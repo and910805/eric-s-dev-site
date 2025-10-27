@@ -4,9 +4,6 @@ import { motion } from 'framer-motion'
 import { ExternalLink, Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const cehBadgeUrl =
-  'https://www.eccouncil.org/wp-content/uploads/2023/01/CEH-Badge.png'
-
 export default function About() {
   const skills = [
     'React / Vite / TailwindCSS',
@@ -31,14 +28,6 @@ export default function About() {
                 我主業在資安（Cybersecurity）領域，熟悉弱點掃描、滲透測試、EDR 與 ISO 27001 合規管理。
                 網站中的技術文章與工具也多與資安實務相關。
               </p>
-              <div className="mt-auto flex justify-center">
-                <img
-                  src={cehBadgeUrl}
-                  alt="CEH certification badge"
-                  loading="lazy"
-                  className="h-28 w-auto rounded-lg shadow-[0_20px_50px_rgba(253,225,232,0.35)]"
-                />
-              </div>
             </div>
           </div>
 

@@ -20,7 +20,7 @@ export const projects = [
     description:
       '公司內部使用的出貨照片上傳與審核系統，支援相機拍照與內網同步。',
     tech: ['Flask', 'Tkinter', 'REST API'],
-    github: null,
+    github: 'https://github.com/and910805/image-upload',
     demo: null,
   },
   {
@@ -45,7 +45,7 @@ export const projects = [
       '模擬經營遊戲網站，教導學生程式邏輯與狀態管理。',
     tech: ['React', 'Zustand'],
     github: 'https://github.com/and910805/farmgame',
-    demo: null,
+    demo: 'https://and910805.github.io/FarmGame/',
   },
   {
     title: 'AI Quiz Bot',

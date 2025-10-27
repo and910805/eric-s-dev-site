@@ -13,8 +13,9 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          'Inter',
           '"Noto Sans TC"',
+          '"Playfair Display"',
+          'Inter',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
@@ -23,6 +24,7 @@ module.exports = {
           '"Helvetica Neue"',
           'sans-serif',
         ],
+        display: ['"Playfair Display"', '"Noto Sans TC"', 'serif'],
       },
     },
   },

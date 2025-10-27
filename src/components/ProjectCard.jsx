@@ -4,70 +4,59 @@ import { Github, ExternalLink } from 'lucide-react'
 
 export default function ProjectCard({ project }) {
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.4 }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-glow-pink hover:shadow-[0_40px_120px_rgba(245,230,197,0.4)] transition-shadow duration-300"
+      className="group relative flex h-full flex-col gap-5 rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-6 transition hover:shadow-lg"
     >
-      <div className="aspect-video w-full overflow-hidden bg-ink-dark/50">
-        <img
-          src={project.img}
-          alt={project.title}
-          className="h-full w-full object-cover object-center opacity-90 transition duration-300 group-hover:scale-105 group-hover:opacity-100"
-        />
+      <div className="space-y-2">
+        <h3 className="text-lg font-semibold text-ink-dark font-display dark:text-soft-gold">
+          {project.title}
+        </h3>
+        <p className="text-sm leading-relaxed text-slate-700 dark:text-zinc-200">
+          {project.description}
+        </p>
       </div>
 
-      <div className="flex flex-col gap-4 p-6">
-        <div>
-          <h3 className="text-lg font-semibold text-white flex flex-wrap items-center gap-2">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-            {project.description}
-          </p>
-        </div>
-
+      {project.tech?.length > 0 && (
         <div className="flex flex-wrap gap-2 text-[0.7rem]">
           {project.tech.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-gradient-to-r from-blush-pink/20 to-soft-gold/20 text-blush-pink border border-white/20 px-2 py-1 font-medium text-[0.7rem] leading-none"
+              className="rounded-full bg-ink-dark/90 px-2 py-1 font-medium leading-none text-white dark:bg-white/20 dark:text-soft-gold"
             >
               {tag}
             </span>
           ))}
         </div>
+      )}
 
-        <div className="mt-2 flex flex-wrap gap-3 text-[0.8rem]">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 font-medium text-zinc-200 hover:text-white hover:bg-white/20 transition"
-            >
-              <Github className="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-          )}
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 font-medium text-zinc-200 hover:text-white hover:bg-white/20 transition"
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>Live Demo</span>
-            </a>
-          )}
-        </div>
+      <div className="mt-auto flex flex-wrap gap-3 text-[0.8rem]">
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-ink-dark/10 bg-ink-dark/90 px-3 py-1.5 font-medium text-white transition hover:bg-ink-dark dark:border-white/20 dark:bg-white/10 dark:text-soft-gold"
+          >
+            <Github className="h-4 w-4" />
+            <span>GitHub</span>
+          </a>
+        )}
+        {project.demo && (
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-ink-dark/10 bg-white/80 px-3 py-1.5 font-medium text-ink-dark transition hover:bg-white dark:border-white/20 dark:bg-white/10 dark:text-soft-gold"
+          >
+            <ExternalLink className="h-4 w-4" />
+            <span>Live Demo</span>
+          </a>
+        )}
       </div>
-
-      {/* subtle gradient border glow */}
-      <div className="pointer-events-none absolute inset-px rounded-[1rem] ring-1 ring-white/10 ring-offset-0" />
-    </motion.div>
+    </motion.article>
   )
 }

@@ -10,11 +10,14 @@ export default function Projects() {
         subtitle="Selected Work"
         title="專案作品"
       >
-        <p className="text-zinc-300 text-base leading-relaxed max-w-2xl">
-          下面是我實際有在跑、真的會被同事 / 客戶使用的系統與網站。
-          每一個都是我自己主導開發，包含前端 UI、後端 API、資料庫、部署、
-          還有實務上的需求整合。
-        </p>
+        <div className="space-y-4 text-base leading-relaxed text-zinc-300 max-w-3xl">
+          <p>
+            我希望透過「安全 × 教育 × 自動化」三個面向，將技術轉化為實際價值的應用。
+          </p>
+          <p>
+            下列專案都是實際在企業或教學情境落地的產品，由我負責需求訪談、系統規劃到開發部署。
+          </p>
+        </div>
       </SectionContainer>
 
       <div className="grid gap-8 md:grid-cols-2">

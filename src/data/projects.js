@@ -1,29 +1,58 @@
 export const projects = [
   {
-    title: 'TaskGo - 現場工作派工系統',
+    title: 'TaskGo',
     description:
-      'React + Flask + SQLite 任務派工／現場回報系統。支援工班登入、現場拍照上傳、任務狀態追蹤、權限分級。',
-    tech: ['React', 'Vite', 'Flask', 'SQLite', 'JWT', 'Tailwind'],
-    img: 'https://placehold.co/600x400/111827/FFFFFF?text=TaskGo',
+      '多角色任務派工系統（工人、自主管理員、HQ 管理員），具 JWT 驗證、附件上傳與任務狀態追蹤。',
+    tech: ['Flask', 'React', 'SQLite', 'JWT', 'Tailwind'],
     github: 'https://github.com/and910805/taskgo',
     demo: null,
   },
   {
-    title: 'Nessus Dashboard - 資安弱點可視化',
+    title: 'Nessus Dashboard',
     description:
-      '自動抓 Nessus/Tenable 掃描結果，轉成儀表板與 KPI 報表，給主管看風險趨勢與修補進度。',
-    tech: ['Python', 'Streamlit', 'Pandas', 'Security'],
-    img: 'https://placehold.co/600x400/111827/FFFFFF?text=Nessus+Dashboard',
+      '弱點掃描報告分析儀表板，支援快照比較、KPI 計算、風險統計圖表。',
+    tech: ['Streamlit', 'Plotly', 'SQLite', 'Python'],
     github: 'https://github.com/and910805/nessus_dashboard',
     demo: null,
   },
   {
-    title: 'Wedding Front - 客製婚禮網站',
+    title: 'Shipping Photo Manager',
+    description:
+      '公司內部使用的出貨照片上傳與審核系統，支援相機拍照與內網同步。',
+    tech: ['Flask', 'Tkinter', 'REST API'],
+    github: null,
+    demo: null,
+  },
+  {
+    title: 'Wedding Site',
     description:
       '互動式婚禮邀請網站：時間地點、座位表、相簿、落花動畫、RWD 手機優化。整套是我從零設計 UI + 動畫。',
     tech: ['React', 'Vite', 'Framer Motion', 'Tailwind'],
-    img: 'https://placehold.co/600x400/111827/FFFFFF?text=Wedding+Site',
     github: 'https://github.com/and910805/wedding-front',
     demo: 'https://and910805.github.io/wedding-front',
+  },
+  {
+    title: 'Binary Search Game',
+    description:
+      '用於教學的演算法遊戲，讓學生透過互動方式學習二分搜尋原理。',
+    tech: ['React'],
+    github: 'https://github.com/and910805/Binary-Search-game',
+    demo: 'https://and910805.github.io/Binary-Search-game/',
+  },
+  {
+    title: 'FarmGame',
+    description:
+      '模擬經營遊戲網站，教導學生程式邏輯與狀態管理。',
+    tech: ['React', 'Zustand'],
+    github: 'https://github.com/and910805/farmgame',
+    demo: null,
+  },
+  {
+    title: 'AI Quiz Bot',
+    description:
+      '整合 Google Sheet 的互動測驗系統，支援錯題回顧與分數統計。',
+    tech: ['Google Apps Script', 'LINE API'],
+    github: null,
+    demo: null,
   },
 ]

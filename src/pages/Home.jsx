@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Mail } from 'lucide-react'
+import { ArrowRight, Github, Mail, ExternalLink } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { contact } from '../data/contact.js'
 
@@ -98,6 +98,91 @@ export default function Home() {
           </li>
         ))}
       </motion.ul>
+
+      {/* Focus areas */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="mt-14 space-y-6"
+      >
+        <p className="text-base text-zinc-200 leading-relaxed">
+          我希望透過「安全 × 教育 × 自動化」三個面向，將技術轉化為實際價值的應用。
+        </p>
+
+        <div className="grid gap-6 md:grid-cols-3 text-sm">
+          <div className="rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-5 text-ink-dark">
+            <h3 className="text-lg font-semibold font-display">Information Security</h3>
+            <p className="mt-3 leading-relaxed text-slate-700">
+              弱點掃描、滲透測試與治理流程自動化，協助企業把資安作業變成可追蹤的儀表板與行動方案。
+            </p>
+            <a
+              href="https://and910805.github.io/eric_site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-dark/80 hover:text-ink-dark"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Eric’s InfoSec Site
+            </a>
+          </div>
+
+          <div className="rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-5 text-ink-dark">
+            <h3 className="text-lg font-semibold font-display">Programming Education</h3>
+            <p className="mt-3 leading-relaxed text-slate-700">
+              以遊戲化教材與互動課程讓小學到高中學生理解演算法、邏輯思考與程式設計。
+            </p>
+            <a
+              href="https://python--5fbm8pp.gamma.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-dark/80 hover:text-ink-dark"
+            >
+              <ExternalLink className="h-4 w-4" />
+              家教視聽介紹頁
+            </a>
+          </div>
+
+          <div className="rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-5 text-ink-dark">
+            <h3 className="text-lg font-semibold font-display">Automation & Dev</h3>
+            <p className="mt-3 leading-relaxed text-slate-700">
+              將內部流程、任務派工與資料追蹤系統化，交付真正被現場採用的 Web / App 解決方案。
+            </p>
+            <a
+              href="https://ithelp.ithome.com.tw/users/20171891/ironman/8352"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-dark/80 hover:text-ink-dark"
+            >
+              <ExternalLink className="h-4 w-4" />
+              iThome 鐵人賽紀錄
+            </a>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5 text-sm text-zinc-300 backdrop-blur-xl">
+          <div className="font-semibold text-white">More Links</div>
+          <ul className="mt-3 space-y-2">
+            {[
+              { label: 'iThome 鐵人賽紀錄', href: 'https://ithelp.ithome.com.tw/users/20171891/ironman/8352' },
+              { label: 'Eric’s InfoSec Site', href: 'https://and910805.github.io/eric_site/' },
+              { label: 'HackMD 技術筆記', href: 'https://hackmd.io/@LKanFpXQTUSJayug7EHeiA' },
+            ].map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-zinc-200 hover:text-white"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
     </section>
   )
 }

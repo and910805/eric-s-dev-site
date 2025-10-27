@@ -7,7 +7,7 @@ export default function SectionContainer({ title, subtitle, children }) {
         <div className="text-xs font-semibold uppercase tracking-[0.25em] text-soft-gold/80">
           {subtitle}
         </div>
-        <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-white">
+        <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-white font-display">
           {title}
         </h2>
       </header>

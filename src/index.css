@@ -5,5 +5,13 @@
 /* Global tweaks */
 body {
   @apply bg-ink-dark text-zinc-100 antialiased;
-  font-family: 'Inter', 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Noto Sans TC', 'Playfair Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: 'Playfair Display', 'Noto Sans TC', 'Times New Roman', serif;
+  letter-spacing: -0.01em;
 }

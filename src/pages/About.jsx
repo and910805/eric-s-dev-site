@@ -24,67 +24,69 @@ export default function About() {
         title="主業 / 副業 / 開發"
       >
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-6 flex flex-col gap-4">
-            <div>
-              <h3 className="text-xl font-semibold text-ink-dark font-display dark:text-soft-gold">Information Security Expertise</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">
+          <div className="glass-card">
+            <div className="glass-card__inner">
+              <h3 className="text-xl font-semibold text-white font-display">Information Security Expertise</h3>
+              <p className="text-sm leading-relaxed text-zinc-300">
                 我主業在資安（Cybersecurity）領域，熟悉弱點掃描、滲透測試、EDR 與 ISO 27001 合規管理。
                 網站中的技術文章與工具也多與資安實務相關。
               </p>
+              <div className="mt-auto flex justify-center">
+                <img
+                  src={cehBadgeUrl}
+                  alt="CEH certification badge"
+                  loading="lazy"
+                  className="h-28 w-auto rounded-lg shadow-[0_20px_50px_rgba(253,225,232,0.35)]"
+                />
+              </div>
             </div>
-            <img
-              src={cehBadgeUrl}
-              alt="CEH certification badge"
-              loading="lazy"
-              className="mx-auto mt-auto h-28 w-auto rounded-lg shadow-lg"
-            />
           </div>
 
-          <div className="rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-6 flex flex-col gap-4">
-            <div>
-              <h3 className="text-xl font-semibold text-ink-dark font-display dark:text-soft-gold">程式家教（Programming Tutor）</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">
+          <div className="glass-card">
+            <div className="glass-card__inner">
+              <h3 className="text-xl font-semibold text-white font-display">程式家教（Programming Tutor）</h3>
+              <p className="text-sm leading-relaxed text-zinc-300">
                 我同時從事程式家教，教學對象為小學至高中學生，
                 以「互動性」與「遊戲化學習」為核心，讓學生能快樂學會程式邏輯。
               </p>
-            </div>
-            <div className="flex flex-col gap-2 text-sm">
-              <a
-                href="https://python--5fbm8pp.gamma.site/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-dark/10 bg-white/60 px-4 py-2 font-medium text-ink-dark transition hover:bg-white hover:border-ink-dark/30 dark:border-white/20 dark:bg-gray-900/60 dark:text-zinc-100"
-              >
-                <ExternalLink className="h-4 w-4" />
-                家教視聽介紹頁
-              </a>
-              <a
-                href="https://and910805.github.io/Binary-Search-game/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-dark/10 bg-white/60 px-4 py-2 font-medium text-ink-dark transition hover:bg-white hover:border-ink-dark/30 dark:border-white/20 dark:bg-gray-900/60 dark:text-zinc-100"
-              >
-                <ExternalLink className="h-4 w-4" />
-                二分法演算法遊戲
-              </a>
+              <div className="flex flex-col gap-2 text-sm">
+                <a
+                  href="https://python--5fbm8pp.gamma.site/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 font-semibold text-white transition hover:bg-white/20"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  家教視聽介紹頁
+                </a>
+                <a
+                  href="https://and910805.github.io/Binary-Search-game/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 font-semibold text-white transition hover:bg-white/20"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  二分法演算法遊戲
+                </a>
+              </div>
             </div>
           </div>
 
-          <div className="rounded-2xl shadow-md bg-white/70 dark:bg-gray-800/70 p-6 flex flex-col gap-4">
-            <div>
-              <h3 className="text-xl font-semibold text-ink-dark font-display dark:text-soft-gold">Automation & Freelance Development</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-700 dark:text-zinc-200">
+          <div className="glass-card">
+            <div className="glass-card__inner">
+              <h3 className="text-xl font-semibold text-white font-display">Automation & Freelance Development</h3>
+              <p className="text-sm leading-relaxed text-zinc-300">
                 我協助企業把資安、營運流程與開發需求串起來，落地成可用的工具與儀表板，
                 也提供接案與顧問服務，專注在安全、自動化與教育產品的整合。
               </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-pink/80 to-soft-gold/80 px-4 py-2 text-sm font-semibold text-ink-dark shadow-[0_15px_40px_rgba(253,225,232,0.35)] transition hover:scale-[1.02]"
+              >
+                <Mail className="h-4 w-4" />
+                聯絡我談合作
+              </Link>
             </div>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-dark/10 bg-ink-dark/90 px-4 py-2 text-sm font-semibold text-white transition hover:bg-ink-dark dark:border-white/20 dark:bg-white/20"
-            >
-              <Mail className="h-4 w-4" />
-              聯絡我談合作
-            </Link>
           </div>
         </div>
       </SectionContainer>

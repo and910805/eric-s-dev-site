@@ -52,7 +52,7 @@ export const projects = [
     description:
       '整合 Google Sheet 的互動測驗系統，支援錯題回顧與分數統計。',
     tech: ['Google Apps Script', 'LINE API'],
-    github: null,
+    github: 'https://github.com/and910805/CEH-robot',
     demo: null,
   },
 ]

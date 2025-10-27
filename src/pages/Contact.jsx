@@ -8,16 +8,18 @@ const InfoRow = ({ icon: Icon, label, value, href }) => (
     href={href ?? '#'}
     target={href ? '_blank' : undefined}
     rel={href ? 'noopener noreferrer' : undefined}
-    className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-zinc-200 backdrop-blur-xl hover:bg-white/10 hover:text-white transition"
+    className="group glass-card block text-zinc-200 transition-colors duration-300 hover:text-white"
   >
-    <div className="rounded-lg bg-gradient-to-br from-blush-pink/20 to-soft-gold/20 p-2 text-soft-gold shadow-glow-pink">
-      <Icon className="w-5 h-5" />
-    </div>
-    <div className="flex flex-col text-sm">
-      <span className="font-medium text-white">{label}</span>
-      <span className="text-zinc-400 group-hover:text-zinc-200 break-all">
-        {value}
-      </span>
+    <div className="relative z-[1] flex items-start gap-4">
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blush-pink/30 to-soft-gold/30 text-white shadow-[0_12px_30px_rgba(253,225,232,0.35)]">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="space-y-1 text-sm">
+        <span className="font-semibold text-white">{label}</span>
+        <span className="block text-zinc-400 transition-colors duration-300 group-hover:text-zinc-200 break-all">
+          {value}
+        </span>
+      </div>
     </div>
   </a>
 )

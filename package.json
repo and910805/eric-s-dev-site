@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "npx --yes gh-pages -d dist"
   },
   "dependencies": {
     "classnames": "^2.5.1",

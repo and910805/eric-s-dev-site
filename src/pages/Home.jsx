@@ -57,7 +57,7 @@ export default function Home() {
             Hi, I&apos;m Eric —
             <br />
             <span className="bg-gradient-to-r from-blush-pink via-soft-gold to-white bg-clip-text text-transparent">
-              資安顧問出身的全端開發者。
+              資安&程式設計出身的全端開發者。
             </span>
           </h1>
 

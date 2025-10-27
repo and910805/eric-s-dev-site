@@ -11,7 +11,7 @@ export default function ProjectCard({ project }) {
       transition={{ duration: 0.4 }}
       className="group glass-card h-full"
     >
-      <div className="glass-card__inner">
+      <div className="glass-card__inner h-full">
         <div className="space-y-3">
           <h3 className="text-xl font-semibold text-white font-display">
             {project.title}

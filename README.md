@@ -10,6 +10,15 @@ npm install
 npm run dev
 ```
 
+## 🚢 部署到 GitHub Pages
+
+```bash
+npm run build
+npm run deploy
+```
+
+`npm run deploy` 會透過 [`gh-pages`](https://github.com/tschaub/gh-pages) 套件將 `dist/` 目錄發布到 GitHub Pages（`https://and910805.github.io/eric-s-dev-site/`）。
+
 ## 🔧 你要改的地方
 
 1. 聯絡資訊：`src/data/contact.js`

@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - 'codex/**'
-      - 'dev/**'
   workflow_dispatch:
 
 permissions:
@@ -14,19 +12,35 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm ci
-      - run: npm run build
-      - run: echo "eric-s-dev-site.kuanlin.pro" > ./dist/CNAME
-      - name: Deploy to GitHub Pages
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Add CNAME for custom domain
+        run: |
+          echo "eric-s-dev-site.kuanlin.pro" > ./dist/CNAME
+
+      - name: Add .nojekyll
+        run: |
+          echo "" > ./dist/.nojekyll
+
+      - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
-          force_orphan: true   # ✅ 這行會在第一次部署時自動新建 gh-pages 分支
-          enable_jekyll: false # ✅ 建議加，避免 .nojekyll 問題
+          force_orphan: true
+          enable_jekyll: false

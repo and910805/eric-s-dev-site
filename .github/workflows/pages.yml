@@ -2,7 +2,10 @@ name: Deploy site to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'codex/**'
+      - 'dev/**'
   workflow_dispatch:
 
 permissions:
@@ -12,8 +15,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      # 🧩 自動偵測網域名稱（從 package.json 或自訂變數）
-      # 若沒有，就 fallback 成「<repo名>.kuanlin.pro」
       BASE_DOMAIN: kuanlin.pro
       SUBDOMAIN: ${{ github.event.repository.name }}
     steps:
@@ -32,14 +33,13 @@ jobs:
         run: npm run build
 
       # ✅ 自動生成 CNAME
-      #   若 repo 名稱是 "wedding-front" → CNAME = wedding-front.kuanlin.pro
       - name: Generate CNAME automatically
         run: |
           DOMAIN="${SUBDOMAIN}.${BASE_DOMAIN}"
           echo "🌐 Using domain: $DOMAIN"
           echo "$DOMAIN" > ./dist/CNAME
 
-      # 🚀 Deploy to gh-pages
+      # 🚀 Deploy to gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

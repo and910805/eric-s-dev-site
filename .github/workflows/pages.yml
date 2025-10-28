@@ -2,11 +2,14 @@ name: Deploy Vite site to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'codex/**'
+      - 'dev/**'
   workflow_dispatch:
 
 permissions:
-  contents: write  # 👈 這行讓 GitHub Actions 可以推 gh-pages
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -25,3 +28,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+          force_orphan: true   # ✅ 這行會在第一次部署時自動新建 gh-pages 分支
+          enable_jekyll: false # ✅ 建議加，避免 .nojekyll 問題

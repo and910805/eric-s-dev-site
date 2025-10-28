@@ -20,7 +20,7 @@ export default function About() {
         subtitle="Profile"
         title="主業 / 副業 / 開發"
       >
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-3">
           <div className="glass-card">
             <div className="glass-card__inner">
               <h3 className="text-xl font-semibold text-white font-display">Information Security Expertise</h3>
@@ -84,7 +84,7 @@ export default function About() {
         subtitle="Who I Am"
         title="關於我"
       >
-        <div className="max-w-4xl space-y-6 text-base leading-relaxed text-zinc-300">
+        <div className="max-w-4xl space-y-5 text-base leading-relaxed text-zinc-300 sm:space-y-6">
           <p>
             我是 Eric，把「安全 × 教育 × 自動化」變成有感價值的工程師。
             我打造的工具會真正進到公司內網或雲端環境，寫進 SOP 給夥伴使用。
@@ -106,7 +106,7 @@ export default function About() {
         subtitle="Core stack"
         title="技能 / 技術堆疊"
       >
-        <ul className="grid gap-3 sm:grid-cols-2 text-[0.9rem]">
+        <ul className="grid gap-2.5 sm:grid-cols-2 text-[0.9rem]">
           {skills.map((skill, idx) => (
             <motion.li
               key={idx}

@@ -14,7 +14,7 @@ module.exports = {
       fontFamily: {
         sans: [
           '"Noto Sans TC"',
-          '"Playfair Display"',
+          '"Noto Serif TC"',
           'Inter',
           'system-ui',
           '-apple-system',
@@ -24,7 +24,7 @@ module.exports = {
           '"Helvetica Neue"',
           'sans-serif',
         ],
-        display: ['"Playfair Display"', '"Noto Sans TC"', 'serif'],
+        display: ['"Noto Serif TC"', '"Noto Sans TC"', 'serif'],
       },
     },
   },

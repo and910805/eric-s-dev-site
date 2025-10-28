@@ -40,23 +40,22 @@ export default function Home() {
 
   return (
     <section className="relative">
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12 lg:items-start">
         {/* Headline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-8"
+          className="space-y-6 sm:space-y-8"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[0.75rem] font-semibold text-soft-gold/90 shadow-[0_20px_60px_rgba(245,230,197,0.45)]">
             <span className="h-2 w-2 rounded-full bg-gradient-to-r from-blush-pink to-soft-gold shadow-glow-pink" />
             <span>Security · Education · Automation</span>
           </div>
 
-          <h1 className="text-4xl font-semibold leading-[1.1] tracking-[-0.04em] text-white sm:text-5xl">
-            Hi, I&apos;m Eric —
-            <br />
-            <span className="bg-gradient-to-r from-blush-pink via-soft-gold to-white bg-clip-text text-transparent">
+          <h1 className="text-3xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-5xl sm:leading-[1.1]">
+            Hi, I&apos;m Eric —{' '}
+            <span className="whitespace-nowrap bg-gradient-to-r from-blush-pink via-soft-gold to-white bg-clip-text text-transparent">
               資安&程式設計出身的全端開發者。
             </span>
           </h1>
@@ -134,7 +133,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="mt-14 grid gap-5 sm:grid-cols-3 text-[0.85rem]"
+        className="mt-12 sm:mt-14 grid gap-4 sm:gap-5 sm:grid-cols-3 text-[0.85rem]"
       >
         {quickStats.map((item) => (
           <li key={item.stat} className="glass-card">
@@ -151,13 +150,13 @@ export default function Home() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="mt-16 space-y-8"
+        className="mt-14 sm:mt-16 space-y-6 sm:space-y-8"
       >
         <p className="text-base leading-relaxed text-zinc-200">
           我希望透過「安全 × 教育 × 自動化」三個面向，將技術轉化為實際價值的應用。
         </p>
 
-        <div className="grid gap-6 md:grid-cols-3 text-sm">
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-3 text-sm">
           {[
             {
               title: 'Information Security',

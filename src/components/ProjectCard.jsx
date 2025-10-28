@@ -12,8 +12,8 @@ export default function ProjectCard({ project }) {
       className="group glass-card h-full"
     >
       <div className="glass-card__inner h-full">
-        <div className="space-y-3">
-          <h3 className="text-xl font-semibold text-white font-display">
+        <div className="space-y-2.5 sm:space-y-3">
+          <h3 className="text-xl font-semibold text-white font-display leading-snug">
             {project.title}
           </h3>
           <p className="text-sm leading-relaxed text-zinc-300">
@@ -22,7 +22,7 @@ export default function ProjectCard({ project }) {
         </div>
 
         {project.tech?.length > 0 && (
-          <div className="flex flex-wrap gap-2 text-[0.7rem]">
+          <div className="flex flex-wrap gap-1.5 text-[0.7rem] sm:gap-2">
             {project.tech.map((tag) => (
               <span
                 key={tag}
@@ -34,7 +34,7 @@ export default function ProjectCard({ project }) {
           </div>
         )}
 
-        <div className="mt-auto flex flex-wrap gap-3 text-[0.8rem]">
+        <div className="mt-auto flex w-full flex-wrap gap-2.5 text-[0.8rem] sm:gap-3">
           {project.github && (
             <a
               href={project.github}

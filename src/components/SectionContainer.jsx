@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function SectionContainer({ title, subtitle, children }) {
   return (
-    <section className="mb-16">
-      <header className="mb-8 flex flex-col gap-4">
+    <section className="mb-14 sm:mb-16">
+      <header className="mb-6 flex flex-col gap-3 sm:mb-8 sm:gap-4">
         {subtitle && (
           <div className="flex items-center gap-3">
             <span className="subtle-divider" aria-hidden="true" />

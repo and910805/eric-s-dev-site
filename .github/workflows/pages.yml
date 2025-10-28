@@ -1,45 +1,24 @@
-name: Deploy site to GitHub Pages
+name: Deploy Vite site to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-      - 'codex/**'
-      - 'dev/**'
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write  # 👈 這行讓 GitHub Actions 可以推 gh-pages
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      BASE_DOMAIN: kuanlin.pro
-      SUBDOMAIN: ${{ github.event.repository.name }}
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: npm run build
-
-      # ✅ 自動生成 CNAME
-      - name: Generate CNAME automatically
-        run: |
-          DOMAIN="${SUBDOMAIN}.${BASE_DOMAIN}"
-          echo "🌐 Using domain: $DOMAIN"
-          echo "$DOMAIN" > ./dist/CNAME
-
-      # 🚀 Deploy to gh-pages 分支
+      - run: npm ci
+      - run: npm run build
+      - run: echo "eric-s-dev-site.kuanlin.pro" > ./dist/CNAME
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

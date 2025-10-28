@@ -53,7 +53,7 @@ export default function Home() {
             <span>Security · Education · Automation</span>
           </div>
 
-          <h1 className="text-3xl font-semibold leading-tight tracking-[-0.03em] text-white sm:text-5xl sm:leading-[1.1]">
+          <h1 className="text-[1.65rem] font-semibold leading-[1.3] tracking-[-0.03em] text-white sm:text-5xl sm:leading-[1.1]">
             Hi, I&apos;m Eric —{' '}
             <span className="whitespace-nowrap bg-gradient-to-r from-blush-pink via-soft-gold to-white bg-clip-text text-transparent">
               資安&程式設計出身的全端開發者。

@@ -55,7 +55,7 @@ export default function Home() {
 
           <h1 className="text-[1.65rem] font-semibold leading-[1.3] tracking-[-0.03em] text-white sm:text-5xl sm:leading-[1.1]">
             Hi, I&apos;m Eric —{' '}
-            <span className="whitespace-nowrap bg-gradient-to-r from-blush-pink via-soft-gold to-white bg-clip-text text-transparent">
+            <span className="whitespace-nowrap bg-gradient-to-r from-blush-pink via-soft-gold to-white bg-clip-text text-transparent text-[1.35rem] sm:text-[2.75rem]">
               資安&程式設計出身的全端開發者。
             </span>
           </h1>
@@ -133,7 +133,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="mt-12 sm:mt-14 grid gap-4 sm:gap-5 sm:grid-cols-3 text-[0.85rem]"
+        className="mt-12 grid gap-4 text-[0.85rem] sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
       >
         {quickStats.map((item) => (
           <li key={item.stat} className="glass-card">
@@ -156,7 +156,7 @@ export default function Home() {
           我希望透過「安全 × 教育 × 自動化」三個面向，將技術轉化為實際價值的應用。
         </p>
 
-        <div className="grid gap-5 sm:gap-6 md:grid-cols-3 text-sm">
+        <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3 text-sm">
           {[
             {
               title: 'Information Security',

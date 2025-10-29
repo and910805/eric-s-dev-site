@@ -17,7 +17,7 @@ export default function Projects() {
         </div>
       </SectionContainer>
 
-      <div className="grid gap-6 sm:gap-7 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 lg:gap-8 xl:grid-cols-3">
         {projects.map((p) => (
           <ProjectCard key={p.title} project={p} />
         ))}

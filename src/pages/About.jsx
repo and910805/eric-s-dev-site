@@ -20,7 +20,7 @@ export default function About() {
         subtitle="Profile"
         title="主業 / 副業 / 開發"
       >
-        <div className="grid gap-5 sm:gap-6 md:grid-cols-3">
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
           <div className="glass-card">
             <div className="glass-card__inner">
               <h3 className="text-xl font-semibold text-white font-display">Information Security Expertise</h3>
@@ -106,7 +106,7 @@ export default function About() {
         subtitle="Core stack"
         title="技能 / 技術堆疊"
       >
-        <ul className="grid gap-2.5 sm:grid-cols-2 text-[0.9rem]">
+        <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 text-[0.9rem]">
           {skills.map((skill, idx) => (
             <motion.li
               key={idx}

@@ -19,7 +19,7 @@ export default function App() {
 
       <Navbar />
 
-      <main className="flex-1 pt-24 pb-16 px-4 sm:px-8 max-w-6xl w-full mx-auto">
+      <main className="flex-1 pt-24 pb-16 px-4 sm:px-8 lg:px-12 max-w-6xl w-full mx-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />

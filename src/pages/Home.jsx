@@ -161,7 +161,7 @@ export default function Home() {
             {
               title: 'Information Security',
               copy: '弱點掃描、滲透測試與治理流程自動化，協助企業把資安作業變成可追蹤的儀表板與行動方案。',
-              link: 'https://and910805.github.io/eric_site/',
+              link: 'https://eric-s-dev-site.kuanlin.pro/',
               linkLabel: 'Eric’s InfoSec Site',
             },
             {
@@ -201,7 +201,7 @@ export default function Home() {
             <ul className="space-y-2">
               {[
                 { label: 'iThome 鐵人賽紀錄', href: 'https://ithelp.ithome.com.tw/users/20171891/ironman/8352' },
-                { label: 'Eric’s InfoSec Site', href: 'https://and910805.github.io/eric_site/' },
+                { label: 'Eric’s InfoSec Site', href: 'https://eric-s-dev-site.kuanlin.pro/' },
                 { label: 'HackMD 技術筆記', href: 'https://hackmd.io/@LKanFpXQTUSJayug7EHeiA' },
               ].map((link) => (
                 <li key={link.href}>

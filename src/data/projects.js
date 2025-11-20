@@ -4,7 +4,6 @@ export const projects = [
     description:
       '多角色任務派工系統（工人、自主管理員、HQ 管理員），具 JWT 驗證、附件上傳與任務狀態追蹤。',
     tech: ['Flask', 'React', 'SQLite', 'JWT', 'Tailwind'],
-    github: 'https://github.com/and910805/taskgo',
     demo: null,
   },
   {
@@ -12,7 +11,7 @@ export const projects = [
     description:
       '弱點掃描報告分析儀表板，支援快照比較、KPI 計算、風險統計圖表。',
     tech: ['Streamlit', 'Plotly', 'SQLite', 'Python'],
-    github: 'https://github.com/and910805/nessus_dashboard',
+    github: 'https://github.com/and910805/Nessus-Vulnerability-Dashboard',
     demo: null,
   },
   {

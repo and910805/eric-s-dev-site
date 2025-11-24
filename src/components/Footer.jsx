@@ -16,7 +16,7 @@ export default function Footer() {
           },
           {
             label: 'Eric’s InfoSec Site',
-            href: 'https://and910805.github.io/eric_site/',
+            href: 'https://eric-s-dev-site.kuanlin.pro/',
           },
           {
             label: 'HackMD 技術筆記',

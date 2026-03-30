@@ -1,49 +1,54 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Github, ExternalLink } from 'lucide-react'
+import { ExternalLink, Github } from 'lucide-react'
 
 export default function ProjectCard({ project }) {
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.4 }}
-      className="group glass-card h-full"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.35 }}
+      className="glass-card h-full"
     >
       <div className="glass-card__inner h-full">
-        <div className="space-y-2.5 sm:space-y-3">
-          <h3 className="text-xl font-semibold text-white font-display leading-snug">
-            {project.title}
-          </h3>
-          <p className="text-sm leading-relaxed text-zinc-300">
-            {project.description}
-          </p>
+        <div className="space-y-3">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200/80">
+                {project.category}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold leading-snug text-white">
+                {project.title}
+              </h3>
+            </div>
+            {project.year && (
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-300">
+                {project.year}
+              </span>
+            )}
+          </div>
+          <p className="text-sm leading-7 text-zinc-300">{project.description}</p>
         </div>
 
-        {project.tech?.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 text-[0.7rem] sm:gap-2">
-            {project.tech.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-medium leading-none text-zinc-200"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
+        <ul className="flex flex-wrap gap-2 text-xs text-zinc-200">
+          {project.tech.map((tag) => (
+            <li key={tag} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
+              {tag}
+            </li>
+          ))}
+        </ul>
 
-        <div className="mt-auto flex w-full flex-wrap gap-2.5 text-[0.8rem] sm:gap-3">
+        <div className="mt-auto flex flex-wrap gap-3 pt-2">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blush-pink/80 to-soft-gold/80 px-4 py-2 font-semibold text-ink-dark shadow-[0_15px_40px_rgba(253,225,232,0.35)] transition hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
             >
               <Github className="h-4 w-4" />
-              <span>GitHub</span>
+              GitHub
             </a>
           )}
           {project.demo && (
@@ -51,10 +56,10 @@ export default function ProjectCard({ project }) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-4 py-2 font-semibold text-white transition hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>Live Demo</span>
+              查看
             </a>
           )}
         </div>

@@ -1,33 +1,41 @@
 import React from 'react'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Terminal } from 'lucide-react'
+
+const footerLinks = [
+  {
+    label: 'iThome 鐵人賽系列',
+    href: 'https://ithelp.ithome.com.tw/users/20171891/ironman/8352',
+  },
+  {
+    label: '資安筆記網站',
+    href: 'https://and910805.github.io/eric_site/',
+  },
+  {
+    label: 'HackMD 筆記',
+    href: 'https://hackmd.io/@LKanFpXQTUSJayug7EHeiA',
+  },
+]
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-white/10 text-[0.8rem] text-zinc-400 py-8 max-w-6xl mx-auto px-4 sm:px-8 lg:px-12">
-      <div className="flex flex-col gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+    <footer className="mx-auto w-full max-w-6xl px-4 py-8 text-[0.85rem] text-zinc-400 sm:px-8 lg:px-12">
+      <div className="flex flex-col gap-4 border-t border-[#39ff1418] pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
-          <div className="font-medium text-zinc-200">Eric&apos;s Dev Portfolio</div>
-          <div className="text-zinc-500">© {new Date().getFullYear()} Eric. All rights reserved.</div>
+          <div className="mono flex items-center gap-2 text-zinc-100">
+            <Terminal className="h-4 w-4 text-[#39ff14]" />
+            Eric Security Portfolio
+          </div>
+          <div>cybersecurity / certifications / automation / technical output</div>
         </div>
-        <ul className="flex flex-wrap items-center justify-center gap-3 text-zinc-300 sm:justify-end">
-          {[{
-            label: 'iThome 鐵人賽紀錄',
-            href: 'https://ithelp.ithome.com.tw/users/20171891/ironman/8352',
-          },
-          {
-            label: 'Eric’s InfoSec Site',
-            href: 'https://and910805.github.io/eric_site/',
-          },
-          {
-            label: 'HackMD 技術筆記',
-            href: 'https://hackmd.io/@LKanFpXQTUSJayug7EHeiA',
-          }].map((link) => (
+
+        <ul className="flex flex-wrap gap-3 text-zinc-300">
+          {footerLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-zinc-300 hover:text-white"
+                className="inline-flex items-center gap-1.5 transition hover:text-[#b8ffb8]"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
                 {link.label}

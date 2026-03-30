@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
 import clsx from 'classnames'
-import { Menu, X } from 'lucide-react'
+import { Menu, Shield, TerminalSquare, X } from 'lucide-react'
+import { NavLink, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { to: '/', label: 'Home' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/', label: '首頁' },
+  { to: '/about', label: '關於我' },
+  { to: '/projects', label: '專案' },
+  { to: '/articles', label: '文章專區' },
+  { to: '/certifications', label: '證照專區' },
+  { to: '/contact', label: '聯絡' },
 ]
 
 export default function Navbar() {
@@ -19,42 +21,77 @@ export default function Navbar() {
   }, [location.pathname])
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-1.5rem)] max-w-3xl">
-      <nav className="backdrop-blur-xl bg-white/10 border border-white/20 text-zinc-100 shadow-[0_20px_60px_rgba(253,225,232,0.4)] rounded-3xl px-4 py-3 sm:px-6 sm:py-3.5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <header className="fixed left-1/2 top-4 z-40 w-[calc(100%-1.25rem)] max-w-6xl -translate-x-1/2">
+      <nav className="rounded-[1.15rem] border border-[#39ff1429] bg-[#030a10e3] px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:px-6">
         <div className="flex items-center justify-between gap-4">
-          <div className="text-xs font-semibold text-white whitespace-nowrap sm:text-sm">
-            Eric&apos;s Dev Portfolio
-          </div>
+          <NavLink to="/" className="flex min-w-0 items-center gap-3 text-white">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#39ff1430] bg-[#39ff1411] text-[#72ff8f]">
+              <Shield className="h-5 w-5" />
+            </span>
+            <span className="min-w-0">
+              <span className="mono block text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#8af7fe]">
+                Eric / Security Terminal
+              </span>
+              <span className="block truncate text-sm font-semibold text-zinc-100 sm:text-base">
+                資安實務 / 證照 / 自動化
+              </span>
+            </span>
+          </NavLink>
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 p-2 text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink-dark sm:hidden"
+            className="inline-flex items-center justify-center rounded-full border border-[#39ff1429] bg-[#39ff140d] p-2 text-[#b8ffb8] transition hover:bg-[#39ff1416] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#39ff14] sm:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
             aria-label="切換導覽選單"
             aria-expanded={isMobileOpen}
             aria-controls="primary-navigation"
           >
-            {isMobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+
+          <ul className="hidden items-center gap-1 text-sm font-medium lg:flex xl:gap-2">
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) =>
+                    clsx(
+                      'mono inline-flex rounded-full px-3 py-2 transition xl:px-4',
+                      isActive
+                        ? 'bg-[#39ff14] text-[#04110a] shadow-[0_0_22px_rgba(57,255,20,0.22)]'
+                        : 'text-zinc-300 hover:bg-[#39ff140f] hover:text-white'
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-3 hidden items-center gap-2 border-t border-[#39ff1416] pt-3 text-[0.72rem] text-zinc-400 lg:flex">
+          <TerminalSquare className="h-4 w-4 text-[#39ff14]" />
+          <span className="mono">status: active / role: cybersecurity practitioner / mode: portfolio</span>
         </div>
 
         <ul
           id="primary-navigation"
           className={clsx(
-            'mt-3 gap-2 text-[0.85rem] font-medium sm:mt-0 sm:flex sm:flex-wrap sm:items-center sm:justify-end sm:gap-4 sm:text-sm',
-            isMobileOpen ? 'flex flex-col' : 'hidden sm:flex'
+            'mt-3 grid gap-2 border-t border-[#39ff1416] pt-3 text-sm font-medium lg:hidden',
+            isMobileOpen ? 'grid' : 'hidden'
           )}
         >
-          {navItems.map(item => (
+          {navItems.map((item) => (
             <li key={item.to}>
               <NavLink
                 to={item.to}
                 className={({ isActive }) =>
                   clsx(
-                    'inline-flex w-full justify-center px-3 py-1.5 rounded-full transition-colors duration-200 text-center sm:w-auto',
+                    'mono block rounded-xl px-4 py-3 transition',
                     isActive
-                      ? 'bg-gradient-to-r from-blush-pink/70 to-soft-gold/70 text-ink-dark font-semibold shadow-glow-pink'
-                      : 'text-zinc-200 hover:text-white hover:bg-white/10'
+                      ? 'bg-[#39ff14] text-[#04110a]'
+                      : 'bg-white/[0.02] text-zinc-200 hover:bg-[#39ff140f]'
                   )
                 }
               >

@@ -2,9 +2,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import packageJson from './package.json' assert { type: 'json' }
+import packageJson from './package.json' with { type: 'json' }
 
-const REPO_BASE_PATH = '/eric-s-dev-site/' // fallback for github.io/repo
+const REPO_BASE_PATH = '/eric-s-dev-site/'
 const FORCE_CUSTOM_DOMAIN = true
 const CUSTOM_DOMAIN_FLAGS = ['true', '1', 'yes', 'on']
 
@@ -33,9 +33,7 @@ function resolveBasePath(mode) {
     }
   })()
 
-  const usingCustomDomain =
-    FORCE_CUSTOM_DOMAIN || hasCustomDomainFlag || hasCname
-
+  const usingCustomDomain = FORCE_CUSTOM_DOMAIN || hasCustomDomainFlag || hasCname
   const basePath = usingCustomDomain ? '/' : homepageBase
 
   console.log(
@@ -47,15 +45,11 @@ function resolveBasePath(mode) {
   return basePath
 }
 
-export default defineConfig(({ mode }) => {
-  const base = resolveBasePath(mode)
-
-  return {
-    plugins: [react()],
-    base,
-    server: {
-      host: '0.0.0.0',
-      port: 5173,
-    },
-  }
-})
+export default defineConfig(({ mode }) => ({
+  plugins: [react()],
+  base: resolveBasePath(mode),
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+  },
+}))

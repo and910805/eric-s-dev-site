@@ -64,8 +64,7 @@ export default function Home() {
             </h1>
 
             <p className="max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
-              這個版本的網站改成更明確的黑客終端風格，主軸聚焦在你的資安身份。
-              我把 CEH、CEH Practical（CEHP）與 CEH Master 放到核心敘事，讓網站一打開就能傳達你在資安實務、自動化與知識整理上的強度。
+              深諳攻守之道的資安專家，左手拿紅隊的矛，右手拿藍隊的盾，在實戰中優化防禦深度的實踐者。
             </p>
           </div>
 

@@ -1,5 +1,25 @@
 export const projects = [
   {
+    title: 'APT29 ATT&CK Simulation',
+    category: 'Red Team / ATT&CK',
+    year: '2023',
+    description:
+      '以 MITRE ATT&CK 為骨架整理的紅隊模擬流程，涵蓋初始入侵、資料蒐集、持久化與橫向移動，並整合 Pupy、PoshC2、WebDAV 與 ELK/Kibana 等實作環境。',
+    tech: ['MITRE ATT&CK', 'Pupy', 'PoshC2', 'Kibana', 'Red Team'],
+    github: 'https://github.com/and910805/APT29',
+    demo: null,
+  },
+  {
+    title: 'RAT 2.0 Security Research Demo',
+    category: 'Malware Research',
+    year: '2024',
+    description:
+      '用於資安研究的 Python RAT 範例，模擬 C2 通道、檔案傳輸、螢幕截圖、鍵盤側錄與持久化機制，幫助從攻防視角理解惡意程式行為與偵測點。',
+    tech: ['Python', 'Socket', 'Windows', 'mss', 'pynput'],
+    github: 'https://github.com/and910805/Rat2.0',
+    demo: null,
+  },
+  {
     title: 'Nessus Vulnerability Dashboard',
     category: '資安分析',
     year: '2025',

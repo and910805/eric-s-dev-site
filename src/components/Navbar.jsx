@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import clsx from 'classnames'
-import { Menu, Shield, TerminalSquare, X } from 'lucide-react'
+import { Menu, TerminalSquare, X } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 const navItems = [
@@ -25,8 +25,12 @@ export default function Navbar() {
       <nav className="rounded-[1.15rem] border border-[#39ff1429] bg-[#030a10e3] px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:px-6">
         <div className="flex items-center justify-between gap-4">
           <NavLink to="/" className="flex min-w-0 items-center gap-3 text-white">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#39ff1430] bg-[#39ff1411] text-[#72ff8f]">
-              <Shield className="h-5 w-5" />
+            <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-[#39ff1450] bg-[radial-gradient(circle_at_top,#10321f_0%,#06110d_62%,#03070a_100%)] shadow-[0_0_18px_rgba(57,255,20,0.18)]">
+              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(57,255,20,0.1)_48%,transparent_52%,transparent_100%)] opacity-80" />
+              <span className="pointer-events-none absolute inset-x-1 top-1 h-px bg-[#8af7fe]/70" />
+              <span className="mono relative text-sm font-bold tracking-[-0.12em] text-[#8cff61]">
+                &gt;_
+              </span>
             </span>
             <span className="min-w-0">
               <span className="mono block text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#8af7fe]">

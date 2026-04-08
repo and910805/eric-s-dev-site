@@ -64,7 +64,7 @@ export default function Home() {
             </h1>
 
             <p className="max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
-              深諳攻守之道的資安專家，左手拿紅隊的矛，右手拿藍隊的盾，在實戰中優化防禦深度的實踐者。
+              熟悉紅藍隊思維，專注於弱點管理、流程優化與資安實務，持續把技術落實在日常維運與防禦改善中。
             </p>
           </div>
 
@@ -150,6 +150,34 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="glass-card">
+        <div className="glass-card__inner space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#39ff1430] bg-[#39ff1410] text-[#7dff8f]">
+              <TerminalSquare className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#8af7fe]">career path</div>
+              <h2 className="text-2xl font-semibold text-white">職涯歷程</h2>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-2xl border border-[#39ff1424] bg-[#39ff1408] p-5">
+              <div className="mono text-xs uppercase tracking-[0.2em] text-[#8af7fe]">01</div>
+              <h3 className="mt-2 text-lg font-semibold text-white">Deloitte</h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-300">累積 1 年實務經驗，建立資安專案執行與問題整理能力。</p>
+            </div>
+
+            <div className="rounded-2xl border border-[#39ff1424] bg-[#39ff1408] p-5">
+              <div className="mono text-xs uppercase tracking-[0.2em] text-[#8af7fe]">02</div>
+              <h3 className="mt-2 text-lg font-semibold text-white">台灣精材</h3>
+              <p className="mt-2 text-sm leading-7 text-zinc-300">累積 1 年經驗，持續將資安實務與流程改善落地到工作現場。</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">

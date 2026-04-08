@@ -3,6 +3,8 @@ export const contact = {
   title: 'Cybersecurity Practitioner / Automation Builder',
   email: 'goole910805@gmail.com',
   githubUsername: 'and910805',
+  linkedinUrl: 'https://www.linkedin.com/in/guan-lin-zhuang-410a48291',
+  linkedinHandle: 'guan-lin-zhuang-410a48291',
   lineId: '0966632722',
   location: 'Taiwan / Remote',
   intro:

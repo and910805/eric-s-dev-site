@@ -1,5 +1,5 @@
 import React from 'react'
-import { Github, Mail, MapPin, MessageCircle } from 'lucide-react'
+import { Github, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react'
 import SectionContainer from '../components/SectionContainer.jsx'
 import { contact } from '../data/contact.js'
 
@@ -15,6 +15,12 @@ const cards = [
     label: 'GitHub',
     value: contact.githubUsername,
     href: `https://github.com/${contact.githubUsername}`,
+  },
+  {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    value: contact.linkedinHandle,
+    href: contact.linkedinUrl,
   },
   {
     icon: MessageCircle,
@@ -42,7 +48,7 @@ export default function Contact() {
         </div>
       </SectionContainer>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         {cards.map((item) => {
           const content = (
             <div className="glass-card h-full">

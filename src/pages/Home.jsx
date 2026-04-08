@@ -4,6 +4,7 @@ import {
   ArrowRight,
   FileBadge2,
   Github,
+  Linkedin,
   Mail,
   Radar,
   ShieldCheck,
@@ -79,7 +80,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div className="terminal-outline rounded-2xl px-4 py-3">
               <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#88f8d4]">email</div>
               <a
@@ -101,6 +102,19 @@ export default function Home() {
               >
                 <Github className="h-4 w-4 text-[#39ff14]" />
                 {contact.githubUsername}
+              </a>
+            </div>
+
+            <div className="terminal-outline rounded-2xl px-4 py-3">
+              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#88f8d4]">linkedin</div>
+              <a
+                href={contact.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#b8ffb8]"
+              >
+                <Linkedin className="h-4 w-4 text-[#39ff14]" />
+                {contact.linkedinHandle}
               </a>
             </div>
           </div>

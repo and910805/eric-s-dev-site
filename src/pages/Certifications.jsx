@@ -1,6 +1,5 @@
 import React from 'react'
 import { Download, ExternalLink, FileText } from 'lucide-react'
-import TerminalPanel from '../components/TerminalPanel.jsx'
 import SectionContainer from '../components/SectionContainer.jsx'
 import { certifications } from '../data/certifications.js'
 
@@ -12,23 +11,12 @@ export default function Certifications() {
 
   return (
     <>
-      <SectionContainer subtitle="certifications" title="$ certctl list --verified">
-        <TerminalPanel command="certctl status">
-          <div className="space-y-1">
-            <div className="terminal-row">
-              <span className="terminal-key">primary</span>
-              <span className="terminal-value">CEH / CEH Practical / CEH Master</span>
-            </div>
-            <div className="terminal-row">
-              <span className="terminal-key">writing</span>
-              <span className="terminal-value">iThome 2025 鐵人賽 30 篇文章</span>
-            </div>
-            <div className="terminal-row">
-              <span className="terminal-key">purpose</span>
-              <span className="terminal-value">把證照與文章都變成可以回頭查、可以延伸的學習紀錄。</span>
-            </div>
-          </div>
-        </TerminalPanel>
+      <SectionContainer subtitle="Certifications" title="$ certctl list">
+        <div className="max-w-4xl space-y-4 text-base leading-8 text-zinc-300">
+          <p>
+            這裡整理目前已完成的資安證照與寫作紀錄。證照代表能力驗證，文章則是把學習過程留下來，方便之後回查。
+          </p>
+        </div>
       </SectionContainer>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">

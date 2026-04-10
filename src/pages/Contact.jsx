@@ -1,6 +1,5 @@
 import React from 'react'
 import { Github, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react'
-import TerminalPanel from '../components/TerminalPanel.jsx'
 import SectionContainer from '../components/SectionContainer.jsx'
 import { contact } from '../data/contact.js'
 
@@ -40,14 +39,10 @@ const cards = [
 export default function Contact() {
   return (
     <>
-      <SectionContainer subtitle="contact" title="$ sudo contact">
-        <TerminalPanel command="sudo contact --open">
-          <div className="space-y-3 mono text-sm leading-7 text-zinc-300">
-            <p><span className="text-zinc-500">[sudo]</span> password for visitor: ********</p>
-            <p><span className="text-[#39ff14]">access granted.</span> opening contact channels...</p>
-            <p className="font-sans text-base leading-8">{contact.intro}</p>
-          </div>
-        </TerminalPanel>
+      <SectionContainer subtitle="Contact" title="$ contact">
+        <div className="max-w-3xl space-y-4 text-base leading-8 text-zinc-300">
+          <p>{contact.intro}</p>
+        </div>
       </SectionContainer>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">

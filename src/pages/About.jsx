@@ -1,65 +1,39 @@
 import React from 'react'
-import TerminalPanel from '../components/TerminalPanel.jsx'
 import SectionContainer from '../components/SectionContainer.jsx'
-import { manSections } from '../data/terminalProfile.js'
 
 const skills = [
   'CEH / CEH Practical / CEH Master',
-  'Web security and XSS/SQLi defensive thinking',
-  'Vulnerability management and scan result interpretation',
-  'Python automation and internal tooling',
-  'React / Vite / Tailwind CSS front-end delivery',
-  'Flask / API / SQLite lightweight service development',
-  'Linux deployment, service setup, and troubleshooting',
-  'Markdown documentation and knowledge-base writing',
-]
-
-const processes = [
-  ['observe', '先看系統現在怎麼跑，避免直接猜。'],
-  ['verify', '用測試、log、重現步驟確認問題。'],
-  ['patch', '修補時盡量縮小影響範圍，讓改動可回頭追。'],
-  ['document', '把過程寫成筆記，下一次可以更快。'],
+  'Web security and defensive thinking',
+  'Vulnerability management',
+  'Python automation',
+  'React / Vite / Tailwind CSS',
+  'Flask / API / SQLite',
+  'Linux deployment and troubleshooting',
+  'Markdown knowledge-base writing',
 ]
 
 export default function About() {
   return (
     <>
-      <SectionContainer subtitle="manual page" title="$ man eric">
-        <TerminalPanel command="man eric">
-          <div className="space-y-6">
-            {manSections.map((section) => (
-              <section key={section.name}>
-                <h3 className="mono text-sm font-semibold uppercase tracking-[0.24em] text-[#8af7fe]">
-                  {section.name}
-                </h3>
-                <p className="mt-2 text-base leading-8 text-zinc-300">{section.body}</p>
-              </section>
-            ))}
-          </div>
-        </TerminalPanel>
-      </SectionContainer>
-
-      <SectionContainer subtitle="workflow" title="$ cat ~/mindset/process.md">
-        <div className="grid gap-4 md:grid-cols-4">
-          {processes.map(([name, text], index) => (
-            <article key={name} className="glass-card">
-              <div className="glass-card__inner">
-                <div className="mono text-xs uppercase tracking-[0.24em] text-[#8af7fe]">
-                  step {String(index + 1).padStart(2, '0')}
-                </div>
-                <h3 className="mono text-xl font-semibold text-white">{name}</h3>
-                <p className="text-sm leading-7 text-zinc-300">{text}</p>
-              </div>
-            </article>
-          ))}
+      <SectionContainer subtitle="About" title="$ man eric">
+        <div className="max-w-4xl space-y-5 text-base leading-8 text-zinc-300">
+          <p>
+            我主要關注資安、後端工具、自動化與技術筆記整理。比起把作品做得很花，我更在意問題能不能被看懂、被驗證、被維護。
+          </p>
+          <p>
+            目前網站定位是個人知識庫與作品集：資安筆記放學習紀錄，專案放實作經驗，證照頁則整理已完成的能力驗證。
+          </p>
+          <p>
+            做事習慣是先觀察現況，再重現問題、修補、記錄。這也是這個網站想呈現的風格：像 terminal，但不要讓 terminal 搶走內容。
+          </p>
         </div>
       </SectionContainer>
 
-      <SectionContainer subtitle="stack" title="$ compgen -A function eric">
+      <SectionContainer subtitle="Stack" title="$ cat ~/skills.txt">
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {skills.map((skill) => (
             <li key={skill} className="rounded-2xl border border-[#39ff1424] bg-[#39ff1408] px-4 py-4 text-sm leading-7 text-zinc-200">
-              <span className="terminal-caret">-&gt;</span> {skill}
+              {skill}
             </li>
           ))}
         </ul>

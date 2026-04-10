@@ -39,7 +39,7 @@ function securityHeaders(req, res, next) {
       "script-src 'self'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: https://images.unsplash.com https://ithelp.ithome.com.tw",
+      "img-src 'self' data: https://images.unsplash.com https://ithelp.ithome.com.tw https://hackmd.io https://i.imgur.com https://imgur.com",
       "connect-src 'self'",
       "frame-ancestors 'none'",
     ].join('; ')

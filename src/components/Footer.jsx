@@ -3,6 +3,10 @@ import { ExternalLink, Terminal } from 'lucide-react'
 
 const footerLinks = [
   {
+    label: '外包網站',
+    href: 'https://chiayicity.zeabur.app/',
+  },
+  {
     label: 'iThome 鐵人賽',
     href: 'https://ithelp.ithome.com.tw/users/20171891/ironman/8352',
   },

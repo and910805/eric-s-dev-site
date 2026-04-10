@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
@@ -8,6 +8,8 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import Certifications from './pages/Certifications.jsx'
 import Articles from './pages/Articles.jsx'
+import Blog from './pages/Blog.jsx'
+import BlogPost from './pages/BlogPost.jsx'
 
 export default function App() {
   return (
@@ -26,6 +28,9 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/admin" element={<Navigate to="/blog" replace />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/certifications" element={<Certifications />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

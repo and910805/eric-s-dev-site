@@ -12,10 +12,12 @@ FROM node:22-alpine AS runtime
 
 WORKDIR /app
 
-RUN npm install -g serve
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
 COPY --from=build /app/dist ./dist
+COPY server.js ./server.js
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "serve -s dist -l ${PORT:-8080}"]
+CMD ["npm", "start"]

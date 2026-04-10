@@ -37,7 +37,7 @@ export default function Navbar() {
                 Eric / Security Terminal
               </span>
               <span className="block truncate text-sm font-semibold text-zinc-100 sm:text-base">
-                資安筆記 / 專案 / Linux-style portfolio
+                資安筆記 / 專案 / 自動化工具
               </span>
             </span>
           </NavLink>
@@ -76,7 +76,7 @@ export default function Navbar() {
 
         <div className="mt-3 hidden items-center gap-2 border-t border-[#39ff1416] pt-3 text-[0.72rem] text-zinc-400 lg:flex">
           <TerminalSquare className="h-4 w-4 text-[#39ff14]" />
-          <span className="mono">status: active / role: cybersecurity practitioner / mode: portfolio shell</span>
+          <span className="mono">status: active / role: cybersecurity practitioner / notes online</span>
         </div>
 
         <ul

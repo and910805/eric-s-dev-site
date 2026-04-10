@@ -6,6 +6,8 @@ import { articles } from '../data/articles.js'
 import { blogCategories, blogPosts } from '../data/blog.js'
 import { fetchBlogPosts } from '../lib/blogApi.js'
 
+const hiddenCategorySlugs = new Set(['database-lab', 'security-notes', 'build-log'])
+
 function getArticleDirectory(post) {
   if (post.categorySlug === 'ithome-2025-ironman') {
     const day = Number(post.slug.match(/day-(\d+)/)?.[1] ?? 0)
@@ -19,9 +21,12 @@ function getArticleDirectory(post) {
 }
 
 function buildTree(posts) {
+  const visiblePosts = posts.filter((post) => !hiddenCategorySlugs.has(post.categorySlug))
+
   const blogTree = blogCategories
+    .filter((category) => !hiddenCategorySlugs.has(category.slug))
     .map((category) => {
-      const categoryPosts = posts
+      const categoryPosts = visiblePosts
         .filter((post) => post.categorySlug === category.slug)
         .sort((a, b) => b.date.localeCompare(a.date))
 

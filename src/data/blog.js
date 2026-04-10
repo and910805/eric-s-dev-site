@@ -43,13 +43,10 @@ export const blogCategories = [
   { slug: 'certification-notes', name: '證照筆記', count: 1 },
   { slug: 'ctf-notes', name: 'CTF 筆記', count: 1 },
   { slug: 'forensics', name: 'Forensics', count: 1 },
-  { slug: 'database-lab', name: 'Database Lab', count: 1 },
-  { slug: 'security-notes', name: 'Security Notes', count: 1 },
-  { slug: 'build-log', name: 'Build Log', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
 ]
 
-export const blogPosts = [
+const rawBlogPosts = [
   {
     slug: "ithome-2025-day-01",
     title: "Day 1- 法規推著我上場，學習讓我留下",
@@ -573,6 +570,10 @@ PostgreSQL 密碼不應該放進 React 前端或 Git repository，部署時只�
 - 文章改由本地檔案或資料庫維護，不開放線上寫文章後台`,
   },
 ]
+
+export const blogPosts = rawBlogPosts.filter(
+  (post) => !['database-lab', 'security-notes', 'build-log'].includes(post.categorySlug)
+)
 
 export const blogComments = {
   'zeabur-postgresql-blog-foundation': [

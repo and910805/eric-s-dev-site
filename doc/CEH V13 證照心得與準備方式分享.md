@@ -9,11 +9,11 @@ title: CEH V13 證照心得與準備方式分享
 > 結果：通過 ✅
 
 ---
-![CEH_2E345519D3F7](https://hackmd.io/_uploads/rkp74hpLeg.png)
-![image](https://hackmd.io/_uploads/HJtBEnaIgx.png)
+![CEH_2E345519D3F7](/blog-assets/ceh-v13-review/rkp74hpLeg.png)
+![image](/blog-assets/ceh-v13-review/HJtBEnaIgx.png)
 
-![image](https://hackmd.io/_uploads/rk433K38ee.png)
-![image](https://hackmd.io/_uploads/SyVrWi28gx.png)
+![image](/blog-assets/ceh-v13-review/rk433K38ee.png)
+![image](/blog-assets/ceh-v13-review/SyVrWi28gx.png)
 
 ---
 
@@ -68,16 +68,16 @@ https://hackmd.io/@LKanFpXQTUSJayug7EHeiA/Sk3bRkqAkl
 
 為了強化練習，我將整理好的考古題匯入 Google 試算表，並配合 Google Apps Script 製作了一個 LINE Bot：
 
-![image](https://hackmd.io/_uploads/rkLyTDsLlx.png)
+![image](/blog-assets/ceh-v13-review/rkLyTDsLlx.png)
 
 - 即時答題  
-  ![image](https://hackmd.io/_uploads/S1AlpvoLle.png)
+  ![image](/blog-assets/ceh-v13-review/S1AlpvoLle.png)
 
 - 支援中英文題目  
-  ![image](https://hackmd.io/_uploads/SyLz6Dj8lx.png)
+  ![image](/blog-assets/ceh-v13-review/SyLz6Dj8lx.png)
 
 - 自動隨機產生 Google 表單作為小測驗  
-  ![image](https://hackmd.io/_uploads/H1Cp2PiUll.png)
+  ![image](/blog-assets/ceh-v13-review/H1Cp2PiUll.png)
 
 ---
 

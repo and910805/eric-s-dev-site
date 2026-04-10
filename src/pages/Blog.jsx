@@ -74,12 +74,7 @@ export default function Blog() {
 
       <section className="terminal-tree rounded-2xl border border-[#39ff1424] bg-[#02070df5] shadow-[0_18px_70px_rgba(0,0,0,0.5)]">
         <div className="flex items-center justify-between gap-4 border-b border-[#39ff1424] px-5 py-4">
-          <div className="flex items-center gap-3">
-            <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-            <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-            <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-          </div>
-          <div className="mono hidden text-xs text-zinc-500 sm:block">eric@portfolio:~/blog</div>
+          <div className="mono text-xs text-zinc-500">eric@portfolio:~/blog</div>
         </div>
 
         <div className="space-y-5 p-5 sm:p-7">

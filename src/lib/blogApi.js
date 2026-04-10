@@ -31,22 +31,3 @@ export async function createBlogComment(slug, comment) {
   const data = await response.json()
   return data.comment
 }
-
-export async function createBlogPost(post, credentials) {
-  const response = await fetch('/api/blog/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Basic ${window.btoa(`${credentials.username}:${credentials.password}`)}`,
-    },
-    body: JSON.stringify(post),
-  })
-
-  if (!response.ok) {
-    const data = await response.json().catch(() => ({}))
-    throw new Error(data.error ?? 'Unable to save post')
-  }
-
-  const data = await response.json()
-  return data.post
-}

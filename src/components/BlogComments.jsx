@@ -60,6 +60,7 @@ export default function BlogComments({ postSlug }) {
               <input
                 value={form.author}
                 onChange={(event) => setForm((current) => ({ ...current, author: event.target.value }))}
+                maxLength={80}
                 className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#39ff14]"
                 placeholder="Enter your name"
               />
@@ -71,6 +72,7 @@ export default function BlogComments({ postSlug }) {
                 type="email"
                 value={form.email}
                 onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+                maxLength={254}
                 className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#39ff14]"
                 placeholder="name@example.com"
               />
@@ -82,6 +84,7 @@ export default function BlogComments({ postSlug }) {
             <textarea
               value={form.body}
               onChange={(event) => setForm((current) => ({ ...current, body: event.target.value }))}
+              maxLength={2000}
               className="min-h-32 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#39ff14]"
               placeholder="留下你的想法"
             />

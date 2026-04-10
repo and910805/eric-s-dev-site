@@ -10,9 +10,11 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const port = process.env.PORT || 8080
 const distDir = path.join(__dirname, 'dist')
-const adminToken = process.env.BLOG_ADMIN_TOKEN
-const adminUsername = process.env.BLOG_ADMIN_USERNAME
-const adminPassword = process.env.BLOG_ADMIN_PASSWORD
+const commentLimiter = createRateLimiter({
+  maxRequests: 5,
+  windowMs: 15 * 60 * 1000,
+  message: 'Too many comment submissions. Please try again later.',
+})
 
 const pool = process.env.DATABASE_URL
   ? new Pool({
@@ -22,6 +24,28 @@ const pool = process.env.DATABASE_URL
   : null
 
 app.use(express.json({ limit: '1mb' }))
+app.set('trust proxy', 1)
+app.use(securityHeaders)
+
+function securityHeaders(req, res, next) {
+  res.setHeader('X-Content-Type-Options', 'nosniff')
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')
+  res.setHeader(
+    'Content-Security-Policy',
+    [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "script-src 'self'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: https://images.unsplash.com https://ithelp.ithome.com.tw",
+      "connect-src 'self'",
+      "frame-ancestors 'none'",
+    ].join('; ')
+  )
+  return next()
+}
 
 function requireDatabase(req, res, next) {
   if (!pool) {
@@ -30,46 +54,64 @@ function requireDatabase(req, res, next) {
   return next()
 }
 
-function requireAdmin(req, res, next) {
-  const basicCredentials = parseBasicAuth(req.header('authorization'))
-  const token = req.header('authorization')?.replace(/^Bearer\s+/i, '')
+function createRateLimiter({ maxRequests, windowMs, message }) {
+  const buckets = new Map()
 
-  if (adminUsername && adminPassword) {
-    if (basicCredentials?.username === adminUsername && basicCredentials?.password === adminPassword) {
+  return (req, res, next) => {
+    const now = Date.now()
+    const key = req.ip || req.socket.remoteAddress || 'unknown'
+    const bucket = buckets.get(key)
+
+    if (buckets.size > 10000) {
+      for (const [bucketKey, value] of buckets.entries()) {
+        if (value.resetAt <= now) buckets.delete(bucketKey)
+      }
+    }
+
+    if (!bucket || bucket.resetAt <= now) {
+      buckets.set(key, { count: 1, resetAt: now + windowMs })
       return next()
     }
 
-    res.setHeader('WWW-Authenticate', 'Basic realm="Blog Admin"')
-    return res.status(401).json({ error: 'Invalid admin credentials.' })
-  }
+    bucket.count += 1
 
-  if (adminToken) {
-    if (token === adminToken) {
-      return next()
+    if (bucket.count > maxRequests) {
+      const retryAfterSeconds = Math.ceil((bucket.resetAt - now) / 1000)
+      res.setHeader('Retry-After', retryAfterSeconds)
+      return res.status(429).json({ error: message })
     }
 
-    return res.status(401).json({ error: 'Invalid admin token.' })
+    return next()
   }
-
-  return res.status(403).json({ error: 'Blog admin credentials are not configured.' })
 }
 
-function parseBasicAuth(header) {
-  if (!header?.startsWith('Basic ')) return null
+function normalizeCommentText(value, maxLength) {
+  return String(value ?? '')
+    .trim()
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
+    .replace(/</g, '＜')
+    .replace(/>/g, '＞')
+    .slice(0, maxLength)
+}
 
-  try {
-    const decoded = Buffer.from(header.slice('Basic '.length), 'base64').toString('utf8')
-    const separatorIndex = decoded.indexOf(':')
+function safeCommentText(value, maxLength) {
+  return normalizeCommentText(value, maxLength)
+}
 
-    if (separatorIndex === -1) return null
+function isValidSlug(slug) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+}
 
-    return {
-      username: decoded.slice(0, separatorIndex),
-      password: decoded.slice(separatorIndex + 1),
-    }
-  } catch (error) {
-    return null
+function requireValidSlug(req, res, next) {
+  if (!isValidSlug(req.params.slug)) {
+    return res.status(400).json({ error: 'Invalid post slug.' })
   }
+
+  return next()
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 function mapPost(row) {
@@ -91,14 +133,8 @@ app.get('/api/health', (req, res) => {
   res.json({ ok: true, database: Boolean(pool) })
 })
 
-app.get(/^\/blog\/admin(?:\/.*)?$/, requireAdmin, (req, res) => {
-  const indexPath = path.join(distDir, 'index.html')
-
-  if (!fs.existsSync(indexPath)) {
-    return res.status(404).send('Build output not found. Run npm run build first.')
-  }
-
-  return res.sendFile(indexPath)
+app.get(/^\/blog\/admin(?:\/.*)?$/, (req, res) => {
+  return res.status(410).send('Blog admin is disabled. Add posts locally or through the database instead.')
 })
 
 app.get('/api/blog/posts', requireDatabase, async (req, res, next) => {
@@ -121,7 +157,7 @@ app.get('/api/blog/posts', requireDatabase, async (req, res, next) => {
   }
 })
 
-app.get('/api/blog/posts/:slug', requireDatabase, async (req, res, next) => {
+app.get('/api/blog/posts/:slug', requireValidSlug, requireDatabase, async (req, res, next) => {
   try {
     const result = await pool.query(
       `
@@ -147,36 +183,11 @@ app.get('/api/blog/posts/:slug', requireDatabase, async (req, res, next) => {
   }
 })
 
-app.post('/api/blog/posts', requireDatabase, requireAdmin, async (req, res, next) => {
-  try {
-    const { title, slug, excerpt, contentMarkdown, categorySlug, coverImage, status = 'draft' } = req.body
-
-    if (!title || !slug || !excerpt || !contentMarkdown || !categorySlug) {
-      return res.status(400).json({ error: 'title, slug, excerpt, contentMarkdown, and categorySlug are required.' })
-    }
-
-    const result = await pool.query(
-      `
-        WITH selected_category AS (SELECT id FROM blog.categories WHERE slug = $5)
-        INSERT INTO blog.posts (title, slug, excerpt, content_markdown, category_id, cover_image_url, status, published_at)
-        SELECT $1, $2, $3, $4, id, $6, $7, CASE WHEN $7 = 'published' THEN NOW() ELSE NULL END
-        FROM selected_category
-        RETURNING id, slug
-      `,
-      [title, slug, excerpt, contentMarkdown, categorySlug, coverImage ?? null, status]
-    )
-
-    if (!result.rowCount) {
-      return res.status(400).json({ error: 'Category not found.' })
-    }
-
-    return res.status(201).json({ post: result.rows[0] })
-  } catch (error) {
-    next(error)
-  }
+app.post('/api/blog/posts', (req, res) => {
+  return res.status(410).json({ error: 'Online blog publishing is disabled.' })
 })
 
-app.get('/api/blog/posts/:slug/comments', requireDatabase, async (req, res, next) => {
+app.get('/api/blog/posts/:slug/comments', requireValidSlug, requireDatabase, async (req, res, next) => {
   try {
     const result = await pool.query(
       `
@@ -192,8 +203,8 @@ app.get('/api/blog/posts/:slug/comments', requireDatabase, async (req, res, next
     res.json({
       comments: result.rows.map((row) => ({
         id: row.id,
-        author: row.author_name,
-        body: row.body,
+        author: safeCommentText(row.author_name, 80),
+        body: safeCommentText(row.body, 2000),
         date: row.created_at.toISOString().slice(0, 10),
       })),
     })
@@ -202,12 +213,30 @@ app.get('/api/blog/posts/:slug/comments', requireDatabase, async (req, res, next
   }
 })
 
-app.post('/api/blog/posts/:slug/comments', requireDatabase, async (req, res, next) => {
+app.post('/api/blog/posts/:slug/comments', requireValidSlug, commentLimiter, requireDatabase, async (req, res, next) => {
   try {
-    const { author, email, body } = req.body
+    const author = normalizeCommentText(req.body.author, 80)
+    const email = req.body.email?.trim()
+    const body = normalizeCommentText(req.body.body, 2000)
 
-    if (!body?.trim()) {
+    if (!body) {
       return res.status(400).json({ error: 'Comment body is required.' })
+    }
+
+    if (String(req.body.body ?? '').trim().length > 2000) {
+      return res.status(400).json({ error: 'Comment body must be 2000 characters or fewer.' })
+    }
+
+    if (String(req.body.author ?? '').trim().length > 80) {
+      return res.status(400).json({ error: 'Author name must be 80 characters or fewer.' })
+    }
+
+    if (email && email.length > 254) {
+      return res.status(400).json({ error: 'Email must be 254 characters or fewer.' })
+    }
+
+    if (email && !isValidEmail(email)) {
+      return res.status(400).json({ error: 'Email format is invalid.' })
     }
 
     const result = await pool.query(
@@ -218,7 +247,7 @@ app.post('/api/blog/posts/:slug/comments', requireDatabase, async (req, res, nex
         WHERE slug = $1
         RETURNING id, author_name, body, created_at, status
       `,
-      [req.params.slug, author?.trim() || '匿名訪客', email?.trim() || null, body.trim(), req.header('user-agent') ?? null]
+      [req.params.slug, author || '匿名訪客', email || null, body, req.header('user-agent') ?? null]
     )
 
     if (!result.rowCount) {
@@ -228,8 +257,8 @@ app.post('/api/blog/posts/:slug/comments', requireDatabase, async (req, res, nex
     return res.status(201).json({
       comment: {
         id: result.rows[0].id,
-        author: result.rows[0].author_name,
-        body: result.rows[0].body,
+        author: safeCommentText(result.rows[0].author_name, 80),
+        body: safeCommentText(result.rows[0].body, 2000),
         date: result.rows[0].created_at.toISOString().slice(0, 10),
         status: result.rows[0].status,
       },

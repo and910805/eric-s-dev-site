@@ -4,12 +4,12 @@ import { Menu, TerminalSquare, X } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { to: '/', label: '首頁' },
-  { to: '/about', label: '關於我' },
-  { to: '/projects', label: '專案' },
+  { to: '/', label: 'whoami' },
+  { to: '/about', label: 'man eric' },
+  { to: '/projects', label: 'ls projects' },
   { to: '/blog', label: '資安筆記' },
-  { to: '/certifications', label: '證照專區' },
-  { to: '/contact', label: '聯絡' },
+  { to: '/certifications', label: 'certs' },
+  { to: '/contact', label: 'contact' },
 ]
 
 export default function Navbar() {
@@ -37,7 +37,7 @@ export default function Navbar() {
                 Eric / Security Terminal
               </span>
               <span className="block truncate text-sm font-semibold text-zinc-100 sm:text-base">
-                資安實務 / 證照 / 自動化
+                資安筆記 / 專案 / Linux-style portfolio
               </span>
             </span>
           </NavLink>
@@ -46,7 +46,7 @@ export default function Navbar() {
             type="button"
             className="inline-flex items-center justify-center rounded-full border border-[#39ff1429] bg-[#39ff140d] p-2 text-[#b8ffb8] transition hover:bg-[#39ff1416] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#39ff14] sm:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
-            aria-label="切換導覽選單"
+            aria-label="開啟導覽選單"
             aria-expanded={isMobileOpen}
             aria-controls="primary-navigation"
           >
@@ -76,7 +76,7 @@ export default function Navbar() {
 
         <div className="mt-3 hidden items-center gap-2 border-t border-[#39ff1416] pt-3 text-[0.72rem] text-zinc-400 lg:flex">
           <TerminalSquare className="h-4 w-4 text-[#39ff14]" />
-          <span className="mono">status: active / role: cybersecurity practitioner / mode: portfolio</span>
+          <span className="mono">status: active / role: cybersecurity practitioner / mode: portfolio shell</span>
         </div>
 
         <ul

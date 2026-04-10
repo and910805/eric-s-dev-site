@@ -8,5 +8,5 @@ export const contact = {
   lineId: '0966632722',
   location: 'Taiwan / Remote',
   intro:
-    '專注在弱點管理、資安營運、自動化腳本與教學內容設計，能把技術分析整理成可執行的流程與可溝通的成果。',
+    '如果你想聊資安筆記、網站、後端工具、自動化或專案合作，可以從 Email、GitHub 或 LinkedIn 找到我。',
 }

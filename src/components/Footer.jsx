@@ -3,11 +3,11 @@ import { ExternalLink, Terminal } from 'lucide-react'
 
 const footerLinks = [
   {
-    label: 'iThome 鐵人賽系列',
+    label: 'iThome 鐵人賽',
     href: 'https://ithelp.ithome.com.tw/users/20171891/ironman/8352',
   },
   {
-    label: '資安筆記網站',
+    label: '舊版文章站',
     href: 'https://and910805.github.io/eric_site/',
   },
   {
@@ -23,9 +23,9 @@ export default function Footer() {
         <div className="space-y-1">
           <div className="mono flex items-center gap-2 text-zinc-100">
             <Terminal className="h-4 w-4 text-[#39ff14]" />
-            Eric Security Portfolio
+            Eric Security Terminal
           </div>
-          <div>cybersecurity / certifications / automation / technical output</div>
+          <div>cybersecurity / notes / projects / automation</div>
         </div>
 
         <ul className="flex flex-wrap gap-3 text-zinc-300">

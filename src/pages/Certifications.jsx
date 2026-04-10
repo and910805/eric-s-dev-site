@@ -1,5 +1,6 @@
 import React from 'react'
 import { Download, ExternalLink, FileText } from 'lucide-react'
+import TerminalPanel from '../components/TerminalPanel.jsx'
 import SectionContainer from '../components/SectionContainer.jsx'
 import { certifications } from '../data/certifications.js'
 
@@ -11,15 +12,23 @@ export default function Certifications() {
 
   return (
     <>
-      <SectionContainer subtitle="Certifications" title="證照專區">
-        <div className="max-w-4xl space-y-4 text-base leading-8 text-zinc-300">
-          <p>
-            這一頁專門用來突出你的資安證照實力。主軸放在 CEH、CEH Practical（CEHP）與 CEH Master，明確傳達你不只是有學習背景，而是具備完整的理論與實作證明。
-          </p>
-          <p>
-            我也把原始檔案整理成可直接開啟與下載的資源，方便面試、履歷投遞或作品集分享時快速證明專業背景。
-          </p>
-        </div>
+      <SectionContainer subtitle="certifications" title="$ certctl list --verified">
+        <TerminalPanel command="certctl status">
+          <div className="space-y-1">
+            <div className="terminal-row">
+              <span className="terminal-key">primary</span>
+              <span className="terminal-value">CEH / CEH Practical / CEH Master</span>
+            </div>
+            <div className="terminal-row">
+              <span className="terminal-key">writing</span>
+              <span className="terminal-value">iThome 2025 鐵人賽 30 篇文章</span>
+            </div>
+            <div className="terminal-row">
+              <span className="terminal-key">purpose</span>
+              <span className="terminal-value">把證照與文章都變成可以回頭查、可以延伸的學習紀錄。</span>
+            </div>
+          </div>
+        </TerminalPanel>
       </SectionContainer>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
@@ -63,7 +72,7 @@ export default function Certifications() {
           <div className="glass-card">
             <div className="glass-card__inner">
               <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">Preview</p>
-              <h2 className="text-xl font-semibold text-white">CEH Master 證書預覽</h2>
+              <h2 className="text-xl font-semibold text-white">CEH Master 證明預覽</h2>
               <a href="/certifications/ceh-master-certificate.png" target="_blank" rel="noopener noreferrer">
                 <img
                   src="/certifications/ceh-master-certificate.png"
@@ -77,7 +86,7 @@ export default function Certifications() {
           <div className="glass-card">
             <div className="glass-card__inner">
               <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">Additional Proof</p>
-              <h2 className="text-xl font-semibold text-white">其他證明</h2>
+              <h2 className="text-xl font-semibold text-white">其他紀錄</h2>
               <ul className="space-y-3">
                 {secondaryCerts.map((item) => (
                   <li key={item.title} className="rounded-2xl border border-[#39ff1420] bg-[#39ff1406] p-4">
@@ -97,7 +106,7 @@ export default function Certifications() {
                           className="inline-flex items-center gap-2 text-sm font-semibold text-[#8af7fe] transition hover:text-white"
                         >
                           <ExternalLink className="h-4 w-4" />
-                          開啟檔案
+                          開啟紀錄
                         </a>
                       </div>
                     </div>

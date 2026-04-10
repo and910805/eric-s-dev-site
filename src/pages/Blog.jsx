@@ -70,7 +70,7 @@ export default function Blog() {
 
   return (
     <section className="space-y-10">
-      <SectionContainer subtitle="Blog" title="資安筆記與資料庫紀錄" />
+      <SectionContainer subtitle="Blog" title="資安筆記" />
 
       <section className="terminal-tree rounded-2xl border border-[#39ff1424] bg-[#02070df5] shadow-[0_18px_70px_rgba(0,0,0,0.5)]">
         <div className="flex items-center justify-between gap-4 border-b border-[#39ff1424] px-5 py-4">

@@ -4,13 +4,13 @@
 
 > 「你會看 Firewall 嗎？」
 
-![https://ithelp.ithome.com.tw/upload/images/20250821/20171891IQeBuzI90Q.jpg](https://ithelp.ithome.com.tw/upload/images/20250821/20171891IQeBuzI90Q.jpg)
+![/blog-assets/ithome-2025/20171891IQeBuzI90Q.jpg](/blog-assets/ithome-2025/20171891IQeBuzI90Q.jpg)
 
 當下愣了一下，還沒來得及回答，桌上就多了一本厚到嚇人的 Palo Alto 防火牆操作手冊。 **幾百頁的設定、策略、規則說明**，瞬間像是 RPG 遊戲剛創角就被發了一本「防禦指南」。
 
 > 只差沒附註：**請三天內看完。**
 
-![https://ithelp.ithome.com.tw/upload/images/20250821/20171891bGli5r07gP.png](https://ithelp.ithome.com.tw/upload/images/20250821/20171891bGli5r07gP.png)
+![/blog-assets/ithome-2025/20171891bGli5r07gP.png](/blog-assets/ithome-2025/20171891bGli5r07gP.png)
 
 ---
 

@@ -17,7 +17,7 @@
 
 而且不論密碼再怎麼強，總有機會被竊取或破解；只有加上 MFA，才能有效降低風險。
 
-![https://ithelp.ithome.com.tw/upload/images/20250827/20171891QNZQll0jeM.png](https://ithelp.ithome.com.tw/upload/images/20250827/20171891QNZQll0jeM.png)
+![/blog-assets/ithome-2025/20171891QNZQll0jeM.png](/blog-assets/ithome-2025/20171891QNZQll0jeM.png)
 
 ---
 

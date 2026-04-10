@@ -1,4 +1,4 @@
-![https://ithelp.ithome.com.tw/upload/images/20250820/20171891eFUriHTRZ2.png](https://ithelp.ithome.com.tw/upload/images/20250820/20171891eFUriHTRZ2.png)![https://ithelp.ithome.com.tw/upload/images/20250820/20171891Xm2FaXlRMz.png](https://ithelp.ithome.com.tw/upload/images/20250820/20171891Xm2FaXlRMz.png)
+![/blog-assets/ithome-2025/20171891eFUriHTRZ2.png](/blog-assets/ithome-2025/20171891eFUriHTRZ2.png)![/blog-assets/ithome-2025/20171891Xm2FaXlRMz.png](/blog-assets/ithome-2025/20171891Xm2FaXlRMz.png)
 
 在一家公司裡，導入資安工具與服務的最大推力，往往來自 **法規要求**（ISO 27001、GDPR、金融業規範）與 **客戶稽核**，再加上長官對安全能力的期待。這些要求就像遊戲裡的任務 NPC：指定你必須拿到某些裝備才能闖關。 平時沒事可以撐著過日子，但遇到 BOSS（法規檢查 / 客戶審查），裝備不夠就會瞬間 Game Over。
 
@@ -6,7 +6,7 @@
 
 ## 公司常見裝備地圖（快速看表）
 
-![https://ithelp.ithome.com.tw/upload/images/20250820/20171891VJ2SD5m3Ko.png](https://ithelp.ithome.com.tw/upload/images/20250820/20171891VJ2SD5m3Ko.png)
+![/blog-assets/ithome-2025/20171891VJ2SD5m3Ko.png](/blog-assets/ithome-2025/20171891VJ2SD5m3Ko.png)
 
 - **ISO/ISMS（ISO/IEC 27001）**：不是工具，是「制度＋程序＋文件」的地基。
 - **EDR / MDR**：端點偵測與回應；MDR 為 24/7 外包代管。

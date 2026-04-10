@@ -4,7 +4,7 @@
 
 昨天說到 M365 不只是辦公室套件，今天要聊聊現在最流行的資安策略：**Zero Trust（零信任）**。 一句話總結：**「永不信任，始終驗證」**
 
-![https://ithelp.ithome.com.tw/upload/images/20250827/20171891gAGsA9HlG5.jpg](https://ithelp.ithome.com.tw/upload/images/20250827/20171891gAGsA9HlG5.jpg)
+![/blog-assets/ithome-2025/20171891gAGsA9HlG5.jpg](/blog-assets/ithome-2025/20171891gAGsA9HlG5.jpg)
 
 ---
 
@@ -22,7 +22,7 @@
 
 零信任拆成六大面向，組合起來就像一個完整的安全堡壘：
 
-![https://ithelp.ithome.com.tw/upload/images/20250827/20171891fc37LuSgR7.png](https://ithelp.ithome.com.tw/upload/images/20250827/20171891fc37LuSgR7.png)
+![/blog-assets/ithome-2025/20171891fc37LuSgR7.png](/blog-assets/ithome-2025/20171891fc37LuSgR7.png)
 
 1. **身分（Identities）** → 誰在存取？帳號驗證、MFA、風險評估。
 2. **端點（Endpoints）** → 從哪台裝置來？裝置合規性、Defender for Endpoint 偵測風險。
@@ -40,7 +40,7 @@
 - 微軟的優勢在於：它手上握有 **Entra ID（身份）、Intune + Defender for Endpoint（端點）、M365 全家桶（應用）、Purview（資料）**，幾乎能把六大支柱全部串起來。
 - 簡單講：**你的帳號、電腦、郵件、雲端文件，微軟都有工具幫你驗證與控管。**
 
-![https://ithelp.ithome.com.tw/upload/images/20250827/20171891oVDsOSVmud.jpg](https://ithelp.ithome.com.tw/upload/images/20250827/20171891oVDsOSVmud.jpg)
+![/blog-assets/ithome-2025/20171891oVDsOSVmud.jpg](/blog-assets/ithome-2025/20171891oVDsOSVmud.jpg)
 
 ---
 

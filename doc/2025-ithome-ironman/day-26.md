@@ -8,7 +8,7 @@
 
 ## MITRE ATT&CK 到底是什麼？
 
-![https://ithelp.ithome.com.tw/upload/images/20250912/20171891Mo04h3xS5n.png](https://ithelp.ithome.com.tw/upload/images/20250912/20171891Mo04h3xS5n.png)
+![/blog-assets/ithome-2025/20171891Mo04h3xS5n.png](/blog-assets/ithome-2025/20171891Mo04h3xS5n.png)
 
 [MITRE ATT&CK（Adversarial Tactics, Techniques, and Common Knowledge）](https://attack.mitre.org/)其實是一個**全球性的攻擊手法知識庫**，它把駭客的TTPs（Tactics戰術、Techniques技術、Procedures程序）整理成一張詳細的「攻擊地圖」。這不是枯燥的理論，而是基於真實威脅情報（如APT團體的案例）建構的框架，讓資安從業者能快速理解和應對攻擊。
 

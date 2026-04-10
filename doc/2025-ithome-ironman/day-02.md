@@ -1,4 +1,4 @@
-![https://ithelp.ithome.com.tw/upload/images/20250819/20171891UXsSIBCW7L.png](https://ithelp.ithome.com.tw/upload/images/20250819/20171891UXsSIBCW7L.png)
+![/blog-assets/ithome-2025/20171891UXsSIBCW7L.png](/blog-assets/ithome-2025/20171891UXsSIBCW7L.png)
 
 > 是不是以為我要介紹 OWASP？ 今天不打算列一堆「情資平台清單」，而是針對公務繁忙、只能被動收信的資安工程師：只要訂閱幾個可靠來源，人家幫你整理好寄到信箱，這些也都是公開情資的一部分。
 
@@ -11,9 +11,9 @@
 
 ---
 
-![https://ithelp.ithome.com.tw/upload/images/20250819/20171891Q2irF2N7F1.png](https://ithelp.ithome.com.tw/upload/images/20250819/20171891Q2irF2N7F1.png)
+![/blog-assets/ithome-2025/20171891Q2irF2N7F1.png](/blog-assets/ithome-2025/20171891Q2irF2N7F1.png)
 
-![https://ithelp.ithome.com.tw/upload/images/20250819/201718910VgWKVY32o.png](https://ithelp.ithome.com.tw/upload/images/20250819/201718910VgWKVY32o.png)
+![/blog-assets/ithome-2025/201718910VgWKVY32o.png](/blog-assets/ithome-2025/201718910VgWKVY32o.png)
 
 ## 我訂閱的 3 個來源（以及各自的價值）
 

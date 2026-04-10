@@ -28,7 +28,7 @@
 
 > 上面這些都是 **Entra ID** 的內容；基礎沒打好，後面所有 M365 安全都進不去。依公司架構（純雲、混合 AD、B2B 協作）設計基線，別忘了 **兩個 break-glass 帳號**（長密碼、監控、從 CA 排除）與**全域封鎖舊式驗證**。 ＊註：Entra ID Protection／PIM 等屬進階功能，通常需要 **P2** 授權。
 
-![https://ithelp.ithome.com.tw/upload/images/20250826/20171891QaAr1hc8Lf.png](https://ithelp.ithome.com.tw/upload/images/20250826/20171891QaAr1hc8Lf.png)
+![/blog-assets/ithome-2025/20171891QaAr1hc8Lf.png](/blog-assets/ithome-2025/20171891QaAr1hc8Lf.png)
 
 ---
 
@@ -45,7 +45,7 @@
 
 > 補充：**信箱的「垃圾信/惡意信」基礎防護主要由 EOP 負責；Defender for Office 365 是在 EOP 之上提供進階釣魚與 0-day 防護。**
 
-## ![https://ithelp.ithome.com.tw/upload/images/20250826/20171891WRgLvFHTaZ.png](https://ithelp.ithome.com.tw/upload/images/20250826/20171891WRgLvFHTaZ.png)
+## ![/blog-assets/ithome-2025/20171891WRgLvFHTaZ.png](/blog-assets/ithome-2025/20171891WRgLvFHTaZ.png)
 
 ---
 
@@ -58,7 +58,7 @@
 
 ＊註：部分進階功能（如自動標籤、Endpoint DLP、eDiscovery Premium、Insider Risk）需較高階授權。
 
-![https://ithelp.ithome.com.tw/upload/images/20250826/201718910zAiHjnhoM.png](https://ithelp.ithome.com.tw/upload/images/20250826/201718910zAiHjnhoM.png)
+![/blog-assets/ithome-2025/201718910zAiHjnhoM.png](/blog-assets/ithome-2025/201718910zAiHjnhoM.png)
 
 [微軟 Purview 文件](https://learn.microsoft.com/zh-tw/purview/purview)
 

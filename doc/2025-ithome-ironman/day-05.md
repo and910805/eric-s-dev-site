@@ -4,7 +4,7 @@
 
 如果把防火牆當作是鐵甲、EDR 當作神器， 那 ISMS（資訊安全管理系統）就是一本「**葵花寶典**」。 只不過這本就像尚未自宮前的無字天書，是**厚到能壓死人**的一疊政策、流程、紀錄表單。
 
-![https://ithelp.ithome.com.tw/upload/images/20250822/20171891H2Ajv5O8hb.jpg](https://ithelp.ithome.com.tw/upload/images/20250822/20171891H2Ajv5O8hb.jpg)
+![/blog-assets/ithome-2025/20171891H2Ajv5O8hb.jpg](/blog-assets/ithome-2025/20171891H2Ajv5O8hb.jpg)
 
 ---
 

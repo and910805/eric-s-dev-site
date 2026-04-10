@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronRight, FileText, Folder, FolderOpen, Terminal } from 'lucide-react'
+import { ChevronRight, ExternalLink, FileText, Folder, FolderOpen, Terminal } from 'lucide-react'
 import SectionContainer from '../components/SectionContainer.jsx'
+import { articles } from '../data/articles.js'
 import { blogCategories, blogPosts } from '../data/blog.js'
 import { fetchBlogPosts } from '../lib/blogApi.js'
 
@@ -18,7 +19,7 @@ function getArticleDirectory(post) {
 }
 
 function buildTree(posts) {
-  return blogCategories
+  const blogTree = blogCategories
     .map((category) => {
       const categoryPosts = posts
         .filter((post) => post.categorySlug === category.slug)
@@ -42,6 +43,27 @@ function buildTree(posts) {
       }
     })
     .filter(Boolean)
+
+  return [
+    ...blogTree,
+    {
+      slug: 'external-links',
+      name: '外部文章連結',
+      count: articles.length,
+      directories: [
+        {
+          name: 'hackmd-and-ithome',
+          items: articles.map((article) => ({
+            ...article,
+            slug: article.href,
+            date: article.platform,
+            readTime: article.category,
+            external: true,
+          })),
+        },
+      ],
+    },
+  ]
 }
 
 export default function Blog() {
@@ -149,7 +171,24 @@ export default function Blog() {
                                   {directory.items.map((post, postIndex) => {
                                     const isLastPost = postIndex === directory.items.length - 1
 
-                                    return (
+                                    return post.external ? (
+                                      <a
+                                        key={post.slug}
+                                        href={post.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#39ff1408] hover:text-white"
+                                      >
+                                        <span className="mt-0.5 w-5 text-zinc-700">{isLastPost ? '└──' : '├──'}</span>
+                                        <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-[#8af7fe]" />
+                                        <span className="min-w-0 flex-1">
+                                          <span className="block truncate">{post.title}.url</span>
+                                          <span className="mt-1 block whitespace-normal text-xs leading-5 text-zinc-500 group-hover:text-zinc-400">
+                                            {post.date} / {post.readTime}
+                                          </span>
+                                        </span>
+                                      </a>
+                                    ) : (
                                       <Link
                                         key={post.slug}
                                         to={`/blog/${post.slug}`}

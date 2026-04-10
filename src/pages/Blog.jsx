@@ -66,8 +66,40 @@ function buildTree(posts) {
   ]
 }
 
+function matchesSearch(item, query) {
+  if (!query) return true
+
+  return [item.title, item.category, item.categorySlug, item.excerpt, item.description, item.platform, item.href]
+    .filter(Boolean)
+    .some((value) => String(value).toLowerCase().includes(query))
+}
+
+function filterTree(tree, query) {
+  if (!query) return tree
+
+  return tree
+    .map((category) => {
+      const directories = category.directories
+        .map((directory) => ({
+          ...directory,
+          items: directory.items.filter((item) => matchesSearch(item, query)),
+        }))
+        .filter((directory) => directory.items.length > 0)
+
+      if (!directories.length) return null
+
+      return {
+        ...category,
+        count: directories.reduce((total, directory) => total + directory.items.length, 0),
+        directories,
+      }
+    })
+    .filter(Boolean)
+}
+
 export default function Blog() {
   const [posts, setPosts] = useState(blogPosts)
+  const [searchTerm, setSearchTerm] = useState('')
   const [openCategories, setOpenCategories] = useState({})
   const [openDirectories, setOpenDirectories] = useState({})
 
@@ -80,7 +112,10 @@ export default function Blog() {
   }, [])
 
   const tree = useMemo(() => buildTree(posts), [posts])
+  const normalizedSearch = searchTerm.trim().toLowerCase()
+  const visibleTree = useMemo(() => filterTree(tree, normalizedSearch), [normalizedSearch, tree])
   const totalPosts = tree.reduce((total, category) => total + category.count, 0)
+  const visiblePosts = visibleTree.reduce((total, category) => total + category.count, 0)
 
   function toggleCategory(slug) {
     setOpenCategories((current) => ({ ...current, [slug]: !current[slug] }))
@@ -103,19 +138,41 @@ export default function Blog() {
           <div className="mono flex flex-wrap items-center gap-2 text-sm text-[#b8ffb8]">
             <Terminal className="h-4 w-4 text-[#39ff14]" />
             <span className="text-[#39ff14]">$</span>
-            <span>tree ~/blog --interactive</span>
+            <span>{normalizedSearch ? `grep -ri "${searchTerm}" ~/blog` : 'tree ~/blog --interactive'}</span>
           </div>
+
+          <label className="mono block rounded-xl border border-[#39ff1424] bg-black/30 px-4 py-3 text-sm text-zinc-400 focus-within:border-[#39ff14] focus-within:bg-[#39ff1408]">
+            <span className="mr-2 text-[#39ff14]">$</span>
+            <span className="mr-2 text-zinc-500">grep</span>
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              className="w-[min(100%,28rem)] bg-transparent text-[#eaffec] outline-none placeholder:text-zinc-600"
+              placeholder="search notes, tags, keywords..."
+            />
+          </label>
 
           <div className="rounded-xl border border-white/10 bg-black/30 p-4 sm:p-5">
             <div className="mono mb-4 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-400">
               <span>~/blog</span>
-              <span>{tree.length} directories, {totalPosts} articles</span>
+              <span>
+                {normalizedSearch
+                  ? `${visiblePosts} matches / ${totalPosts} articles`
+                  : `${tree.length} directories, ${totalPosts} articles`}
+              </span>
             </div>
 
             <div className="space-y-2">
-              {tree.map((category, categoryIndex) => {
-                const categoryOpen = Boolean(openCategories[category.slug])
-                const isLastCategory = categoryIndex === tree.length - 1
+              {visibleTree.length === 0 && (
+                <div className="mono rounded-lg border border-[#ffbd2e33] bg-[#ffbd2e08] px-4 py-3 text-sm text-[#ffdf8a]">
+                  no matches found. try another keyword.
+                </div>
+              )}
+
+              {visibleTree.map((category, categoryIndex) => {
+                const categoryOpen = normalizedSearch || Boolean(openCategories[category.slug])
+                const isLastCategory = categoryIndex === visibleTree.length - 1
 
                 return (
                   <div key={category.slug} className="mono text-sm">
@@ -143,7 +200,7 @@ export default function Blog() {
                       <div className="ml-6 space-y-1 border-l border-[#39ff141f] pl-4">
                         {category.directories.map((directory, directoryIndex) => {
                           const directoryKey = `${category.slug}/${directory.name}`
-                          const directoryOpen = Boolean(openDirectories[directoryKey])
+                          const directoryOpen = normalizedSearch || Boolean(openDirectories[directoryKey])
                           const isLastDirectory = directoryIndex === category.directories.length - 1
 
                           return (
@@ -219,7 +276,7 @@ export default function Blog() {
           </div>
 
           <p className="mono text-xs leading-6 text-zinc-500">
-            hint: click a directory to expand it, then open a markdown file to read the article.
+            hint: click a directory to expand it, or use grep to search across notes and external links.
           </p>
         </div>
       </section>

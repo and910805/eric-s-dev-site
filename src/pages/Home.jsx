@@ -1,19 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Github, Linkedin, Mail, ShieldCheck, TerminalSquare } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, Mail, TerminalSquare } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { contact } from '../data/contact.js'
 import { identity, whoamiLines } from '../data/terminalProfile.js'
 
-const highlights = [
-  '資安筆記與 iThome 鐵人賽文章整理',
-  'CEH / CEH Practical / CEH Master',
-  'Python、React、Flask 與自動化工具實作',
-]
-
 export default function Home() {
   return (
-    <section className="space-y-14 sm:space-y-16">
+    <section>
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -111,17 +105,6 @@ export default function Home() {
             </div>
           </div>
         </motion.aside>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        {highlights.map((item) => (
-          <div key={item} className="glass-card">
-            <div className="glass-card__inner">
-              <ShieldCheck className="h-5 w-5 text-[#39ff14]" />
-              <p className="text-sm leading-7 text-zinc-200">{item}</p>
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   )

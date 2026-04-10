@@ -4,3 +4,6 @@ dist
 .DS_Store
 vite.log
 vite.err.log
+vite.*.log
+vite.*.err.log
+server.*.log

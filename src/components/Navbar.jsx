@@ -4,12 +4,12 @@ import { Menu, TerminalSquare, X } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 const navItems = [
-  { to: '/', label: 'whoami' },
-  { to: '/about', label: 'man eric' },
-  { to: '/projects', label: 'ls projects' },
+  { to: '/', label: '首頁' },
+  { to: '/about', label: '關於我' },
+  { to: '/projects', label: '專案' },
   { to: '/blog', label: '資安筆記' },
-  { to: '/certifications', label: 'certs' },
-  { to: '/contact', label: 'contact' },
+  { to: '/certifications', label: '證照' },
+  { to: '/contact', label: '聯絡' },
 ]
 
 export default function Navbar() {
@@ -60,7 +60,7 @@ export default function Navbar() {
                   to={item.to}
                   className={({ isActive }) =>
                     clsx(
-                      'mono inline-flex rounded-full px-3 py-2 transition xl:px-4',
+                      'inline-flex rounded-full px-3 py-2 font-semibold transition xl:px-4',
                       isActive
                         ? 'bg-[#39ff14] text-[#04110a] shadow-[0_0_22px_rgba(57,255,20,0.22)]'
                         : 'text-zinc-300 hover:bg-[#39ff140f] hover:text-white'
@@ -92,7 +92,7 @@ export default function Navbar() {
                 to={item.to}
                 className={({ isActive }) =>
                   clsx(
-                    'mono block rounded-xl px-4 py-3 transition',
+                    'block rounded-xl px-4 py-3 font-semibold transition',
                     isActive
                       ? 'bg-[#39ff14] text-[#04110a]'
                       : 'bg-white/[0.02] text-zinc-200 hover:bg-[#39ff140f]'

@@ -478,8 +478,7 @@ const rawBlogPosts = [
     readTime: '7 min read',
     excerpt:
       '從剛退伍踏進新竹，到一個人扛起公司資安與 IT 日常，這一年不寬裕、不輕鬆，卻也讓我真正長出韌性、技術與責任感。',
-    coverImage:
-      'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1600&q=80',
+    coverImage: '/S__67723282.jpg',
     contentMarkdown: stripFrontmatter(selfReview2025),
   },
   {

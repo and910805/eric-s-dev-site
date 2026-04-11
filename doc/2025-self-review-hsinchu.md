@@ -1,6 +1,6 @@
 # 2025 年回顧：在新竹 37K 的日子裡，我為自己打了一場仗
 
-![新竹夜色與獨自奮戰的節奏](https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1400&q=80)
+![夜裡一個人守著電腦與城市燈光](https://images.unsplash.com/photo-1758773263238-1989d0cc788c?auto=format&fit=crop&w=1600&q=80)
 
 看到以前實習時遇到的資安前輩 HackerCat（駭客貓）寫的年度回顧，發現他每年都會記錄自己的成長，這讓我也想靜下心來，把這精彩到不行、甚至有點瘋狂的 2025 年給記錄下來。
 

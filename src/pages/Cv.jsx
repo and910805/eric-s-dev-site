@@ -67,20 +67,6 @@ export default function Cv() {
               </div>
             </div>
           </div>
-
-          <div className="glass-card">
-            <div className="glass-card__inner">
-              <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">Tips</p>
-              <ul className="space-y-3 text-sm leading-7 text-zinc-300">
-                <li className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                  若瀏覽器內嵌預覽失敗，可以直接點 `open pdf`。
-                </li>
-                <li className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                  想更新履歷時，只要替換 `public/cv/eric-chuang-cv.pdf` 即可。
-                </li>
-              </ul>
-            </div>
-          </div>
         </aside>
       </div>
     </>

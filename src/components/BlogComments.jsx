@@ -25,7 +25,8 @@ export default function BlogComments({ postSlug }) {
 
     try {
       const savedComment = await createBlogComment(postSlug, { ...form, body })
-      setNotice(savedComment.status === 'pending' ? '留言已送出，等待審核後會顯示。' : '留言已發佈。')
+      setComments((current) => [savedComment, ...current])
+      setNotice('留言已直接發布。')
     } catch (error) {
       const localComment = {
         id: Date.now(),
@@ -50,7 +51,7 @@ export default function BlogComments({ postSlug }) {
 
         <h2 className="text-2xl font-semibold text-white">發佈留言</h2>
         <p className="text-sm leading-7 text-zinc-400">
-          目前留言會先在瀏覽器中即時顯示。接上後端後，這個表單可以送到 `blog.comments`，並加入審核狀態。
+          送出後會直接發布到這篇文章底下，不需要再另外審核。
         </p>
 
         <form onSubmit={handleSubmit} className="grid gap-4">

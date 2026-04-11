@@ -250,7 +250,7 @@ app.post('/api/blog/posts/:slug/comments', requireValidSlug, commentLimiter, req
     const result = await pool.query(
       `
         INSERT INTO blog.comments (post_id, author_name, author_email, body, status, user_agent)
-        SELECT id, $2, $3, $4, 'pending', $5
+        SELECT id, $2, $3, $4, 'approved', $5
         FROM blog.posts
         WHERE slug = $1
         RETURNING id, author_name, body, created_at, status

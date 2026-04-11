@@ -17,6 +17,7 @@ RUN npm ci --omit=dev
 
 COPY --from=build /app/dist ./dist
 COPY server.js ./server.js
+COPY docs ./docs
 
 EXPOSE 8080
 

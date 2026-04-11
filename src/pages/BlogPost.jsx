@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { ArrowLeft, CalendarDays, Clock3, FolderOpen, Tag } from 'lucide-react'
+import { ArrowLeft, CalendarDays, Clock3, FolderOpen, Tag, TerminalSquare } from 'lucide-react'
 import BlogComments from '../components/BlogComments.jsx'
 import MarkdownContent from '../components/MarkdownContent.jsx'
 import { blogCategories, blogPosts } from '../data/blog.js'
@@ -30,7 +30,10 @@ export default function BlogPost() {
     return <div className="glass-card">Loading article...</div>
   }
 
-  const relatedPosts = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 3)
+  const relatedPosts = [
+    ...blogPosts.filter((item) => item.slug !== post.slug && item.categorySlug === post.categorySlug),
+    ...blogPosts.filter((item) => item.slug !== post.slug && item.categorySlug !== post.categorySlug),
+  ].slice(0, 3)
 
   return (
     <section className="space-y-8">
@@ -40,31 +43,56 @@ export default function BlogPost() {
       </Link>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-        <article className="overflow-hidden rounded-2xl border border-[#39ff1424] bg-[#041018f2] shadow-[0_18px_60px_rgba(0,0,0,0.42)]">
-          <img src={post.coverImage} alt="" className="h-64 w-full object-cover sm:h-80" />
-
-          <div className="space-y-8 p-6 sm:p-8">
-            <header className="space-y-4">
-              <div className="flex flex-wrap gap-3 text-xs text-zinc-300">
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#39ff1424] bg-[#39ff1408] px-3 py-1">
-                  <CalendarDays className="h-4 w-4 text-[#39ff14]" />
+        <article className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#041018f2] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
+          <div className="blog-hero">
+            <img src={post.coverImage} alt="" className="h-full w-full object-cover" />
+            <div className="blog-hero__overlay" />
+            <div className="blog-hero__content">
+              <div className="flex flex-wrap gap-3 text-xs text-zinc-200">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#f4d58d33] bg-[#f4d58d1a] px-3 py-1.5 text-[#fff1c7]">
+                  <CalendarDays className="h-4 w-4" />
                   {post.date}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#3df2ff24] bg-[#3df2ff0d] px-3 py-1">
-                  <FolderOpen className="h-4 w-4 text-[#8af7fe]" />
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#8af7fe33] bg-[#8af7fe14] px-3 py-1.5 text-[#d8fbff]">
+                  <FolderOpen className="h-4 w-4" />
                   {post.category}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">
-                  <Clock3 className="h-4 w-4 text-zinc-300" />
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-zinc-100">
+                  <Clock3 className="h-4 w-4" />
                   {post.readTime}
                 </span>
               </div>
 
-              <h1 className="section-title">{post.title}</h1>
-              <p className="text-base leading-8 text-zinc-300 sm:text-lg">{post.excerpt}</p>
-            </header>
+              <div className="space-y-4">
+                <p className="mono text-xs uppercase tracking-[0.28em] text-[#8af7fe]">Personal archive / yearly log</p>
+                <h1 className="blog-hero__title">{post.title}</h1>
+                <p className="max-w-3xl text-base leading-8 text-zinc-100/88 sm:text-lg">{post.excerpt}</p>
+              </div>
 
-            <div className="markdown-body">
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="blog-hero__stat">
+                  <span className="blog-hero__stat-label">Category</span>
+                  <span className="blog-hero__stat-value">{post.category}</span>
+                </div>
+                <div className="blog-hero__stat">
+                  <span className="blog-hero__stat-label">Published</span>
+                  <span className="blog-hero__stat-value">{post.date}</span>
+                </div>
+                <div className="blog-hero__stat">
+                  <span className="blog-hero__stat-label">Reading time</span>
+                  <span className="blog-hero__stat-value">{post.readTime}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-8 p-6 sm:p-8 lg:p-10">
+            <div className="blog-terminal-note">
+              <TerminalSquare className="h-4 w-4 text-[#39ff14]" />
+              <span className="mono text-xs text-zinc-400">logbook://reflection/{post.slug}</span>
+            </div>
+
+            <div className="markdown-body markdown-body--feature">
               <MarkdownContent>{post.contentMarkdown}</MarkdownContent>
             </div>
           </div>

@@ -33,6 +33,7 @@ import ithomeDay27 from '../../doc/2025-ithome-ironman/day-27.md?raw'
 import ithomeDay28 from '../../doc/2025-ithome-ironman/day-28.md?raw'
 import ithomeDay29 from '../../doc/2025-ithome-ironman/day-29.md?raw'
 import ithomeDay30 from '../../doc/2025-ithome-ironman/day-30.md?raw'
+import selfReview2025 from '../../doc/2025-self-review-hsinchu.md?raw'
 
 function stripFrontmatter(markdown) {
   return markdown.replace(/^---[\s\S]*?---\s*/, '').trim()
@@ -43,6 +44,7 @@ export const blogCategories = [
   { slug: 'certification-notes', name: '證照筆記', count: 1 },
   { slug: 'ctf-notes', name: 'CTF 筆記', count: 1 },
   { slug: 'forensics', name: 'Forensics', count: 1 },
+  { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
 ]
 
@@ -466,6 +468,19 @@ const rawBlogPosts = [
     coverImage:
       'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1400&q=80',
     contentMarkdown: stripFrontmatter(forensicsClass),
+  },
+  {
+    slug: '2025-self-review-hsinchu-37k',
+    title: '2025 年回顧：在新竹 37K 的日子裡，我為自己打了一場仗',
+    date: '2025-12-31',
+    category: '回顧自我',
+    categorySlug: 'self-review',
+    readTime: '7 min read',
+    excerpt:
+      '從剛退伍踏進新竹，到一個人扛起公司資安與 IT 日常，這一年不寬裕、不輕鬆，卻也讓我真正長出韌性、技術與責任感。',
+    coverImage:
+      'https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1600&q=80',
+    contentMarkdown: stripFrontmatter(selfReview2025),
   },
   {
     slug: 'zeabur-postgresql-blog-foundation',

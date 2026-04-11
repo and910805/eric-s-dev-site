@@ -7,8 +7,9 @@ const navItems = [
   { to: '/', label: '首頁' },
   { to: '/about', label: '關於我' },
   { to: '/projects', label: '專案' },
-  { to: '/services', label: '接案服務' },
-  { to: '/blog', label: '資安筆記' },
+  { to: '/services', label: '服務' },
+  { to: '/blog', label: '文章' },
+  { to: '/cv', label: 'CV' },
   { to: '/certifications', label: '證照' },
   { to: '/contact', label: '聯絡' },
 ]
@@ -38,7 +39,7 @@ export default function Navbar() {
                 Eric / Security Terminal
               </span>
               <span className="block truncate text-sm font-semibold text-zinc-100 sm:text-base">
-                資安筆記 / 專案 / 自動化工具
+                資安筆記 / 專案 / 個人網站
               </span>
             </span>
           </NavLink>
@@ -47,7 +48,7 @@ export default function Navbar() {
             type="button"
             className="inline-flex items-center justify-center rounded-full border border-[#39ff1429] bg-[#39ff140d] p-2 text-[#b8ffb8] transition hover:bg-[#39ff1416] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#39ff14] sm:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
-            aria-label="開啟導覽選單"
+            aria-label="切換導航選單"
             aria-expanded={isMobileOpen}
             aria-controls="primary-navigation"
           >

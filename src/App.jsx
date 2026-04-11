@@ -10,6 +10,7 @@ import Certifications from './pages/Certifications.jsx'
 import Services from './pages/Services.jsx'
 import Blog from './pages/Blog.jsx'
 import BlogPost from './pages/BlogPost.jsx'
+import Cv from './pages/Cv.jsx'
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/blog/admin" element={<Navigate to="/blog" replace />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/certifications" element={<Certifications />} />
+          <Route path="/cv" element={<Cv />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

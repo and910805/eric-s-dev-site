@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename)
 const app = express()
 const port = process.env.PORT || 8080
 const distDir = path.join(__dirname, 'dist')
+const schemaPath = path.join(__dirname, 'docs', 'postgres-blog-schema.sql')
 const commentLimiter = createRateLimiter({
   maxRequests: 5,
   windowMs: 15 * 60 * 1000,
@@ -127,6 +128,13 @@ function mapPost(row) {
     contentMarkdown: row.content_markdown,
     commentCount: Number(row.comment_count ?? 0),
   }
+}
+
+async function initializeDatabaseSchema() {
+  if (!pool) return
+
+  const schemaSql = fs.readFileSync(schemaPath, 'utf8')
+  await pool.query(schemaSql)
 }
 
 app.get('/api/health', (req, res) => {
@@ -289,6 +297,20 @@ app.use((error, req, res, next) => {
   res.status(500).json({ error: 'Internal server error.' })
 })
 
-app.listen(port, () => {
-  console.log(`Blog server listening on port ${port}`)
-})
+async function startServer() {
+  if (pool) {
+    try {
+      await initializeDatabaseSchema()
+      console.log('Blog database schema is ready.')
+    } catch (error) {
+      console.error('Failed to initialize blog database schema.')
+      console.error(error)
+    }
+  }
+
+  app.listen(port, () => {
+    console.log(`Blog server listening on port ${port}`)
+  })
+}
+
+startServer()

@@ -20,17 +20,45 @@ export default function Home() {
             profile / active
           </div>
 
-          <div className="space-y-5">
-            <h1 className="section-title max-w-4xl">
-              $ whoami
-              <span className="mt-3 block bg-[linear-gradient(90deg,#39ff14_0%,#3df2ff_55%,#effff5_100%)] bg-clip-text text-transparent">
-                Eric
-              </span>
-            </h1>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
+            <div className="space-y-5">
+              <h1 className="section-title max-w-4xl">
+                $ whoami
+                <span className="mt-3 block bg-[linear-gradient(90deg,#39ff14_0%,#3df2ff_55%,#effff5_100%)] bg-clip-text text-transparent">
+                  Eric
+                </span>
+              </h1>
 
-            <p className="max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
-              {identity.summary}
-            </p>
+              <p className="max-w-3xl text-base leading-8 text-zinc-300 sm:text-lg">
+                {identity.summary}
+              </p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
+              transition={{
+                opacity: { duration: 0.45, delay: 0.18 },
+                scale: { duration: 0.45, delay: 0.18 },
+                y: { duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
+              }}
+              className="mx-auto w-full max-w-[220px] lg:mx-0 lg:justify-self-center"
+            >
+              <div className="terminal-outline relative overflow-hidden rounded-2xl border-[#39ff14]/25 bg-[linear-gradient(180deg,rgba(6,18,26,0.96),rgba(2,10,16,0.98))] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.35),0_0_30px_rgba(57,255,20,0.12)] before:pointer-events-none before:absolute before:inset-[1px] before:rounded-[calc(1rem-1px)] before:border before:border-[#3df2ff]/10 before:content-['']">
+                <div className="mb-2 flex items-center justify-between px-1">
+                  <span className="mono text-[0.58rem] uppercase tracking-[0.26em] text-[#7df48d]">
+                    cert badge
+                  </span>
+                  <span className="h-2 w-2 rounded-full bg-[#39ff14] shadow-[0_0_12px_rgba(57,255,20,0.9)]" />
+                </div>
+                <img
+                  src="/CEHMASTER_5FB43496785F.png"
+                  alt="CEH certification"
+                  className="relative z-[1] h-auto w-full rounded-xl object-contain shadow-[0_12px_28px_rgba(0,0,0,0.25)]"
+                />
+                <div className="pointer-events-none absolute inset-x-6 bottom-0 h-10 rounded-full bg-[#39ff14]/20 blur-2xl" />
+              </div>
+            </motion.div>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">

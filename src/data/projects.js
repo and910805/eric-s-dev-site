@@ -74,7 +74,7 @@ export const projects = [
       '婚禮網站前端作品，使用 React、Vite 與 Framer Motion 做出流暢的頁面互動。',
     tech: ['React', 'Vite', 'Framer Motion', 'Tailwind CSS'],
     github: 'https://github.com/and910805/wedding-front',
-    demo: 'https://and910805.github.io/wedding-front',
+    demo: 'https://wedding-front.kuanlin.pro/',
   },
   {
     title: 'Binary Search Game',
@@ -85,7 +85,7 @@ export const projects = [
       '用遊戲方式解釋二分搜尋，把抽象演算法變成可以互動理解的學習流程。',
     tech: ['React', 'Game UX', 'Teaching'],
     github: 'https://github.com/and910805/Binary-Search-game',
-    demo: 'https://and910805.github.io/Binary-Search-game/',
+    demo: 'https://binary-search-game.kuanlin.pro/',
   },
   {
     title: 'FarmGame',
@@ -96,6 +96,6 @@ export const projects = [
       '農場遊戲原型，練習 React 狀態管理、資源循環與輕量互動設計。',
     tech: ['React', 'Zustand', 'Game Prototype'],
     github: 'https://github.com/and910805/farmgame',
-    demo: 'https://and910805.github.io/FarmGame/',
+    demo: 'https://farmgame.kuanlin.pro/',
   },
 ]

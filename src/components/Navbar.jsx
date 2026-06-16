@@ -7,7 +7,6 @@ const navItems = [
   { to: '/', label: '首頁' },
   { to: '/about', label: '關於我' },
   { to: '/projects', label: '專案' },
-  { to: '/services', label: '服務' },
   { to: '/blog', label: '文章' },
   { to: '/cv', label: 'CV' },
   { to: '/certifications', label: '證照' },

@@ -9,7 +9,7 @@ import { fetchBlogPosts } from '../lib/blogApi.js'
 const hiddenCategorySlugs = new Set(['database-lab', 'security-notes', 'build-log'])
 
 function getArticleDirectory(post) {
-  if (post.categorySlug === 'ithome-2025-ironman') {
+  if (post.categorySlug === 'ithome-2025-ironman' || post.categorySlug === 'ithome-2026-ironman') {
     const day = Number(post.slug.match(/day-(\d+)/)?.[1] ?? 0)
 
     if (day <= 10) return 'day-01-10'
@@ -102,6 +102,16 @@ function filterTree(tree, query) {
     .filter(Boolean)
 }
 
+function mergePostsWithApi(localPosts, apiPosts) {
+  const postsBySlug = new Map(localPosts.map((post) => [post.slug, post]))
+
+  for (const post of apiPosts) {
+    postsBySlug.set(post.slug, post)
+  }
+
+  return Array.from(postsBySlug.values())
+}
+
 export default function Blog() {
   const [posts, setPosts] = useState(blogPosts)
   const [searchTerm, setSearchTerm] = useState('')
@@ -111,7 +121,7 @@ export default function Blog() {
   useEffect(() => {
     fetchBlogPosts()
       .then((apiPosts) => {
-        if (apiPosts.length) setPosts(apiPosts)
+        if (apiPosts.length) setPosts(mergePostsWithApi(blogPosts, apiPosts))
       })
       .catch(() => {})
   }, [])

@@ -33,6 +33,7 @@ import ithomeDay27 from '../../doc/2025-ithome-ironman/day-27.md?raw'
 import ithomeDay28 from '../../doc/2025-ithome-ironman/day-28.md?raw'
 import ithomeDay29 from '../../doc/2025-ithome-ironman/day-29.md?raw'
 import ithomeDay30 from '../../doc/2025-ithome-ironman/day-30.md?raw'
+import ithome2026Day01 from '../../doc/2026-ithome-ironman/day-01.md?raw'
 import selfReview2025 from '../../doc/2025-self-review-hsinchu.md?raw'
 
 function stripFrontmatter(markdown) {
@@ -46,9 +47,23 @@ export const blogCategories = [
   { slug: 'forensics', name: 'Forensics', count: 1 },
   { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
+  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 1 },
 ]
 
 const rawBlogPosts = [
+  {
+    slug: 'ithome-2026-day-01',
+    title: 'Day 1 - 為什麼漏洞需要標準化通報？從 CVE 說起',
+    date: '2026-07-07',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '6 min read',
+    excerpt:
+      '漏洞通報不是把技術細節丟出去就結束。CVE 的價值在於讓研究者、廠商、使用者與防禦者能用同一個識別方式討論同一個問題，降低誤解與重複溝通成本。',
+    coverImage:
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80',
+    contentMarkdown: ithome2026Day01,
+  },
   {
     slug: "ithome-2025-day-01",
     title: "Day 1- 法規推著我上場，學習讓我留下",

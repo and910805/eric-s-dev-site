@@ -45,7 +45,16 @@ export default function BlogPost() {
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
         <article className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#041018f2] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
           <div className="blog-hero">
-            <img src={post.coverImage} alt="" className="h-full w-full object-cover" />
+            {post.coverImage && (
+              <img
+                src={post.coverImage}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+                onError={(event) => {
+                  event.currentTarget.hidden = true
+                }}
+              />
+            )}
             <div className="blog-hero__overlay" />
             <div className="blog-hero__content">
               <div className="flex flex-wrap gap-3 text-xs text-zinc-200">

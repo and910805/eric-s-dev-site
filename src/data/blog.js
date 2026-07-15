@@ -35,6 +35,8 @@ import ithomeDay29 from '../../doc/2025-ithome-ironman/day-29.md?raw'
 import ithomeDay30 from '../../doc/2025-ithome-ironman/day-30.md?raw'
 import ithome2026Day01 from '../../doc/2026-ithome-ironman/day-01.md?raw'
 import ithome2026Day02 from '../../doc/2026-ithome-ironman/day-02.md?raw'
+import ithome2026Day03 from '../../doc/2026-ithome-ironman/day-03.md?raw'
+import ithome2026Day04 from '../../doc/2026-ithome-ironman/day-04.md?raw'
 import selfReview2025 from '../../doc/2025-self-review-hsinchu.md?raw'
 
 function stripFrontmatter(markdown) {
@@ -48,10 +50,34 @@ export const blogCategories = [
   { slug: 'forensics', name: 'Forensics', count: 1 },
   { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
-  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 2 },
+  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 4 },
 ]
 
 const rawBlogPosts = [
+  {
+    slug: 'ithome-2026-day-04',
+    title: 'Day 4 - 一個漏洞從發現到公開的生命週期',
+    date: '2026-07-10',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '9 min read',
+    excerpt:
+      '漏洞從被發現到成為公開 CVE Record，會經過通報、指派判斷、保留 ID、整理資料與發布。理解每個階段，才能分清 Reserved、Published 與下游 enrichment。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day04,
+  },
+  {
+    slug: 'ithome-2026-day-03',
+    title: 'Day 3 - CNA 是什麼？CNA、Root CNA、MITRE、NVD 的角色',
+    date: '2026-07-09',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      'CNA 負責指派與發布，Root 負責治理，MITRE 同時扮演多個 Program 角色，而 NVD 是下游 enrichment 資料庫。釐清角色，才能找到正確通報窗口。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day03,
+  },
   {
     slug: 'ithome-2026-day-02',
     title: 'Day 2 - CVE 是什麼？CVE ID、CVE Record、CVE List 的差異',

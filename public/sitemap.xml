@@ -46,6 +46,16 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://eric-s-dev-site.kuanlin.pro/blog/ithome-2026-day-03</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://eric-s-dev-site.kuanlin.pro/blog/ithome-2026-day-04</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://eric-s-dev-site.kuanlin.pro/blog/ithome-2025-day-01</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

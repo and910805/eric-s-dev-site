@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">CNA、Root、MITRE 與 NVD 的角色關係</title>
+  <desc id="desc">Root 管理 CNA，CNA 指派 CVE ID 並發布 Record，CVE List 提供公開紀錄，NVD 進行下游資料豐富化；MITRE 同時擔任 Secretariat、Top-Level Root 與 CNA-LR。</desc>
+  <defs>
+    <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#71808d"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="#0b1118"/>
+  <g font-family="Inter, 'Noto Sans TC', sans-serif" letter-spacing="0">
+    <text x="60" y="66" fill="#edf3f7" font-size="29" font-weight="700">誰負責指派、治理與資料補充？</text>
+    <text x="60" y="100" fill="#8c99a5" font-size="17">CVE Program 內的發布流程，與 NVD 的下游 enrichment 是兩件事</text>
+
+    <rect x="60" y="155" width="250" height="128" rx="8" fill="#171b35" stroke="#ff940e" stroke-width="2"/>
+    <text x="185" y="202" fill="#ffad4d" font-size="23" font-weight="800" text-anchor="middle">Root / TL-Root</text>
+    <text x="185" y="238" fill="#d8dee4" font-size="17" text-anchor="middle">管理、訓練、治理</text>
+    <text x="185" y="263" fill="#8c99a5" font-size="15" text-anchor="middle">處理升級與 scope 問題</text>
+
+    <path d="M310 219H388" stroke="#71808d" stroke-width="3" marker-end="url(#arrow3)"/>
+    <rect x="400" y="155" width="250" height="128" rx="8" fill="#13222a" stroke="#79c8a1" stroke-width="2"/>
+    <text x="525" y="202" fill="#9de0bf" font-size="24" font-weight="800" text-anchor="middle">CNA</text>
+    <text x="525" y="238" fill="#d8dee4" font-size="17" text-anchor="middle">指派 CVE ID</text>
+    <text x="525" y="263" fill="#8c99a5" font-size="15" text-anchor="middle">建立並發布 CVE Record</text>
+
+    <path d="M650 219H728" stroke="#71808d" stroke-width="3" marker-end="url(#arrow3)"/>
+    <rect x="740" y="155" width="180" height="128" rx="8" fill="#121d29" stroke="#5ea8d6" stroke-width="2"/>
+    <text x="830" y="202" fill="#8ec9ee" font-size="23" font-weight="800" text-anchor="middle">CVE List</text>
+    <text x="830" y="238" fill="#d8dee4" font-size="17" text-anchor="middle">公開紀錄</text>
+    <text x="830" y="263" fill="#8c99a5" font-size="15" text-anchor="middle">人與機器可讀</text>
+
+    <path d="M920 219H978" stroke="#71808d" stroke-width="3" marker-end="url(#arrow3)"/>
+    <rect x="990" y="155" width="150" height="128" rx="8" fill="#201d16" stroke="#d9b45f" stroke-width="2"/>
+    <text x="1065" y="202" fill="#f0cf7b" font-size="23" font-weight="800" text-anchor="middle">NVD</text>
+    <text x="1065" y="238" fill="#d8dee4" font-size="16" text-anchor="middle">下游 enrichment</text>
+    <text x="1065" y="263" fill="#8c99a5" font-size="15" text-anchor="middle">CVSS / CWE / CPE</text>
+
+    <rect x="60" y="350" width="1080" height="182" rx="8" fill="#101821" stroke="#35424d" stroke-width="2" stroke-dasharray="8 7"/>
+    <text x="100" y="398" fill="#edf3f7" font-size="23" font-weight="800">MITRE 目前同時扮演多個 CVE Program 角色</text>
+    <g>
+      <rect x="100" y="430" width="290" height="66" rx="6" fill="#161636"/>
+      <text x="245" y="458" fill="#ffad4d" font-size="18" font-weight="700" text-anchor="middle">Secretariat</text>
+      <text x="245" y="482" fill="#9aa6b1" font-size="14" text-anchor="middle">行政、後勤與基礎設施</text>
+      <rect x="455" y="430" width="290" height="66" rx="6" fill="#161f29"/>
+      <text x="600" y="458" fill="#8ec9ee" font-size="18" font-weight="700" text-anchor="middle">Top-Level Root</text>
+      <text x="600" y="482" fill="#9aa6b1" font-size="14" text-anchor="middle">管理其 Root 與 CNA 階層</text>
+      <rect x="810" y="430" width="290" height="66" rx="6" fill="#13221e"/>
+      <text x="955" y="458" fill="#9de0bf" font-size="18" font-weight="700" text-anchor="middle">CNA-LR</text>
+      <text x="955" y="482" fill="#9aa6b1" font-size="14" text-anchor="middle">承接未被其他 CNA 涵蓋的 scope</text>
+    </g>
+    <text x="60" y="580" fill="#596672" font-size="15">簡化示意，資料依據：CVE Program Structure、Partner Roles 與 NVD Process</text>
+  </g>
+</svg>

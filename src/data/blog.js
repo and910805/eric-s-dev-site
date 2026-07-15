@@ -60,8 +60,7 @@ const rawBlogPosts = [
     readTime: '6 min read',
     excerpt:
       '漏洞通報不是把技術細節丟出去就結束。CVE 的價值在於讓研究者、廠商、使用者與防禦者能用同一個識別方式討論同一個問題，降低誤解與重複溝通成本。',
-    coverImage:
-      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80',
+    coverImage: '/blog-assets/ithome-2026/cve-record-lifecycle-official.jpg',
     contentMarkdown: ithome2026Day01,
   },
   {

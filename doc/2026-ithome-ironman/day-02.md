@@ -4,8 +4,6 @@
 >
 > 本週主題：CVE 與 CNA 基礎
 
-[![CVE Program 官方 Logo](/blog-assets/ithome-2026/cve-logo-official.svg)](https://www.cve.org/)
-
 工作上常會聽到一句話：「請查一下這個 CVE。」
 
 這句話大家通常都聽得懂，但仔細想會發現，它可能在問三件不同的事：這個漏洞的編號是什麼？這筆漏洞紀錄寫了什麼？還是這個漏洞有沒有被收錄在 CVE 的公開目錄中？

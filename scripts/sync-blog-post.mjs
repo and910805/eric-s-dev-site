@@ -7,7 +7,7 @@ const { Client } = pg
 const [
   slug,
   markdownPath,
-  coverImageUrl = '',
+  coverImageArgument = '',
   title = '',
   excerpt = '',
   publishedDate = '',
@@ -15,6 +15,7 @@ const [
   categoryName = '',
 ] = process.argv.slice(2)
 const shouldUpsert = Boolean(title)
+const coverImageUrl = coverImageArgument === '-' ? '' : coverImageArgument
 
 if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug ?? '')) {
   throw new Error('A valid lowercase blog slug is required.')
@@ -113,7 +114,7 @@ async function upsertPost(databaseClient) {
           category_id, slug, title, excerpt, content_markdown,
           cover_image_url, status, published_at
         )
-        VALUES ($1, $2, $3, $4, $5, $6, 'published', $7::date)
+        VALUES ($1, $2, $3, $4, $5, $6, 'published', ($7::date + TIME '12:00:00') AT TIME ZONE 'UTC')
         ON CONFLICT (slug) DO UPDATE SET
           category_id = EXCLUDED.category_id,
           title = EXCLUDED.title,

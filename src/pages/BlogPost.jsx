@@ -44,7 +44,7 @@ export default function BlogPost() {
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
         <article className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#041018f2] shadow-[0_24px_80px_rgba(0,0,0,0.5)]">
-          <div className="blog-hero">
+          <div className={`blog-hero ${post.coverImage ? '' : 'blog-hero--plain'}`}>
             {post.coverImage && (
               <img
                 src={post.coverImage}

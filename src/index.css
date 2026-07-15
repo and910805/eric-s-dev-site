@@ -228,6 +228,14 @@ button {
     linear-gradient(180deg, rgba(4, 10, 16, 0.25), rgba(4, 10, 16, 0.92));
 }
 
+.blog-hero--plain {
+  background: #07131a;
+}
+
+.blog-hero--plain .blog-hero__overlay {
+  background: rgba(0, 0, 0, 0.08);
+}
+
 .blog-hero__overlay {
   position: absolute;
   inset: 0;

@@ -61,7 +61,7 @@ const rawBlogPosts = [
     readTime: '8 min read',
     excerpt:
       '一句「請查一下這個 CVE」，可能在問識別碼、單筆漏洞紀錄或整份公開目錄。拆開 CVE ID、CVE Record 與 CVE List，才能正確理解漏洞狀態與資料層次。',
-    coverImage: '/blog-assets/ithome-2026/day-02-three-layers.svg',
+    coverImage: null,
     contentMarkdown: ithome2026Day02,
   },
   {
@@ -73,7 +73,7 @@ const rawBlogPosts = [
     readTime: '6 min read',
     excerpt:
       '漏洞通報不是把技術細節丟出去就結束。CVE 的價值在於讓研究者、廠商、使用者與防禦者能用同一個識別方式討論同一個問題，降低誤解與重複溝通成本。',
-    coverImage: '/blog-assets/ithome-2026/cve-record-lifecycle-official.jpg',
+    coverImage: null,
     contentMarkdown: ithome2026Day01,
   },
   {

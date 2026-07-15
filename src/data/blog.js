@@ -34,6 +34,7 @@ import ithomeDay28 from '../../doc/2025-ithome-ironman/day-28.md?raw'
 import ithomeDay29 from '../../doc/2025-ithome-ironman/day-29.md?raw'
 import ithomeDay30 from '../../doc/2025-ithome-ironman/day-30.md?raw'
 import ithome2026Day01 from '../../doc/2026-ithome-ironman/day-01.md?raw'
+import ithome2026Day02 from '../../doc/2026-ithome-ironman/day-02.md?raw'
 import selfReview2025 from '../../doc/2025-self-review-hsinchu.md?raw'
 
 function stripFrontmatter(markdown) {
@@ -47,10 +48,22 @@ export const blogCategories = [
   { slug: 'forensics', name: 'Forensics', count: 1 },
   { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
-  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 1 },
+  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 2 },
 ]
 
 const rawBlogPosts = [
+  {
+    slug: 'ithome-2026-day-02',
+    title: 'Day 2 - CVE 是什麼？CVE ID、CVE Record、CVE List 的差異',
+    date: '2026-07-08',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      '一句「請查一下這個 CVE」，可能在問識別碼、單筆漏洞紀錄或整份公開目錄。拆開 CVE ID、CVE Record 與 CVE List，才能正確理解漏洞狀態與資料層次。',
+    coverImage: '/blog-assets/ithome-2026/day-02-three-layers.svg',
+    contentMarkdown: ithome2026Day02,
+  },
   {
     slug: 'ithome-2026-day-01',
     title: 'Day 1 - 為什麼漏洞需要標準化通報？從 CVE 說起',

@@ -4,11 +4,9 @@
 >
 > 本週主題：CVE 與 CNA 基礎
 
-前一天談完漏洞從發現、保留 ID 到公開的生命週期，今天把鏡頭拉近，直接拆一筆 CVE Record。
+第一次打開 CVE JSON，畫面不太友善。`cveMetadata`、`containers`、`affected`、`problemTypes` 一層包一層，很容易看幾行就回到網頁版，只留下「反正有描述和分數」的印象。
 
-閱讀 CVE 時，最容易犯的錯是只看標題、描述或分數。其實一筆 Record 不只是「漏洞說明」，而是一份有結構的資料：誰發布、目前是什麼狀態、影響哪個產品、哪些版本受影響、弱點屬於哪一類，以及有哪些公開證據，都有各自的位置。
-
-先建立一個重要觀念：**CVE ID 是識別碼，CVE Record 才是承載漏洞資料的紀錄。**
+但只看描述和分數，往往會漏掉真正影響判斷的東西：資料是誰提供的、版本邊界怎麼寫、Record 後來有沒有更新。今天不打算背 schema，而是把一筆 Record 拆成幾個讀得懂的區塊。
 
 ## 先看整體：CVE JSON 5.x 的三個區塊
 
@@ -41,19 +39,19 @@
 
 一筆 Published Record 的主要內容通常放在 `containers.cna`。這裡的 CNA 是資料提供者，不代表所有欄位都一定由產品廠商填寫；實際來源仍取決於該筆漏洞由哪個 CNA 負責。
 
-### providerMetadata：誰提供這個 container
+**先看 providerMetadata：誰提供這個 container**
 
 這個區塊通常包含提供者的組織 ID、短名稱與更新時間。它能幫助讀者辨認這份 CNA container 是由哪個組織提交。
 
 如果 Record 後來出現 ADP container，每個 container 也會有自己的 provider metadata，讓不同來源的資料不會混在一起。
 
-### title：短標題
+**title 只是短標題**
 
 `title` 用一行文字概括漏洞。好的標題通常會帶出產品、元件或弱點類型，例如「某元件的路徑穿越漏洞」，但它不是完整描述，也不適合承擔所有技術條件。
 
 有些 Record 沒有 title，因此不能把它當成判斷漏洞內容的唯一入口。
 
-### descriptions：人類可讀的漏洞描述
+**descriptions 才是人類可讀的漏洞描述**
 
 `descriptions` 是陣列，通常至少包含語言代碼與文字內容。描述的核心任務，是讓讀者能回答：
 
@@ -66,7 +64,7 @@
 
 描述也不等於完整技術報告。PoC、修補 commit、繞過方式或操作細節，通常會放在 advisory 或其他 references 中。
 
-### affected：產品與版本範圍
+**affected：產品與版本範圍**
 
 `affected` 是實務上最需要仔細看的區塊之一。常見資料包括：
 
@@ -81,7 +79,7 @@
 
 最危險的讀法，是看到產品名稱相同就直接判定資產受影響。產品分支、平台、模組、設定與版本邊界都可能改變結論。
 
-### problemTypes：弱點分類
+**problemTypes：弱點分類**
 
 `problemTypes` 常用來記錄 CWE，例如：
 
@@ -93,7 +91,7 @@ CWE-79: Improper Neutralization of Input During Web Page Generation
 
 與其為了填欄位勉強選一個看似接近的分類，不如先確認真正的失效機制。第 8 至 10 天會再完整討論 CWE 與根因判斷。
 
-### metrics：嚴重程度資料
+**metrics：嚴重程度資料**
 
 `metrics` 可以承載 CVSS v3.1、CVSS v4.0 或其他評估資料，通常包含向量、分數與嚴重程度。
 
@@ -104,7 +102,7 @@ CWE-79: Improper Neutralization of Input During Web Page Generation
 
 所以看到某網站的 CVSS 時，要一起確認版本、向量與評分來源。若 CNA container 沒有 metrics，也不代表這筆 CVE 無效。
 
-### references：可公開查證的資料
+**references：可公開查證的資料**
 
 `references` 會列出與漏洞相關的公開網址，可能指向：
 
@@ -116,7 +114,7 @@ CWE-79: Improper Neutralization of Input During Web Page Generation
 
 有些 reference 還會帶 tags，例如 `vendor-advisory`、`patch` 或 `exploit`，幫助系統分類。不過 tag 只是提示，仍應打開原始頁面確認內容、版本與更新時間。
 
-### credits、timeline 與 supportingMedia
+**還有 credits、timeline 與 supportingMedia**
 
 Record 還可能包含：
 
@@ -152,24 +150,13 @@ ADP 是 Authorized Data Publisher。它可以在 CNA 已發布的核心資料之
 
 把「沒有欄位」直接翻譯成「現實中不存在」，是讀漏洞資料時常見的推論錯誤。
 
-## 實際閱讀一筆 Record 的順序
+## 真正查資料時，先看哪裡？
 
-面對一筆陌生 CVE，可以依序檢查：
+面對一筆陌生 CVE，通常先確認 ID、狀態與更新時間，再直接跳到 `affected` 看產品和版本。確定資產可能落在範圍內，才回頭細讀 description、CWE、CVSS 與 references。若有多個 container，還要看 provider，否則很容易把不同來源的評估混成同一份答案。
 
-1. **身分與狀態**：CVE ID、`PUBLISHED` 或 `REJECTED`、更新時間。
-2. **資料來源**：CNA container 與 provider 是誰，是否還有 ADP。
-3. **受影響範圍**：vendor、product、版本邊界、平台與模組。
-4. **漏洞機制與影響**：description 是否交代攻擊條件與結果。
-5. **分類與評分**：CWE、CVSS 由誰提供，向量假設是什麼。
-6. **外部證據**：vendor advisory、patch、release notes 與其他 references。
+這個順序刻意把產品與版本放在分數前面。資產根本不在受影響範圍內，9.8 分也不是該資產的修補結論；反過來，Record 暫時沒有分數，也不是忽略它的理由。
 
-這個順序刻意把產品與版本放在分數前面。若資產根本不在受影響範圍內，再高的 CVSS 也不是該資產的修補結論；反過來，沒有分數也不能成為忽略漏洞的理由。
-
-## 小結
-
-CVE Record 可以先分成 metadata、CNA 核心資料與可選的 ADP enrichment。真正閱讀時，最重要的不是背完 JSON 欄位，而是知道每個欄位回答哪一類問題，以及資料由誰提供。
-
-明天會把視野再拉遠：CVE/MITRE、NIST/NVD、CISA/KEV、FIRST 與 Vendor Advisory 都在談漏洞，但它們各自回答的問題並不相同。
+CVE JSON 的欄位很多，不需要一次背完。先記住 metadata、CNA 核心資料與可選的 ADP enrichment，已經足夠應付大多數閱讀情境。下一篇再把視野拉遠，看看同一組 CVE ID 為什麼會出現在一堆不同網站上。
 
 ## 參考資料
 
@@ -177,4 +164,3 @@ CVE Record 可以先分成 metadata、CNA 核心資料與可選的 ADP enrichmen
 - CVE JSON 5 Schema: https://github.com/CVEProject/cve-schema
 - CVE List V5 Repository: https://github.com/CVEProject/cvelistV5
 - CVE Program Glossary: https://www.cve.org/ResourcesSupport/Glossary
-

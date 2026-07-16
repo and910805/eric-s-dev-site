@@ -39,6 +39,8 @@ import ithome2026Day03 from '../../doc/2026-ithome-ironman/day-03.md?raw'
 import ithome2026Day04 from '../../doc/2026-ithome-ironman/day-04.md?raw'
 import ithome2026Day05 from '../../doc/2026-ithome-ironman/day-05.md?raw'
 import ithome2026Day06 from '../../doc/2026-ithome-ironman/day-06.md?raw'
+import ithome2026Day07 from '../../doc/2026-ithome-ironman/day-07.md?raw'
+import ithome2026Day08 from '../../doc/2026-ithome-ironman/day-08.md?raw'
 import selfReview2025 from '../../doc/2025-self-review-hsinchu.md?raw'
 
 function stripFrontmatter(markdown) {
@@ -52,10 +54,34 @@ export const blogCategories = [
   { slug: 'forensics', name: 'Forensics', count: 1 },
   { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
-  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 6 },
+  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 8 },
 ]
 
 const rawBlogPosts = [
+  {
+    slug: 'ithome-2026-day-08',
+    title: 'Day 8 - CWE 是什麼？為什麼漏洞要對應 CWE',
+    date: '2026-07-14',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      'CVE 指向特定產品裡的一個漏洞，CWE 則描述可能反覆出現的弱點類型。從一行不安全程式碼開始，理解 weakness、vulnerability 與分類粒度的差別。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day08,
+  },
+  {
+    slug: 'ithome-2026-day-07',
+    title: 'Day 7 - 寫漏洞通報時，什麼資訊是「必要」的？',
+    date: '2026-07-13',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '9 min read',
+    excerpt:
+      '一封只寫「這裡有漏洞」的信，通常還不足以處理。從產品版本、重現步驟、安全邊界到公開狀態，整理一份能被定位、驗證與協調的漏洞報告。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day07,
+  },
   {
     slug: 'ithome-2026-day-06',
     title: 'Day 6 - 漏洞資訊到底看誰？CVE/MITRE、NIST/NVD、CISA/KEV、FIRST 與 Vendor Advisory',

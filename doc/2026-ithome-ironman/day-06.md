@@ -4,11 +4,9 @@
 >
 > 本週主題：CVE 與 CNA 基礎
 
-查一個 CVE 時，搜尋結果經常同時出現 CVE.org、NVD、CISA、FIRST、廠商公告與各種商業平台。頁面都寫著同一組 CVE ID，內容與分數卻不一定相同。
+把一組 CVE ID 貼進搜尋引擎，通常會同時看到 CVE.org、NVD、CISA、FIRST、廠商公告，外加幾個商業情資平台。每個頁面看起來都很正式，分數卻可能不一樣，受影響版本也不一定寫得同樣完整。
 
-這不是單純的「哪個網站更新比較慢」，而是各組織負責的問題不同。
-
-最實用的記法是：**先確定現在想回答什麼，再選資料來源。**
+這時候問「哪個網站才是對的」其實問錯了。比較有用的問法是：**現在要找的是官方識別、技術評分、在野利用，還是修補方式？**
 
 ![漏洞資訊來源分工：CVE/MITRE、NIST/NVD、CISA/KEV、FIRST 與 Vendor Advisory](/blog-assets/ithome-2026/day-06-source-map.png)
 
@@ -25,7 +23,7 @@ CVE Program 的核心任務，是用一致的 CVE ID 識別並描述公開的資
 
 CVE Program 是一個由多種角色共同運作的體系，不是所有 Record 都由 MITRE 單獨撰寫。產品廠商、研究組織、協調中心等 CNA，會在各自 scope 內指派 CVE ID 並發布 Record。
 
-### MITRE 在哪裡？
+**那 MITRE 在哪裡？**
 
 MITRE 在 CVE Program 中承擔 Secretariat、Top-Level Root 與 CNA of Last Resort 等職責，也維運 CVE 相關基礎服務。但「MITRE 管理 CVE Program」不等於「每一筆 CVE 都是 MITRE 發現、驗證或評分」。
 
@@ -80,13 +78,13 @@ KEV 回答的不是「理論上最嚴重的是哪一個」，而是：
 
 FIRST 是 Forum of Incident Response and Security Teams。它維護多項資安標準與規格，其中和漏洞管理最常遇到的是 CVSS；EPSS 也由 FIRST 提供相關資源與資料。
 
-### CVSS 回答技術嚴重程度
+**CVSS 回答技術嚴重程度**
 
 CVSS 透過一組 metric 與 vector 描述漏洞特性，最後形成分數與 severity。當資料來源標示 CVSS v3.1 或 v4.0，真正的計算規格與定義應回到 FIRST 文件查核。
 
 FIRST 不會替全世界每一筆 CVE 決定唯一分數。實際評分可能由 CNA、NVD、廠商或其他分析者提供，因此同一 CVE 可能出現多組向量。
 
-### EPSS 回答近期被利用的機率
+**EPSS 回答近期被利用的機率**
 
 EPSS 是資料驅動的預測模型，估計已公開 CVE 在未來 30 天內遭到利用的機率。它和 CVSS 不可互相替代：
 
@@ -136,61 +134,21 @@ NVD:  CVSS 9.8
 
 正確比較方式是閱讀完整 vector，再回到描述、受影響設定與產品文件驗證每一個 metric。只比較 8.1 與 9.8，無法知道差異發生在哪裡。
 
-## 一套實用的查詢順序
+## 實際查一個漏洞時怎麼走
 
-處理一筆陌生 CVE 時，可以使用下面的順序：
-
-1. **CVE.org**：確認 ID、Record 狀態、CNA、核心描述與 references。
-2. **Vendor Advisory**：確認產品、版本、修補與 mitigation。
-3. **NVD**：查看 NIST 的 CVSS、CWE、CPE 等 enrichment。
-4. **CISA KEV**：確認是否已有在野利用證據與要求行動。
-5. **FIRST**：查核 CVSS 定義，並以 EPSS 補充近期利用機率。
-6. **其他可靠來源**：CERT、公部門公告、研究報告、修補 commit 或 exploit 分析。
+處理一筆陌生 CVE，通常先到 CVE.org 確認 ID、Record 狀態、CNA 與 references。接著打開 vendor advisory 查受影響和修補版本；需要 NIST 的 CVSS、CWE、CPE enrichment 時再看 NVD。若正在排修補優先順序，就加查 CISA KEV 與 EPSS；對向量有疑問，再回 FIRST 的 CVSS 規格核對定義。
 
 順序不是硬性規則。例如事件應變期間，可能會先查 KEV 與 vendor mitigation；研究評分差異時，則會優先打開 FIRST 規格。重點是每次引用資料，都知道它是誰提供、想回答哪個問題、何時更新。
 
-## 快速對照表
+## 幾句常聽到、但要多想一下的話
 
-| 想回答的問題 | 優先查看 |
-| --- | --- |
-| 官方 CVE ID 與 Record 狀態？ | CVE.org |
-| 哪個 CNA 發布了核心資料？ | CVE Record 的 metadata / CNA container |
-| NIST 的 CVSS、CWE、CPE 分析？ | NVD |
-| 是否已知遭到在野利用？ | CISA KEV |
-| CVSS metric 的正式定義？ | FIRST CVSS |
-| 未來 30 天的利用機率訊號？ | FIRST EPSS |
-| 哪些版本受影響、如何修補？ | Vendor Advisory |
+「NVD 就是 CVE 官網」不對，NVD 是使用 CVE 資料做 enrichment 的下游資料庫。「MITRE 會替每一筆 CVE 打分數」也不對，評分可能來自 CNA、NVD、廠商或其他 provider。
 
-## 常見誤解
+「沒在 KEV 就不急」更危險。KEV 是很強的優先訊號，卻不是全世界利用活動的完整清單。至於 vendor 說不受影響，也要先核對產品分支、部署方式和公告更新日期；使用下游重新封裝版本時，還得找對應發行者的公告。
 
-### NVD 就是 CVE 官方網站？
+最後只留一個判斷原則：不要找一個網站包辦所有答案。CVE Program 管識別與核心 Record，NVD 做分析補充，CISA 提供已知利用訊號，FIRST 維護評分規格，真正要升級哪一版，通常還是得回 vendor advisory。
 
-不是。NVD 使用 CVE 資料並進行 enrichment；CVE List 與 CVE Record 的官方入口是 CVE.org。
-
-### MITRE 會替每一筆 CVE 打分數？
-
-不是。MITRE 在 Program 中有重要營運角色，但每筆 Record 的 CNA 與評分提供者可能不同。
-
-### CVE 沒在 KEV，就可以延後處理？
-
-不能只靠這個條件。KEV 是高價值優先訊號，不是所有利用活動的完整清單。
-
-### Vendor 說不受影響，就不用再確認？
-
-應先核對產品名稱、分支、部署方式與公告更新日期。若實際使用的是下游重新封裝版本，也要查該發行者的公告。
-
-## 小結
-
-這些權威來源不是彼此競爭的「漏洞百科」，而是共同完成不同工作：
-
-- CVE Program 提供共同識別與核心 Record。
-- MITRE 承擔 CVE Program 的關鍵營運角色。
-- NIST/NVD 補充適合分析與自動化使用的 enrichment。
-- CISA/KEV 提供已知在野利用與優先處理訊號。
-- FIRST 維護 CVSS，並提供 EPSS 相關資源。
-- Vendor Advisory 提供最貼近產品版本與修補操作的資訊。
-
-明天會回到漏洞通報本身，整理哪些資料是「必要」，哪些是能顯著降低往返補件次數的高價值資訊。
+下一篇會回到通報的起點：一封只寫「這裡有漏洞」的信，為什麼通常還不夠處理？
 
 ## 參考資料
 
@@ -202,4 +160,3 @@ NVD:  CVSS 9.8
 - FIRST Standards: https://www.first.org/standards/
 - FIRST CVSS: https://www.first.org/cvss/
 - FIRST EPSS: https://www.first.org/epss/
-

@@ -4,9 +4,11 @@
 >
 > 本週主題：CVE 與 CNA 基礎
 
-看到一筆 CVE Record 時，很多人第一個反應是：「這是 MITRE 發的嗎？」另一個常見說法則是：「去 NVD 申請一個 CVE。」
+「這個 CVE 是 MITRE 發的嗎？」
 
-這兩句話都反映出同一個問題：CVE 生態系裡有很多熟悉的名字，但每個角色負責的工作不同。
+「要申請 CVE，是不是去 NVD 填資料？」
+
+這兩句都很常見，也剛好把 CVE 生態系最容易混淆的地方點了出來：名字都看過，但不一定知道它們分別在流程的哪一站。
 
 CVE Program 並不是由單一組織集中處理全球所有漏洞。它採用分層、分工的架構，讓不同產品廠商、開源專案、安全組織與協調單位，可以在各自被授權的範圍內指派 CVE ID 並發布 CVE Record。
 
@@ -94,14 +96,11 @@ CNA 發布 CVE Record → CVE List → NVD 收錄並進行 enrichment
 
 這也解釋了為什麼 CVE 官網與 NVD 顯示的欄位可能不同。CVE Record 可能已經 Published，但 NVD enrichment 尚未完成；也可能 CNA 提供了一組 CVSS，NVD 後續根據公開資料提供另一組評估。兩者不一定互相衝突，而是資料提供者與用途不同。
 
-## 四個角色放在一起看
+## 沿著一筆通報走一次
 
-| 角色 | 主要工作 | 是否指派 CVE ID | 是否發布 CVE Record | 是否做下游 enrichment |
-| --- | --- | --- | --- | --- |
-| CNA | 處理自身 scope 內的漏洞 | 是 | 是 | 可提供部分資料 |
-| Root / TL-Root | 管理、訓練、治理與處理升級 | 視其是否兼任 CNA | 視其角色 | 通常不是主要目的 |
-| MITRE | Secretariat、TL-Root、CNA-LR 等多重角色 | 依其 CNA-LR scope | 依其 CNA-LR scope | 不是 NVD enrichment |
-| NVD | 收錄 Published CVE 並補充弱點管理資料 | 否 | 否 | 是 |
+假設一份漏洞報告送到產品 CNA。CNA 先確認 scope、判斷是否符合指派規則，接著保留 ID、整理資料並發布 Record。遇到跨 scope、重複指派或治理問題時，Root 可能介入協調；再往上，TL-Root 與 Secretariat 維持整個 Program 的運作，而 MITRE 同時承擔其中幾種角色。
+
+Record 公開後，NVD 才從下游接手，依公開資訊補上 CVSS、CWE、CPE 等 enrichment。換句話說，CNA 與 Root 位在「指派與發布」這條線上，NVD 位在「公開後分析」這條線上。MITRE 則不能只用一個框框概括，必須看當下談的是它的哪個角色。
 
 ## 實務上應該找誰？
 
@@ -114,16 +113,11 @@ CNA 發布 CVE Record → CVE List → NVD 收錄並進行 enrichment
 
 選對窗口能減少轉交時間，也能降低 scope 重疊與重複指派的風險。
 
-## 小結
+## 下次別再找錯窗口
 
-今天最重要的觀念是：CVE Program 是一個分散式合作體系。
+CVE Program 比較像一個分散合作的網路，不是一間把全球漏洞全部收進來處理的總公司。要通報或申請 ID，找 scope 合適的 CNA；遇到治理與升級問題，才往 Root 體系走；要看公開後的 NIST 分析，再開 NVD。
 
-- CNA 負責 scope 內的 CVE ID 指派與 CVE Record 發布。
-- Root 與 TL-Root 負責管理、支援與治理 CNA 階層。
-- MITRE 同時扮演 Secretariat、TL-Root 與 CNA-LR 等多個角色。
-- NVD 是 NIST 維護的下游 enrichment 資料庫，不是 CVE 指派單位。
-
-明天會沿著這些角色繼續看流程：一個漏洞從被發現、通報、保留 ID，到最後公開成 CVE Record，中間會經過哪些階段？
+角色釐清後，下一篇就比較好走了：直接跟著一個漏洞，從發現一路走到公開。
 
 ## 參考資料
 

@@ -41,6 +41,28 @@ import ithome2026Day05 from '../../doc/2026-ithome-ironman/day-05.md?raw'
 import ithome2026Day06 from '../../doc/2026-ithome-ironman/day-06.md?raw'
 import ithome2026Day07 from '../../doc/2026-ithome-ironman/day-07.md?raw'
 import ithome2026Day08 from '../../doc/2026-ithome-ironman/day-08.md?raw'
+import ithome2026Day09 from '../../doc/2026-ithome-ironman/day-09.md?raw'
+import ithome2026Day10 from '../../doc/2026-ithome-ironman/day-10.md?raw'
+import ithome2026Day11 from '../../doc/2026-ithome-ironman/day-11.md?raw'
+import ithome2026Day12 from '../../doc/2026-ithome-ironman/day-12.md?raw'
+import ithome2026Day13 from '../../doc/2026-ithome-ironman/day-13.md?raw'
+import ithome2026Day14 from '../../doc/2026-ithome-ironman/day-14.md?raw'
+import ithome2026Day15 from '../../doc/2026-ithome-ironman/day-15.md?raw'
+import ithome2026Day16 from '../../doc/2026-ithome-ironman/day-16.md?raw'
+import ithome2026Day17 from '../../doc/2026-ithome-ironman/day-17.md?raw'
+import ithome2026Day18 from '../../doc/2026-ithome-ironman/day-18.md?raw'
+import ithome2026Day19 from '../../doc/2026-ithome-ironman/day-19.md?raw'
+import ithome2026Day20 from '../../doc/2026-ithome-ironman/day-20.md?raw'
+import ithome2026Day21 from '../../doc/2026-ithome-ironman/day-21.md?raw'
+import ithome2026Day22 from '../../doc/2026-ithome-ironman/day-22.md?raw'
+import ithome2026Day23 from '../../doc/2026-ithome-ironman/day-23.md?raw'
+import ithome2026Day24 from '../../doc/2026-ithome-ironman/day-24.md?raw'
+import ithome2026Day25 from '../../doc/2026-ithome-ironman/day-25.md?raw'
+import ithome2026Day26 from '../../doc/2026-ithome-ironman/day-26.md?raw'
+import ithome2026Day27 from '../../doc/2026-ithome-ironman/day-27.md?raw'
+import ithome2026Day28 from '../../doc/2026-ithome-ironman/day-28.md?raw'
+import ithome2026Day29 from '../../doc/2026-ithome-ironman/day-29.md?raw'
+import ithome2026Day30 from '../../doc/2026-ithome-ironman/day-30.md?raw'
 import selfReview2025 from '../../doc/2025-self-review-hsinchu.md?raw'
 
 function stripFrontmatter(markdown) {
@@ -54,10 +76,274 @@ export const blogCategories = [
   { slug: 'forensics', name: 'Forensics', count: 1 },
   { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
-  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 8 },
+  { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 30 },
 ]
 
 const rawBlogPosts = [
++  {
+    slug: 'ithome-2026-day-30',
+    title: 'Day 30 - 建立自己的 CVE／CNA 漏洞通報檢查清單',
+    date: '2026-08-05',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '9 min read',
+    excerpt:
+      '把產品、版本、證據、CWE、CVSS、描述與風險情報收成一份發布前檢查清單，替三十天的通報實務建立可重複使用的工作方法。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day30,
+  },
+  {
+    slug: 'ithome-2026-day-29',
+    title: 'Day 29 - 從公開審查規則看：哪些報告最容易被要求補件',
+    date: '2026-08-04',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '從 CNA Rules 與協調指引整理常見補件原因：產品版本不明、無法重現、影響過度延伸、scope 錯誤與版本範圍靠猜。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day29,
+  },
+  {
+    slug: 'ithome-2026-day-28',
+    title: 'Day 28 - 案例拆解：把漏洞報告整理成 CVE Record',
+    date: '2026-08-03',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      '用虛構的 ZIP 路徑穿越案例，逐步確認修補點、affected versions、CWE、描述、CVSS 與 references 如何保持一致。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day28,
+  },
+  {
+    slug: 'ithome-2026-day-27',
+    title: 'Day 27 - 一份好漏洞報告需要什麼：影響、條件、版本、修補',
+    date: '2026-08-02',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '好的漏洞報告要讓另一端找到同一環境、從乾淨狀態重現，並把已證明影響、版本範圍與修補資訊清楚分開。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day27,
+  },
+  {
+    slug: 'ithome-2026-day-26',
+    title: 'Day 26 - CVE 描述怎麼寫：把必要事實放進一個段落',
+    date: '2026-08-01',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '從產品、版本、weakness、攻擊條件到技術影響，整理 CVE 描述應保留的必要事實，以及容易讓內容失真的用語。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day26,
+  },
+  {
+    slug: 'ithome-2026-day-25',
+    title: 'Day 25 - 漏洞類型整理：Injection、Memory Corruption、Auth Bypass、DoS',
+    date: '2026-07-31',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '四種常見漏洞名稱各自在描述什麼，又還缺哪些資訊？從輸入、失效控制與實際結果，避免把根因、利用方法與影響混在一起。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day25,
+  },
+  {
+    slug: 'ithome-2026-day-24',
+    title: 'Day 24 - KEV、Exploit、PoC：不要把三種證據混成一句話',
+    date: '2026-07-30',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      'PoC 證明主張、exploit 取得利用結果、KEV 記錄已知野外利用。分開能力、成熟度與觀測事實，通報才不會誇大。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day24,
+  },
+  {
+    slug: 'ithome-2026-day-23',
+    title: 'Day 23 - CVSS 高不等於一定被利用：怎麼和 EPSS 一起看',
+    date: '2026-07-29',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '6 min read',
+    excerpt:
+      'CVSS 描述技術嚴重度，EPSS 估計近期利用機率；搭配資產、可達性與 KEV 證據，才能形成可解釋的優先順序。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day23,
+  },
+  {
+    slug: 'ithome-2026-day-22',
+    title: 'Day 22 - EPSS 是什麼？它預測的是未來 30 天',
+    date: '2026-07-28',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '6 min read',
+    excerpt:
+      'EPSS 每日估計 CVE 在未來 30 天觀察到野外利用的機率。理解 score、percentile 與模型限制，避免把預測當成風險答案。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day22,
+  },
+  {
+    slug: 'ithome-2026-day-21',
+    title: 'Day 21 - 從向量到分數：RCE 一定是 9.8 嗎',
+    date: '2026-07-27',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      'RCE 不會自動等於 CVSS 9.8。登入權限、使用者互動、利用位置與實際影響不同，都會產生不同向量與分數。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day21,
+  },
+  {
+    slug: 'ithome-2026-day-20',
+    title: 'Day 20 - Scope 與 C／I／A：影響到底落在哪個系統',
+    date: '2026-07-26',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      '從 v3.1 Scope 的 security authority，到 v4.0 vulnerable 與 subsequent system，逐一確認機密性、完整性與可用性影響。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day20,
+  },
+  {
+    slug: 'ithome-2026-day-19',
+    title: 'Day 19 - PR 與 UI：到底是誰必須先做什麼',
+    date: '2026-07-25',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      'Privileges Required 看攻擊前已有權限，User Interaction 看攻擊者以外的人是否必須參與；用 Stored XSS 拆開兩者。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day19,
+  },
+  {
+    slug: 'ithome-2026-day-18',
+    title: 'Day 18 - AV、AC 與 AT：攻擊距離和攻擊難度怎麼判斷',
+    date: '2026-07-24',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '利用位置、額外條件與攻擊者必須克服的防禦不是同一件事。比較 v3.1 AC 與 v4.0 新增的 Attack Requirements。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day18,
+  },
+  {
+    slug: 'ithome-2026-day-17',
+    title: 'Day 17 - CVSS v4.0 改了什麼？不只是多一組縮寫',
+    date: '2026-07-23',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      'CVSS v4.0 新增 Attack Requirements、細分 User Interaction、移除 Scope，並加入 Threat 與 Supplemental Metrics。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day17,
+  },
+  {
+    slug: 'ithome-2026-day-16',
+    title: 'Day 16 - 一篇讀懂 CVSS v3.1：從條件、Scope 到影響',
+    date: '2026-07-22',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      '把 v3.1 Base Vector 還原成攻擊敘事，依序理解 AV、AC、PR、UI、Scope 與 C／I／A，而不是只記住 9.8。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day16,
+  },
+  {
+    slug: 'ithome-2026-day-15',
+    title: 'Day 15 - CVSS 是什麼？先把嚴重度與風險分開',
+    date: '2026-07-21',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      'CVSS 提供技術嚴重度的共同語言，不知道組織的資產與威脅情境。先分清 Base、時間變化與 Environmental Metrics。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day15,
+  },
+  {
+    slug: 'ithome-2026-day-14',
+    title: 'Day 14 - 案例練習：一個漏洞如何選 CWE 與 CAPEC',
+    date: '2026-07-20',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '從虛構的任意檔案讀取報告開始，圈出入口、權限、失效控制與影響，再判斷 CWE-22 與 CAPEC-139 是否真的吻合。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day14,
+  },
+  {
+    slug: 'ithome-2026-day-13',
+    title: 'Day 13 - CVE、CWE、CAPEC 三者到底怎麼接在一起',
+    date: '2026-07-19',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '6 min read',
+    excerpt:
+      'CVE 識別具體漏洞，CWE 描述系統弱點，CAPEC 整理攻擊者行為。三者回答不同問題，也不是一對一關係。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day13,
+  },
+  {
+    slug: 'ithome-2026-day-12',
+    title: 'Day 12 - CAPEC 怎麼讀？把攻擊行為拆成幾個階段',
+    date: '2026-07-18',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '6 min read',
+    excerpt:
+      '以 Relative Path Traversal 為例，沿著 Explore、Experiment、Exploit 閱讀 CAPEC execution flow，找出報告缺少的利用條件。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day12,
+  },
+  {
+    slug: 'ithome-2026-day-11',
+    title: 'Day 11 - CAPEC 是什麼？它和 CWE 有什麼不同',
+    date: '2026-07-17',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      'CWE 在問系統哪裡出了問題，CAPEC 則整理攻擊者如何利用弱點。理解 attack pattern，也釐清它和 ATT&CK 的使用差異。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day11,
+  },
+  {
+    slug: 'ithome-2026-day-10',
+    title: 'Day 10 - 不要只寫表面現象：CWE 與漏洞根因',
+    date: '2026-07-16',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '7 min read',
+    excerpt:
+      '任意檔案讀取與 RCE 都可能只是結果。從資料流、失效控制與 patch 往前追，讓 CWE mapping 停在證據支持的位置。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day10,
+  },
+  {
+    slug: 'ithome-2026-day-09',
+    title: 'Day 9 - 常見 CWE 怎麼分？從 XSS、SQL Injection、Path Traversal 到 RCE',
+    date: '2026-07-15',
+    category: '2026 iThome 鐵人賽',
+    categorySlug: 'ithome-2026-ironman',
+    readTime: '8 min read',
+    excerpt:
+      'XSS、SQL Injection 與 Path Traversal 比較像失效方式，RCE 通常是結果。沿著 input、檢查與 sink 選擇合適 CWE。',
+    coverImage: null,
+    contentMarkdown: ithome2026Day09,
+  },
   {
     slug: 'ithome-2026-day-08',
     title: 'Day 8 - CWE 是什麼？為什麼漏洞要對應 CWE',

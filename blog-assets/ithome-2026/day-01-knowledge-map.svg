@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">漏洞知識地圖</title>
+  <desc id="desc">CVE 作為漏洞識別中心，連結 CWE、CAPEC、CVSS、EPSS 與 KEV 等不同用途的資料。</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#08141b"/>
+      <stop offset="1" stop-color="#10211e"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#1f5654"/>
+      <stop offset="1" stop-color="#102c30"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="675" rx="20" fill="url(#bg2)"/>
+  <g font-family="Inter, 'Noto Sans TC', sans-serif" letter-spacing="0">
+    <text x="64" y="70" fill="#e8fbf8" font-size="30" font-weight="700">CVE 是入口，不是漏洞風險的全部答案</text>
+    <text x="64" y="103" fill="#8aa9ad" font-size="18">每一種標準回答不同問題，組合使用才形成可行動的資訊</text>
+
+    <g fill="none" stroke="#315258" stroke-width="2">
+      <path d="M600 337 L290 215"/>
+      <path d="M600 337 L910 215"/>
+      <path d="M600 337 L250 460"/>
+      <path d="M600 337 L600 535"/>
+      <path d="M600 337 L950 460"/>
+    </g>
+    <g fill="#65e6d4">
+      <circle cx="445" cy="276" r="5"/><circle cx="755" cy="276" r="5"/>
+      <circle cx="425" cy="398" r="5"/><circle cx="600" cy="436" r="5"/><circle cx="775" cy="398" r="5"/>
+    </g>
+
+    <circle cx="600" cy="337" r="126" fill="url(#core)" stroke="#65e6d4" stroke-width="3"/>
+    <text x="600" y="318" fill="#8af7e8" font-size="20" text-anchor="middle">漏洞身分</text>
+    <text x="600" y="365" fill="#ffffff" font-size="42" font-weight="800" text-anchor="middle">CVE ID</text>
+    <text x="600" y="397" fill="#a7c2c1" font-size="16" text-anchor="middle">我們談的是哪一個問題？</text>
+
+    <g>
+      <rect x="140" y="148" width="300" height="120" rx="8" fill="#10262d" stroke="#3c7077" stroke-width="2"/>
+      <text x="175" y="192" fill="#82e7ff" font-size="27" font-weight="800">CWE</text>
+      <text x="175" y="223" fill="#e1eeee" font-size="18">弱點類型與根因</text>
+      <text x="175" y="248" fill="#829fa3" font-size="15">問題為什麼會發生？</text>
+
+      <rect x="760" y="148" width="300" height="120" rx="8" fill="#10262d" stroke="#3c7077" stroke-width="2"/>
+      <text x="795" y="192" fill="#ffbd6e" font-size="27" font-weight="800">CAPEC</text>
+      <text x="795" y="223" fill="#e1eeee" font-size="18">攻擊者行為與模式</text>
+      <text x="795" y="248" fill="#829fa3" font-size="15">攻擊可能如何展開？</text>
+
+      <rect x="100" y="408" width="300" height="120" rx="8" fill="#10262d" stroke="#3c7077" stroke-width="2"/>
+      <text x="135" y="452" fill="#84f0b5" font-size="27" font-weight="800">CVSS</text>
+      <text x="135" y="483" fill="#e1eeee" font-size="18">技術嚴重程度</text>
+      <text x="135" y="508" fill="#829fa3" font-size="15">漏洞本身有多嚴重？</text>
+
+      <rect x="450" y="508" width="300" height="120" rx="8" fill="#10262d" stroke="#3c7077" stroke-width="2"/>
+      <text x="485" y="552" fill="#f7dc6f" font-size="27" font-weight="800">EPSS</text>
+      <text x="485" y="583" fill="#e1eeee" font-size="18">未來遭利用的機率</text>
+      <text x="485" y="608" fill="#829fa3" font-size="15">近期被利用的可能性？</text>
+
+      <rect x="800" y="408" width="300" height="120" rx="8" fill="#10262d" stroke="#3c7077" stroke-width="2"/>
+      <text x="835" y="452" fill="#ff8888" font-size="27" font-weight="800">KEV</text>
+      <text x="835" y="483" fill="#e1eeee" font-size="18">已知遭利用狀態</text>
+      <text x="835" y="508" fill="#829fa3" font-size="15">是否已有實際利用證據？</text>
+    </g>
+    <text x="64" y="646" fill="#5f8589" font-size="16">CVE 通報實務 30 天 · Day 1</text>
+  </g>
+</svg>

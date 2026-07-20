@@ -44,7 +44,7 @@ export default function BlogComments({ postSlug }) {
   return (
     <section className="glass-card">
       <div className="glass-card__inner">
-        <div className="flex items-center gap-2 text-[#8af7fe]">
+        <div className="flex items-center gap-2 text-[#7dd3fc]">
           <MessageCircle className="h-4 w-4" />
           <span className="mono text-[0.72rem] uppercase tracking-[0.22em]">comments</span>
         </div>
@@ -62,7 +62,7 @@ export default function BlogComments({ postSlug }) {
                 value={form.author}
                 onChange={(event) => setForm((current) => ({ ...current, author: event.target.value }))}
                 maxLength={80}
-                className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#39ff14]"
+                className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#4ade80]"
                 placeholder="Enter your name"
               />
             </label>
@@ -74,7 +74,7 @@ export default function BlogComments({ postSlug }) {
                 value={form.email}
                 onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
                 maxLength={254}
-                className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#39ff14]"
+                className="rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#4ade80]"
                 placeholder="name@example.com"
               />
             </label>
@@ -86,7 +86,7 @@ export default function BlogComments({ postSlug }) {
               value={form.body}
               onChange={(event) => setForm((current) => ({ ...current, body: event.target.value }))}
               maxLength={2000}
-              className="min-h-32 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#39ff14]"
+              className="min-h-32 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none focus:border-[#4ade80]"
               placeholder="留下你的想法"
             />
           </label>
@@ -96,7 +96,7 @@ export default function BlogComments({ postSlug }) {
             <Send className="h-4 w-4" />
           </button>
 
-          {notice && <p className="text-sm text-[#b8ffb8]">{notice}</p>}
+          {notice && <p className="text-sm text-[#bbf7d0]">{notice}</p>}
         </form>
 
         <div className="space-y-3">

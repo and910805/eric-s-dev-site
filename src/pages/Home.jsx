@@ -24,7 +24,7 @@ export default function Home() {
             <div className="space-y-5">
               <h1 className="section-title max-w-4xl">
                 $ whoami
-                <span className="mt-3 block bg-[linear-gradient(90deg,#39ff14_0%,#3df2ff_55%,#effff5_100%)] bg-clip-text text-transparent">
+                <span className="mt-3 block bg-[linear-gradient(90deg,#4ade80_0%,#67e8f9_55%,#effff5_100%)] bg-clip-text text-transparent">
                   Eric
                 </span>
               </h1>
@@ -44,19 +44,19 @@ export default function Home() {
               }}
               className="mx-auto w-full max-w-[220px] lg:mx-0 lg:justify-self-center"
             >
-              <div className="terminal-outline relative overflow-hidden rounded-2xl border-[#39ff14]/25 bg-[linear-gradient(180deg,rgba(6,18,26,0.96),rgba(2,10,16,0.98))] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.35),0_0_30px_rgba(57,255,20,0.12)] before:pointer-events-none before:absolute before:inset-[1px] before:rounded-[calc(1rem-1px)] before:border before:border-[#3df2ff]/10 before:content-['']">
+              <div className="terminal-outline relative overflow-hidden rounded-2xl border-[#4ade80]/25 bg-[linear-gradient(180deg,rgba(6,18,26,0.96),rgba(2,10,16,0.98))] p-3 shadow-[0_18px_40px_rgba(0,0,0,0.35),0_0_30px_rgba(74,222,128,0.12)] before:pointer-events-none before:absolute before:inset-[1px] before:rounded-[calc(1rem-1px)] before:border before:border-[#67e8f9]/10 before:content-['']">
                 <div className="mb-2 flex items-center justify-between px-1">
-                  <span className="mono text-[0.58rem] uppercase tracking-[0.26em] text-[#7df48d]">
+                  <span className="mono text-[0.58rem] uppercase tracking-[0.26em] text-[#86efac]">
                     cert badge
                   </span>
-                  <span className="h-2 w-2 rounded-full bg-[#39ff14] shadow-[0_0_12px_rgba(57,255,20,0.9)]" />
+                  <span className="h-2 w-2 rounded-full bg-[#4ade80] shadow-[0_0_12px_rgba(74,222,128,0.9)]" />
                 </div>
                 <img
                   src="/CEHMASTER_5FB43496785F.png"
                   alt="CEH certification"
                   className="relative z-[1] h-auto w-full rounded-xl object-contain shadow-[0_12px_28px_rgba(0,0,0,0.25)]"
                 />
-                <div className="pointer-events-none absolute inset-x-6 bottom-0 h-10 rounded-full bg-[#39ff14]/20 blur-2xl" />
+                <div className="pointer-events-none absolute inset-x-6 bottom-0 h-10 rounded-full bg-[#4ade80]/20 blur-2xl" />
               </div>
             </motion.div>
           </div>
@@ -74,38 +74,38 @@ export default function Home() {
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <div className="terminal-outline rounded-2xl px-4 py-3">
-              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#88f8d4]">email</div>
+              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#99f6e4]">email</div>
               <a
                 href={`mailto:${contact.email}`}
-                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#b8ffb8]"
+                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#bbf7d0]"
               >
-                <Mail className="h-4 w-4 text-[#39ff14]" />
+                <Mail className="h-4 w-4 text-[#4ade80]" />
                 {contact.email}
               </a>
             </div>
 
             <div className="terminal-outline rounded-2xl px-4 py-3">
-              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#88f8d4]">github</div>
+              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#99f6e4]">github</div>
               <a
                 href={`https://github.com/${contact.githubUsername}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#b8ffb8]"
+                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#bbf7d0]"
               >
-                <Github className="h-4 w-4 text-[#39ff14]" />
+                <Github className="h-4 w-4 text-[#4ade80]" />
                 {contact.githubUsername}
               </a>
             </div>
 
             <div className="terminal-outline rounded-2xl px-4 py-3">
-              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#88f8d4]">linkedin</div>
+              <div className="mono text-[0.72rem] uppercase tracking-[0.22em] text-[#99f6e4]">linkedin</div>
               <a
                 href={contact.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#b8ffb8]"
+                className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-100 hover:text-[#bbf7d0]"
               >
-                <Linkedin className="h-4 w-4 text-[#39ff14]" />
+                <Linkedin className="h-4 w-4 text-[#4ade80]" />
                 {contact.linkedinHandle}
               </a>
             </div>
@@ -119,7 +119,7 @@ export default function Home() {
           className="glass-card"
         >
           <div className="glass-card__inner">
-            <div className="flex items-center gap-2 text-[#7df48d]">
+            <div className="flex items-center gap-2 text-[#86efac]">
               <TerminalSquare className="h-4 w-4" />
               <span className="mono text-[0.72rem] uppercase tracking-[0.22em]">identity</span>
             </div>

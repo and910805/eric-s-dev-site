@@ -23,23 +23,23 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="mx-auto w-full max-w-6xl px-4 py-8 text-[0.85rem] text-zinc-400 sm:px-8 lg:px-12">
-      <div className="flex flex-col gap-4 border-t border-[#39ff1418] pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 border-t border-white/[0.08] pt-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <div className="mono flex items-center gap-2 text-zinc-100">
-            <Terminal className="h-4 w-4 text-[#39ff14]" />
+            <Terminal className="h-4 w-4 text-[#4ade80]" />
             Eric Security Terminal
           </div>
           <div>cybersecurity / notes / projects / automation</div>
         </div>
 
-        <ul className="flex flex-wrap gap-3 text-zinc-300">
+        <ul className="flex flex-wrap gap-x-4 gap-y-2 text-zinc-300">
           {footerLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 transition hover:text-[#b8ffb8]"
+                className="inline-flex items-center gap-1.5 transition hover:text-[#bbf7d0]"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
                 {link.label}
@@ -48,6 +48,10 @@ export default function Footer() {
           ))}
         </ul>
       </div>
+
+      <p className="mono mt-6 text-xs text-zinc-600">
+        © {new Date().getFullYear()} Eric Chuang · built with React + Vite · deployed on GitHub Pages
+      </p>
     </footer>
   )
 }

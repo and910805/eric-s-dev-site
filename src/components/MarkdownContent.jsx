@@ -36,7 +36,7 @@ export default function MarkdownContent({ children }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#8af7fe] underline"
+              className="text-[#7dd3fc] underline decoration-[#7dd3fc4d] underline-offset-4 transition hover:text-[#bae6fd] hover:decoration-[#7dd3fc]"
             >
               {linkChildren}
             </a>

@@ -26,10 +26,10 @@ export default function Certifications() {
               <div className="glass-card__inner">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">{item.issuer}</p>
+                    <p className="mono text-xs uppercase tracking-[0.22em] text-[#7dd3fc]">{item.issuer}</p>
                     <h2 className="mt-2 text-2xl font-semibold text-white">{item.title}</h2>
                   </div>
-                  <span className="rounded-full border border-[#39ff1424] bg-[#39ff1408] px-3 py-1 text-xs font-semibold text-[#b8ffb8]">
+                  <span className="rounded-full border border-[#4ade8024] bg-[#4ade8008] px-3 py-1 text-xs font-semibold text-[#bbf7d0]">
                     {item.type}
                   </span>
                 </div>
@@ -59,13 +59,13 @@ export default function Certifications() {
         <aside className="space-y-5">
           <div className="glass-card">
             <div className="glass-card__inner">
-              <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">Preview</p>
+              <p className="mono text-xs uppercase tracking-[0.22em] text-[#7dd3fc]">Preview</p>
               <h2 className="text-xl font-semibold text-white">CEH Master 證明預覽</h2>
               <a href="/certifications/ceh-master-certificate.png" target="_blank" rel="noopener noreferrer">
                 <img
                   src="/certifications/ceh-master-certificate.png"
                   alt="CEH Master certificate preview"
-                  className="w-full rounded-2xl border border-[#39ff1420] object-cover"
+                  className="w-full rounded-2xl border border-[#4ade8020] object-cover"
                 />
               </a>
             </div>
@@ -73,13 +73,13 @@ export default function Certifications() {
 
           <div className="glass-card">
             <div className="glass-card__inner">
-              <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">Additional Proof</p>
+              <p className="mono text-xs uppercase tracking-[0.22em] text-[#7dd3fc]">Additional Proof</p>
               <h2 className="text-xl font-semibold text-white">其他紀錄</h2>
               <ul className="space-y-3">
                 {secondaryCerts.map((item) => (
-                  <li key={item.title} className="rounded-2xl border border-[#39ff1420] bg-[#39ff1406] p-4">
+                  <li key={item.title} className="rounded-2xl border border-[#4ade8020] bg-[#4ade8006] p-4">
                     <div className="flex items-start gap-3">
-                      <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-2xl border border-[#39ff1420] bg-white/5 text-zinc-200">
+                      <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-2xl border border-[#4ade8020] bg-white/5 text-zinc-200">
                         <FileText className="h-4 w-4" />
                       </div>
                       <div className="space-y-2">
@@ -91,7 +91,7 @@ export default function Certifications() {
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm font-semibold text-[#8af7fe] transition hover:text-white"
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-[#7dd3fc] transition hover:text-white"
                         >
                           <ExternalLink className="h-4 w-4" />
                           開啟紀錄

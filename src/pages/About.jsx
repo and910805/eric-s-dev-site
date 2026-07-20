@@ -32,7 +32,7 @@ export default function About() {
       <SectionContainer subtitle="Stack" title="$ cat ~/skills.txt">
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {skills.map((skill) => (
-            <li key={skill} className="rounded-2xl border border-[#39ff1424] bg-[#39ff1408] px-4 py-4 text-sm leading-7 text-zinc-200">
+            <li key={skill} className="rounded-2xl border border-[#4ade8024] bg-[#4ade8008] px-4 py-4 text-sm leading-7 text-zinc-200">
               {skill}
             </li>
           ))}

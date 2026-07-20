@@ -20,7 +20,7 @@ export default function Cv() {
           <div className="glass-card__inner">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">Resume Preview</p>
+                <p className="mono text-xs uppercase tracking-[0.22em] text-[#7dd3fc]">Resume Preview</p>
                 <h2 className="mt-2 text-2xl font-semibold text-white">莊冠霖 / Eric Chuang</h2>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -40,7 +40,7 @@ export default function Cv() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-[#39ff1420] bg-[#02070d]">
+            <div className="overflow-hidden rounded-2xl border border-[#4ade8020] bg-[#02070d]">
               <iframe
                 src={cvUrl}
                 title="Eric CV PDF"
@@ -53,10 +53,10 @@ export default function Cv() {
         <aside className="space-y-5">
           <div className="glass-card">
             <div className="glass-card__inner">
-              <p className="mono text-xs uppercase tracking-[0.22em] text-[#8af7fe]">File Info</p>
-              <div className="space-y-3 rounded-2xl border border-[#39ff1420] bg-[#39ff1408] p-4">
+              <p className="mono text-xs uppercase tracking-[0.22em] text-[#7dd3fc]">File Info</p>
+              <div className="space-y-3 rounded-2xl border border-[#4ade8020] bg-[#4ade8008] p-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#39ff1420] bg-white/5 text-zinc-100">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#4ade8020] bg-white/5 text-zinc-100">
                     <FileText className="h-5 w-5" />
                   </div>
                   <div>

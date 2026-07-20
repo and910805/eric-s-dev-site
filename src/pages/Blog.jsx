@@ -144,20 +144,20 @@ export default function Blog() {
     <section className="space-y-10">
       <SectionContainer subtitle="Blog" title="資安筆記" />
 
-      <section className="terminal-tree rounded-2xl border border-[#39ff1424] bg-[#02070df5] shadow-[0_18px_70px_rgba(0,0,0,0.5)]">
-        <div className="flex items-center justify-between gap-4 border-b border-[#39ff1424] px-5 py-4">
+      <section className="terminal-tree rounded-2xl border border-[#4ade8024] bg-[#02070df5] shadow-[0_18px_70px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center justify-between gap-4 border-b border-[#4ade8024] px-5 py-4">
           <div className="mono text-xs text-zinc-500">eric@portfolio:~/blog</div>
         </div>
 
         <div className="space-y-5 p-5 sm:p-7">
-          <div className="mono flex flex-wrap items-center gap-2 text-sm text-[#b8ffb8]">
-            <Terminal className="h-4 w-4 text-[#39ff14]" />
-            <span className="text-[#39ff14]">$</span>
+          <div className="mono flex flex-wrap items-center gap-2 text-sm text-[#bbf7d0]">
+            <Terminal className="h-4 w-4 text-[#4ade80]" />
+            <span className="text-[#4ade80]">$</span>
             <span>{normalizedSearch ? `grep -ri "${searchTerm}" ~/blog` : 'tree ~/blog --interactive'}</span>
           </div>
 
-          <label className="mono block rounded-xl border border-[#39ff1424] bg-black/30 px-4 py-3 text-sm text-zinc-400 focus-within:border-[#39ff14] focus-within:bg-[#39ff1408]">
-            <span className="mr-2 text-[#39ff14]">$</span>
+          <label className="mono block rounded-xl border border-[#4ade8024] bg-black/30 px-4 py-3 text-sm text-zinc-400 focus-within:border-[#4ade80] focus-within:bg-[#4ade8008]">
+            <span className="mr-2 text-[#4ade80]">$</span>
             <span className="mr-2 text-zinc-500">grep</span>
             <input
               type="search"
@@ -194,16 +194,16 @@ export default function Blog() {
                     <button
                       type="button"
                       onClick={() => toggleCategory(category.slug)}
-                      className="group flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-100 transition hover:bg-[#39ff1408] hover:text-white"
+                      className="group flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-100 transition hover:bg-[#4ade8008] hover:text-white"
                     >
                       <span className="w-5 text-zinc-500">{isLastCategory ? '└──' : '├──'}</span>
                       <ChevronRight
-                        className={`h-4 w-4 text-[#39ff14] transition ${categoryOpen ? 'rotate-90' : ''}`}
+                        className={`h-4 w-4 text-[#4ade80] transition ${categoryOpen ? 'rotate-90' : ''}`}
                       />
                       {categoryOpen ? (
-                        <FolderOpen className="h-4 w-4 text-[#8af7fe]" />
+                        <FolderOpen className="h-4 w-4 text-[#7dd3fc]" />
                       ) : (
-                        <Folder className="h-4 w-4 text-[#8af7fe]" />
+                        <Folder className="h-4 w-4 text-[#7dd3fc]" />
                       )}
                       <span className="font-semibold">{category.name}</span>
                       <span className="ml-auto rounded-full border border-white/10 px-2 py-0.5 text-[0.68rem] text-zinc-500">
@@ -212,7 +212,7 @@ export default function Blog() {
                     </button>
 
                     {categoryOpen && (
-                      <div className="ml-6 space-y-1 border-l border-[#39ff141f] pl-4">
+                      <div className="ml-6 space-y-1 border-l border-[#4ade801f] pl-4">
                         {category.directories.map((directory, directoryIndex) => {
                           const directoryKey = `${category.slug}/${directory.name}`
                           const directoryOpen = normalizedSearch || Boolean(openDirectories[directoryKey])
@@ -223,23 +223,23 @@ export default function Blog() {
                               <button
                                 type="button"
                                 onClick={() => toggleDirectory(directoryKey)}
-                                className="group flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-200 transition hover:bg-[#3df2ff0a] hover:text-white"
+                                className="group flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-200 transition hover:bg-[#67e8f90a] hover:text-white"
                               >
                                 <span className="w-5 text-zinc-600">{isLastDirectory ? '└──' : '├──'}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 text-[#8af7fe] transition ${directoryOpen ? 'rotate-90' : ''}`}
+                                  className={`h-4 w-4 text-[#7dd3fc] transition ${directoryOpen ? 'rotate-90' : ''}`}
                                 />
                                 {directoryOpen ? (
-                                  <FolderOpen className="h-4 w-4 text-[#39ff14]" />
+                                  <FolderOpen className="h-4 w-4 text-[#4ade80]" />
                                 ) : (
-                                  <Folder className="h-4 w-4 text-[#39ff14]" />
+                                  <Folder className="h-4 w-4 text-[#4ade80]" />
                                 )}
                                 <span>{directory.name}</span>
                                 <span className="ml-auto text-[0.68rem] text-zinc-600">{directory.items.length} files</span>
                               </button>
 
                               {directoryOpen && (
-                                <div className="ml-6 space-y-1 border-l border-[#3df2ff1f] pl-4">
+                                <div className="ml-6 space-y-1 border-l border-[#67e8f91f] pl-4">
                                   {directory.items.map((post, postIndex) => {
                                     const isLastPost = postIndex === directory.items.length - 1
 
@@ -249,10 +249,10 @@ export default function Blog() {
                                         href={post.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#39ff1408] hover:text-white"
+                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#4ade8008] hover:text-white"
                                       >
                                         <span className="mt-0.5 w-5 text-zinc-700">{isLastPost ? '└──' : '├──'}</span>
-                                        <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-[#8af7fe]" />
+                                        <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-[#7dd3fc]" />
                                         <span className="min-w-0 flex-1">
                                           <span className="block truncate">{post.title}.url</span>
                                           <span className="mt-1 block whitespace-normal text-xs leading-5 text-zinc-500 group-hover:text-zinc-400">
@@ -264,10 +264,10 @@ export default function Blog() {
                                       <Link
                                         key={post.slug}
                                         to={`/blog/${post.slug}`}
-                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#39ff1408] hover:text-white"
+                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#4ade8008] hover:text-white"
                                       >
                                         <span className="mt-0.5 w-5 text-zinc-700">{isLastPost ? '└──' : '├──'}</span>
-                                        <FileText className="mt-0.5 h-4 w-4 shrink-0 text-[#39ff14]" />
+                                        <FileText className="mt-0.5 h-4 w-4 shrink-0 text-[#4ade80]" />
                                         <span className="min-w-0 flex-1">
                                           <span className="block truncate">{post.title}.md</span>
                                           <span className="mt-1 block whitespace-normal text-xs leading-5 text-zinc-500 group-hover:text-zinc-400">

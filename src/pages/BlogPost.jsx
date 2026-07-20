@@ -62,7 +62,7 @@ export default function BlogPost() {
                   <CalendarDays className="h-4 w-4" />
                   {post.date}
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#8af7fe33] bg-[#8af7fe14] px-3 py-1.5 text-[#d8fbff]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#7dd3fc33] bg-[#7dd3fc14] px-3 py-1.5 text-[#d8fbff]">
                   <FolderOpen className="h-4 w-4" />
                   {post.category}
                 </span>
@@ -73,7 +73,7 @@ export default function BlogPost() {
               </div>
 
               <div className="space-y-4">
-                <p className="mono text-xs uppercase tracking-[0.28em] text-[#8af7fe]">Personal archive / yearly log</p>
+                <p className="mono text-xs uppercase tracking-[0.28em] text-[#7dd3fc]">Personal archive / yearly log</p>
                 <h1 className="blog-hero__title">{post.title}</h1>
                 <p className="max-w-3xl text-base leading-8 text-zinc-100/88 sm:text-lg">{post.excerpt}</p>
               </div>
@@ -97,7 +97,7 @@ export default function BlogPost() {
 
           <div className="space-y-8 p-6 sm:p-8 lg:p-10">
             <div className="blog-terminal-note">
-              <TerminalSquare className="h-4 w-4 text-[#39ff14]" />
+              <TerminalSquare className="h-4 w-4 text-[#4ade80]" />
               <span className="mono text-xs text-zinc-400">logbook://reflection/{post.slug}</span>
             </div>
 
@@ -116,9 +116,9 @@ export default function BlogPost() {
                   <Link
                     key={item.slug}
                     to={`/blog/${item.slug}`}
-                    className="block rounded-lg border border-white/10 bg-white/[0.03] p-4 transition hover:border-[#39ff1450] hover:bg-[#39ff1408]"
+                    className="block rounded-lg border border-white/10 bg-white/[0.03] p-4 transition hover:border-[#4ade8050] hover:bg-[#4ade8008]"
                   >
-                    <p className="mono text-[0.7rem] uppercase tracking-[0.2em] text-[#8af7fe]">
+                    <p className="mono text-[0.7rem] uppercase tracking-[0.2em] text-[#7dd3fc]">
                       {item.category}
                     </p>
                     <h3 className="mt-2 font-semibold text-white">{item.title}</h3>
@@ -136,10 +136,10 @@ export default function BlogPost() {
                 {blogCategories.map((category) => (
                   <li
                     key={category.slug}
-                    className="flex items-center justify-between rounded-lg border border-[#39ff1424] bg-[#39ff1408] px-4 py-3"
+                    className="flex items-center justify-between rounded-lg border border-[#4ade8024] bg-[#4ade8008] px-4 py-3"
                   >
                     <span className="inline-flex items-center gap-2 text-sm text-zinc-200">
-                      <Tag className="h-4 w-4 text-[#39ff14]" />
+                      <Tag className="h-4 w-4 text-[#4ade80]" />
                       {category.name}
                     </span>
                     <span className="mono text-xs text-zinc-400">{category.count}</span>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
+import ScrollToTop from './components/ScrollToTop.jsx'
 import Home from './pages/Home.jsx'
 import Projects from './pages/Projects.jsx'
 import About from './pages/About.jsx'
@@ -13,16 +14,17 @@ import Cv from './pages/Cv.jsx'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden font-sans text-zinc-100 selection:bg-[#39ff1455] selection:text-white">
+    <div className="relative min-h-screen overflow-x-hidden font-sans text-zinc-100 selection:bg-[#4ade8055] selection:text-white">
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-[-8rem] top-12 h-72 w-72 rounded-full bg-[#39ff1410] blur-[120px]" />
-        <div className="absolute right-[-5rem] top-32 h-80 w-80 rounded-full bg-[#3df2ff10] blur-[130px]" />
-        <div className="absolute bottom-[-6rem] left-1/3 h-80 w-80 rounded-full bg-[#39ff140e] blur-[140px]" />
+        <div className="absolute left-[-8rem] top-12 h-72 w-72 rounded-full bg-[#4ade8010] blur-[120px]" />
+        <div className="absolute right-[-5rem] top-32 h-80 w-80 rounded-full bg-[#67e8f910] blur-[130px]" />
+        <div className="absolute bottom-[-6rem] left-1/3 h-80 w-80 rounded-full bg-[#4ade800e] blur-[140px]" />
       </div>
 
+      <ScrollToTop />
       <Navbar />
 
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pb-16 pt-40 sm:px-8 sm:pt-44 lg:px-12">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 pb-16 pt-28 sm:px-8 sm:pt-32 lg:px-12 lg:pt-44">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

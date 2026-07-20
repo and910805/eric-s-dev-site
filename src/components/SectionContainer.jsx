@@ -7,9 +7,11 @@ export default function SectionContainer({ title, subtitle, children, align = 'l
     <section className="mb-16 sm:mb-20">
       <header className={isCenter ? 'mx-auto mb-8 max-w-3xl text-center' : 'mb-8 max-w-3xl'}>
         {subtitle && (
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-cyan-100">
-            <span className="h-2 w-2 rounded-full bg-cyan-300" />
-            {subtitle}
+          <div className={isCenter ? 'mb-4 flex justify-center' : 'mb-4'}>
+            <span className="terminal-label">
+              <span className="terminal-dot" />
+              {subtitle}
+            </span>
           </div>
         )}
         <h2 className="section-title">{title}</h2>

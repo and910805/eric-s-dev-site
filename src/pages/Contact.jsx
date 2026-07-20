@@ -50,7 +50,7 @@ export default function Contact() {
           const content = (
             <div className="glass-card h-full">
               <div className="glass-card__inner">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#4ade8033] bg-[#4ade8012] text-[#86efac]">
                   <item.icon className="h-5 w-5" />
                 </div>
                 <div className="space-y-1">

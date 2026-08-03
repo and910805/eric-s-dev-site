@@ -6,6 +6,12 @@ import MarkdownContent from '../components/MarkdownContent.jsx'
 import { blogCategories, blogPosts } from '../data/blog.js'
 import { fetchBlogPost } from '../lib/blogApi.js'
 
+const PUBLIC_SITE_ORIGIN = 'https://eric-s-dev-site.kuanlin.pro'
+
+function prepareMarkdownForPublishing(markdown) {
+  return String(markdown ?? '').replace(/\]\(\/(?!\/)/g, `](${PUBLIC_SITE_ORIGIN}/`)
+}
+
 export default function BlogPost() {
   const { slug } = useParams()
   const fallbackPost = blogPosts.find((item) => item.slug === slug)
@@ -51,7 +57,7 @@ export default function BlogPost() {
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard API is unavailable.')
 
-      await navigator.clipboard.writeText(post.contentMarkdown)
+      await navigator.clipboard.writeText(prepareMarkdownForPublishing(post.contentMarkdown))
       setCopyStatus('copied')
     } catch (error) {
       setCopyStatus('error')
@@ -139,7 +145,7 @@ export default function BlogPost() {
                   copyStatus === 'copied' ? 'border-[#4ade8066] bg-[#4ade8014] text-[#bbf7d0]' : ''
                 }`}
                 onClick={copyMarkdown}
-                title="複製原始 Markdown"
+                title="複製適合貼到 iThome 的 Markdown"
               >
                 {copyStatus === 'copied' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 <span aria-live="polite">{copyLabel}</span>

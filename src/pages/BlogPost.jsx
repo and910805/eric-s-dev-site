@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { ArrowLeft, CalendarDays, Clock3, FolderOpen, Tag, TerminalSquare } from 'lucide-react'
+import { ArrowLeft, CalendarDays, Check, Clock3, Copy, FolderOpen, Tag, TerminalSquare } from 'lucide-react'
 import BlogComments from '../components/BlogComments.jsx'
 import MarkdownContent from '../components/MarkdownContent.jsx'
 import { blogCategories, blogPosts } from '../data/blog.js'
@@ -11,6 +11,8 @@ export default function BlogPost() {
   const fallbackPost = blogPosts.find((item) => item.slug === slug)
   const [post, setPost] = useState(() => fallbackPost ?? null)
   const [notFound, setNotFound] = useState(false)
+  const [copyStatus, setCopyStatus] = useState('idle')
+  const copyResetTimerRef = useRef(null)
 
   useEffect(() => {
     setNotFound(false)
@@ -21,6 +23,14 @@ export default function BlogPost() {
         if (!fallbackPost) setNotFound(true)
       })
   }, [fallbackPost, slug])
+
+  useEffect(() => {
+    setCopyStatus('idle')
+
+    return () => {
+      if (copyResetTimerRef.current) window.clearTimeout(copyResetTimerRef.current)
+    }
+  }, [slug])
 
   if (notFound) {
     return <Navigate to="/blog" replace />
@@ -34,6 +44,27 @@ export default function BlogPost() {
     ...blogPosts.filter((item) => item.slug !== post.slug && item.categorySlug === post.categorySlug),
     ...blogPosts.filter((item) => item.slug !== post.slug && item.categorySlug !== post.categorySlug),
   ].slice(0, 3)
+
+  const copyMarkdown = async () => {
+    if (copyResetTimerRef.current) window.clearTimeout(copyResetTimerRef.current)
+
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard API is unavailable.')
+
+      await navigator.clipboard.writeText(post.contentMarkdown)
+      setCopyStatus('copied')
+    } catch (error) {
+      setCopyStatus('error')
+    }
+
+    copyResetTimerRef.current = window.setTimeout(() => {
+      setCopyStatus('idle')
+      copyResetTimerRef.current = null
+    }, 2400)
+  }
+
+  const copyLabel =
+    copyStatus === 'copied' ? '已複製 Markdown' : copyStatus === 'error' ? '複製失敗' : '複製 Markdown'
 
   return (
     <section className="space-y-8">
@@ -96,9 +127,23 @@ export default function BlogPost() {
           </div>
 
           <div className="space-y-8 p-6 sm:p-8 lg:p-10">
-            <div className="blog-terminal-note">
-              <TerminalSquare className="h-4 w-4 text-[#4ade80]" />
-              <span className="mono text-xs text-zinc-400">logbook://reflection/{post.slug}</span>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="blog-terminal-note">
+                <TerminalSquare className="h-4 w-4 text-[#4ade80]" />
+                <span className="mono break-all text-xs text-zinc-400">logbook://reflection/{post.slug}</span>
+              </div>
+
+              <button
+                type="button"
+                className={`terminal-button terminal-button--ghost w-full shrink-0 sm:w-auto ${
+                  copyStatus === 'copied' ? 'border-[#4ade8066] bg-[#4ade8014] text-[#bbf7d0]' : ''
+                }`}
+                onClick={copyMarkdown}
+                title="複製原始 Markdown"
+              >
+                {copyStatus === 'copied' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                <span aria-live="polite">{copyLabel}</span>
+              </button>
             </div>
 
             <div className="markdown-body markdown-body--feature">

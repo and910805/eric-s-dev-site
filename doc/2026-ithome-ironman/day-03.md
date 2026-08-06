@@ -96,11 +96,19 @@ NVD 會根據 CVE Record 裡的 references 與公開資訊，補上比較適合�
 
 > 要申請或通報 CVE，先找 scope 合適的 CNA；要看公開後的 NIST 分析，再去 NVD。
 
+## 在台灣可以怎麼找？
+
+如果目標是台灣的產品或組織，實務上可以先看該廠商有沒有自己的漏洞揭露政策、`security.txt`，或是否本身就是 CNA。直接交給最了解產品的人處理，通常會是最快的路。
+
+若一時找不到廠商窗口，或需要第三方協調，TWCERT/CC 是可以考慮的管道。TWCERT/CC 自 2018 年起就是 CNA，也有漏洞通報與協調機制；是否能承接，仍要看案件是否落在它的處理範圍內。
+
+HITCON ZeroDay 也值得知道。它是台灣的漏洞通報與協調平台，會協助驗證問題並聯繫被通報的組織，特別適合遇到沒有明確窗口的台灣組織。不過它不是用來直接申請 CVE ID 的 CNA 入口；需不需要 CVE、由誰指派，還是要回到產品廠商或適合的 CNA 來判斷。
+
 ## 下次別再找錯窗口
 
 CVE Program 比較像一個分散合作的網路，不是一間把全球漏洞全部收進來處理的總公司。
 
-CNA 在第一線處理指派與發布；Root 維持階層與治理；MITRE 同時扮演多個 Program 角色；NVD 則是在公開後把資料整理得更適合做弱點管理。把這四個角色拆開後，下次看到 CVE、MITRE 與 NVD 同時出現，至少不會再把它們當成同一個入口。
+CNA 在第一線處理指派與發布；Root 維持階層與治理；MITRE 同時扮演多個 Program 角色；NVD 則是在公開後把資料整理得更適合做弱點管理。加上台灣的窗口一起看，方向就更清楚了：先找產品廠商；需要協調時找 TWCERT/CC 或 HITCON ZeroDay；需要公開後的弱點資料，再去看 CVE 與 NVD。
 
 下一篇就沿著這條路繼續走：一個漏洞從被發現開始，到公開成 CVE Record，中間通常會經過哪些階段？
 
@@ -112,3 +120,5 @@ CNA 在第一線處理指派與發布；Root 維持階層與治理；MITRE 同�
 - CNA Operational Rules: https://www.cve.org/resourcessupport/allresources/cnarules
 - NVD CVEs and the NVD Process: https://nvd.nist.gov/general/cve-process
 - NVD General Information: https://nvd.nist.gov/general
+- TWCERT/CC Vulnerability Disclosure Policy: https://www.twcert.org.tw/en/cp-59-98-f496f-2.html
+- HITCON ZeroDay: https://zeroday.hitcon.org/

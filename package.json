@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node server.js",
+    "sync:weekly-radar": "node scripts/sync-weekly-vulnerability-radar.mjs",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

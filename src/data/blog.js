@@ -77,6 +77,7 @@ export const blogCategories = [
   { slug: 'self-review', name: '回顧自我', count: 1 },
   { slug: 'ithome-2025-ironman', name: '2025 iThome 鐵人賽', count: 30 },
   { slug: 'ithome-2026-ironman', name: '2026 iThome 鐵人賽', count: 30 },
+  { slug: 'weekly-vulnerability-radar', name: '每週漏洞雷達', count: 32 },
 ]
 
 const rawBlogPosts = [

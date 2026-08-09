@@ -80,7 +80,7 @@ export const blogCategories = [
 ]
 
 const rawBlogPosts = [
-+  {
+  {
     slug: 'ithome-2026-day-30',
     title: 'Day 30 - 建立自己的 CVE／CNA 漏洞通報檢查清單',
     date: '2026-08-05',

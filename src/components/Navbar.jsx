@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import clsx from 'classnames'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Menu, TerminalSquare, X } from 'lucide-react'
 import { NavLink, useLocation } from 'react-router-dom'
 
@@ -15,18 +16,42 @@ const navItems = [
 
 export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [isCompact, setIsCompact] = useState(false)
   const location = useLocation()
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     setIsMobileOpen(false)
   }, [location.pathname])
 
+  useEffect(() => {
+    const updateNavbar = () => setIsCompact(window.scrollY > 48)
+    updateNavbar()
+    window.addEventListener('scroll', updateNavbar, { passive: true })
+    return () => window.removeEventListener('scroll', updateNavbar)
+  }, [])
+
   return (
-    <header className="fixed left-1/2 top-4 z-40 w-[calc(100%-1.25rem)] max-w-6xl -translate-x-1/2">
-      <nav className="rounded-[1.15rem] border border-[#4ade8029] bg-[#030a10e3] px-4 py-3 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:px-6">
+    <header
+      className={clsx(
+        'fixed left-1/2 z-40 w-[calc(100%-1.25rem)] max-w-6xl -translate-x-1/2 transition-[top] duration-200',
+        isCompact ? 'top-2' : 'top-4'
+      )}
+    >
+      <nav
+        className={clsx(
+          'rounded-[1.15rem] border border-[#4ade8029] bg-[#030a10e3] px-4 shadow-[0_18px_48px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-[padding] duration-200 sm:px-6',
+          isCompact ? 'py-2' : 'py-3'
+        )}
+      >
         <div className="flex items-center justify-between gap-4">
-          <NavLink to="/" className="flex min-w-0 items-center gap-3 text-white">
-            <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-[#4ade8050] bg-[radial-gradient(circle_at_top,#10321f_0%,#06110d_62%,#03070a_100%)] shadow-[0_0_12px_rgba(74,222,128,0.12)]">
+          <NavLink to="/" className="flex min-w-0 flex-1 items-center gap-3 overflow-hidden text-white">
+            <span
+              className={clsx(
+                'relative flex shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#4ade8050] bg-[radial-gradient(circle_at_top,#10321f_0%,#06110d_62%,#03070a_100%)] shadow-[0_0_12px_rgba(74,222,128,0.12)] transition-[width,height] duration-200',
+                isCompact ? 'h-10 w-10' : 'h-11 w-11'
+              )}
+            >
               <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(74,222,128,0.1)_48%,transparent_52%,transparent_100%)] opacity-80" />
               <span className="pointer-events-none absolute inset-x-1 top-1 h-px bg-[#7dd3fc]/70" />
               <span className="mono relative text-sm font-bold tracking-[-0.12em] text-[#86efac]">
@@ -35,17 +60,23 @@ export default function Navbar() {
             </span>
             <span className="min-w-0">
               <span className="mono block text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[#7dd3fc]">
-                Eric / Security Terminal
+                Eric<span className="hidden sm:inline"> / Security Terminal</span>
               </span>
-              <span className="block truncate text-sm font-semibold text-zinc-100 sm:text-base">
-                資安筆記 / 專案 / 個人網站
+              <span
+                className={clsx(
+                  'truncate text-sm font-semibold text-zinc-100 sm:text-base',
+                  isCompact ? 'hidden sm:block' : 'block'
+                )}
+              >
+                <span className="sm:hidden">資安筆記 / 專案</span>
+                <span className="hidden sm:inline">資安筆記 / 專案 / 個人網站</span>
               </span>
             </span>
           </NavLink>
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-full border border-[#4ade8029] bg-[#4ade800d] p-2 text-[#bbf7d0] transition hover:bg-[#4ade8016] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4ade80] sm:hidden"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#4ade8029] bg-[#4ade800d] text-[#bbf7d0] transition hover:bg-[#4ade8016] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4ade80] lg:hidden"
             onClick={() => setIsMobileOpen((prev) => !prev)}
             aria-label="切換導航選單"
             aria-expanded={isMobileOpen}
@@ -75,36 +106,51 @@ export default function Navbar() {
           </ul>
         </div>
 
-        <div className="mt-3 hidden items-center gap-2 border-t border-[#4ade8016] pt-3 text-[0.72rem] text-zinc-400 lg:flex">
-          <TerminalSquare className="h-4 w-4 text-[#4ade80]" />
-          <span className="mono">status: active / role: cybersecurity practitioner / notes online</span>
-        </div>
-
-        <ul
-          id="primary-navigation"
-          className={clsx(
-            'mt-3 grid gap-2 border-t border-[#4ade8016] pt-3 text-sm font-medium lg:hidden',
-            isMobileOpen ? 'grid' : 'hidden'
+        <AnimatePresence initial={false}>
+          {!isCompact && (
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
+              transition={{ duration: reduceMotion ? 0 : 0.18 }}
+              className="mt-3 hidden items-center gap-2 border-t border-[#4ade8016] pt-3 text-[0.72rem] text-zinc-400 lg:flex"
+            >
+              <TerminalSquare className="h-4 w-4 text-[#4ade80]" />
+              <span className="mono">status: active / role: cybersecurity practitioner / notes online</span>
+            </motion.div>
           )}
-        >
-          {navItems.map((item) => (
-            <li key={item.to}>
-              <NavLink
-                to={item.to}
-                className={({ isActive }) =>
-                  clsx(
-                    'block rounded-xl px-4 py-3 font-semibold transition',
-                    isActive
-                      ? 'bg-[#4ade801f] text-[#a7f3d0] shadow-[inset_0_0_0_1px_rgba(74,222,128,0.35)]'
-                      : 'bg-white/[0.02] text-zinc-200 hover:bg-white/[0.06]'
-                  )
-                }
-              >
-                {item.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        </AnimatePresence>
+
+        <AnimatePresence initial={false}>
+          {isMobileOpen && (
+            <motion.ul
+              id="primary-navigation"
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2 }}
+              className="mt-3 grid gap-2 border-t border-[#4ade8016] pt-3 text-sm font-medium lg:hidden"
+            >
+              {navItems.map((item) => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      clsx(
+                        'flex min-h-11 items-center rounded-xl px-4 py-3 font-semibold transition',
+                        isActive
+                          ? 'bg-[#4ade801f] text-[#a7f3d0] shadow-[inset_0_0_0_1px_rgba(74,222,128,0.35)]'
+                          : 'bg-white/[0.02] text-zinc-200 hover:bg-white/[0.06]'
+                      )
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
       </nav>
     </header>
   )

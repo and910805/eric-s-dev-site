@@ -1,166 +1,305 @@
 # Day 5 - CVE Record 裡通常包含哪些欄位？
 
-> 系列：CVE 通報實務 30 天：從 CNA、CVSS 到 CWE/EPSS 的漏洞知識整理
+> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀
 >
 > 本週主題：CVE 與 CNA 基礎
 
-第一次打開 CVE JSON，畫面不太友善。`cveMetadata`、`containers`、`affected`、`problemTypes` 一層包一層，很容易看幾行就回到網頁版，只留下「反正有描述和分數」的印象。
+> 遇到鐵人賽的第一個假日，本來想說終於不用上班，可以睡晚一點。結果一睜開眼睛，腦袋馬上跳出一句話：「對齁，今天的文章還是得寫。」
+>
+> 看了一下外面的天氣，目前好像也沒什麼颱風要來的跡象。既然沒有風雨大到哪裡都不能去，就更想趕快把文章寫完，下午還能出去晃晃。
+>
+> 鐵人賽最公平的地方，大概就是它不管今天是平日還是假日，時間一到，文章照樣要交。平日是下班後拖著疲憊的身體寫；假日則是坐在電腦前，一邊想著外面天氣好像不錯，一邊告訴自己：「先把今天這篇寫完再出去。」
 
-但只看描述和分數，往往會漏掉真正影響判斷的東西：資料是誰提供的、版本邊界怎麼寫、Record 後來有沒有更新。今天不打算背 schema，而是把一筆 Record 拆成幾個讀得懂的區塊。
+原本想說，既然是假日，今天就挑個比較輕鬆的內容。
 
-## 先看整體：CVE JSON 5.x 的三個區塊
+昨天才剛跟著一個漏洞走完發現、通報、保留編號到正式公開的流程。今天只要把公開後的 CVE Record 打開來看看，應該不會太難吧？
 
-目前的 CVE Record 採用 CVE JSON 5.x 格式。若先忽略細節，可以把它理解成三層：
+結果點開 CVE JSON 後，映入眼簾的是 `cveMetadata`、`containers`、`affected`、`problemTypes`，一層包著一層。
 
-![CVE Record 結構示意：cveMetadata、CNA container 與可選的 ADP container](/blog-assets/ithome-2026/day-05-record-anatomy.png)
+好，當我沒說。
 
-1. `cveMetadata`：這筆 Record 的識別、狀態與時間資料。
+假日果然沒有比較輕鬆。
+
+第一次打開 CVE JSON，畫面真的不太親切。看沒幾行，就很想默默把分頁關掉，回到網頁版只看漏洞描述和 CVSS 分數，假裝自己什麼都沒看見。
+
+但問題也出在這裡。
+
+只看描述和分數，很容易漏掉真正會影響判斷的資訊：這份資料是誰提供的、哪些版本受影響、Record 後來有沒有更新，以及眼前這個分數到底是誰算的。
+
+不過別擔心，今天不打算帶大家硬背 JSON schema。
+
+我們只要把一筆 CVE Record 拆成幾個比較看得懂的區塊，弄清楚每一區大概在放什麼。下次再看到整包 JSON，至少不會立刻關掉分頁。
+
+## 先別被大括號嚇跑
+
+目前的 CVE Record 採用 CVE JSON 5.x 格式。
+
+如果把那些大括號、方括號和逗號先遮起來，一筆 Record 大致可以拆成這幾個部分：
+
+![CVE Record 結構示意：cveMetadata、CNA container 與可選的 ADP container](https://eric-s-dev-site.kuanlin.pro/blog-assets/ithome-2026/day-05-record-anatomy.png)
+
+1. `cveMetadata`：這筆 Record 的基本資料與狀態。
 2. `containers.cna`：負責發布的 CNA 所提供的主要漏洞資料。
-3. `containers.adp`：ADP 後續補充的 enrichment，可有零個或多個。
+3. `containers.adp`：其他獲授權的角色後續補上的資料，可能沒有，也可能不只一組。
 
-最外層還會看到 `dataType` 與 `dataVersion`，用來表明資料類型與格式版本。它們比較像機器讀取時的路標，不是漏洞本身的技術內容。
+最外層通常還會看到 `dataType` 和 `dataVersion`。
 
-## cveMetadata：這筆紀錄是誰、由誰處理、處於什麼狀態
+這兩個欄位比較像包裹外面的規格標籤，主要是告訴系統：「這包資料是什麼格式、該用哪個版本的規則來讀。」它們很重要，但不是在解釋漏洞怎麼發生。
 
-`cveMetadata` 回答的是 Record 身分與管理狀態。常見欄位包括：
+所以第一次閱讀時，不用每一個欄位都從頭慢慢啃。先認得這幾個大區塊，事情就已經簡單不少。
 
-- `cveId`：例如 `CVE-2026-12345`。
-- `assignerOrgId`：指派這組 ID 的組織識別碼。
-- `state`：常見為 `PUBLISHED` 或 `REJECTED`。
-- `dateReserved`：ID 被保留的時間。
-- `datePublished`：Record 首次發布的時間。
-- `dateUpdated`：Record 最近更新的時間。
+## cveMetadata：先確認這包東西是誰
 
-這些日期回答的是不同問題。`dateReserved` 不是公開日期，`datePublished` 也不表示當天才發現漏洞；`dateUpdated` 則可能因版本、描述或 reference 修正而改變。
+`cveMetadata` 可以看成這筆 Record 外面的資料標籤。
 
-閱讀時還要留意 `state`。如果狀態是 `REJECTED`，原本的 ID 可能因重複指派、不是安全問題或其他原因不再作為獨立漏洞使用。此時應閱讀 rejection reason，而不是沿用舊描述做判斷。
+它不會告訴你漏洞怎麼利用，主要回答的是：
 
-## containers.cna：CNA 發布的核心內容
+> 這是哪一筆紀錄？由誰負責？現在是什麼狀態？什麼時候更新過？
 
-一筆 Published Record 的主要內容通常放在 `containers.cna`。這裡的 CNA 是資料提供者，不代表所有欄位都一定由產品廠商填寫；實際來源仍取決於該筆漏洞由哪個 CNA 負責。
+常見欄位包括：
 
-**先看 providerMetadata：誰提供這個 container**
+- `cveId`：例如 `CVE-2026-12345`
+- `assignerOrgId`：負責這組 ID 的組織識別碼
+- `state`：這筆 Record 目前的狀態
+- `dateReserved`：ID 被保留的時間
+- `datePublished`：Record 首次發布的時間
+- `dateUpdated`：Record 最近更新的時間
 
-這個區塊通常包含提供者的組織 ID、短名稱與更新時間。它能幫助讀者辨認這份 CNA container 是由哪個組織提交。
+這幾個日期看起來很像，但回答的是不同問題。
 
-如果 Record 後來出現 ADP container，每個 container 也會有自己的 provider metadata，讓不同來源的資料不會混在一起。
+`dateReserved` 是編號被保留的時間，不是漏洞公開的時間；`datePublished` 是 Record 首次發布的時間，也不代表研究者當天才發現漏洞；`dateUpdated` 則表示這筆資料後來又被修改過。
 
-**title 只是短標題**
+例如廠商修正受影響版本、調整描述或新增參考連結，`dateUpdated` 就可能跟著改變。
 
-`title` 用一行文字概括漏洞。好的標題通常會帶出產品、元件或弱點類型，例如「某元件的路徑穿越漏洞」，但它不是完整描述，也不適合承擔所有技術條件。
+所以看到一筆兩年前發布的 CVE，也不要直接認定內容兩年都沒動過。先瞄一眼更新時間，有時會發現它昨天才剛改完。
 
-有些 Record 沒有 title，因此不能把它當成判斷漏洞內容的唯一入口。
+另外也要注意 `state`。
 
-**descriptions 才是人類可讀的漏洞描述**
+如果狀態是 `REJECTED`，代表這組 ID 已經不再用來指稱一筆有效的獨立漏洞。原因可能是重複指派、後來確認不是安全問題，或有其他需要撤回的情況。
 
-`descriptions` 是陣列，通常至少包含語言代碼與文字內容。描述的核心任務，是讓讀者能回答：
+遇到這種紀錄，不要再抱著舊描述繼續分析，應該先看它的 rejection reason，確認發生了什麼事。
 
-- 哪個產品或元件有問題？
-- 問題的根因或行為是什麼？
-- 攻擊者需要哪些條件？
+不然很可能認真研究半天，最後才發現自己查的是一個已經被判出局的號碼。
+
+## containers.cna：真正的主菜在這裡
+
+看完外面的資料標籤，接下來就可以打開 `containers.cna`。
+
+一筆已發布 Record 的主要漏洞內容，通常都放在這裡。這份資料由負責該漏洞的 CNA 提供，但 CNA 不一定就是產品廠商，也可能是研究機構、協調單位或其他獲授權的組織。
+
+這個 container 裡的欄位很多，不過實際閱讀時，可以先挑幾個比較重要的看。
+
+### providerMetadata：這份資料是誰放進來的？
+
+`providerMetadata` 通常會提供組織 ID、簡稱和更新時間，用來標示這個 container 的資料來源。
+
+這個欄位平常看起來很不起眼，但當一筆 Record 同時出現 CNA、CVE Program 或其他 ADP 提供的資料時，它就很重要。
+
+因為不同單位可能會提供不同的 CVSS、CWE 或補充資訊。這時候不能把所有內容攪在一起，再說「官方就是這樣寫」。
+
+先看 provider，才知道這句話、這個分數或這項分類究竟是誰提供的。
+
+簡單來說，吃東西之前先看一下外送單，不然等等連這份餐是誰送來的都搞不清楚。
+
+### title：先看標題，但不要只看標題
+
+`title` 是漏洞的短標題，通常會用一行文字帶出產品、元件或弱點類型，例如：
+
+```text
+某元件存在路徑穿越漏洞
+```
+
+它很適合讓人快速掃過，但畢竟只是一行標題，不可能把攻擊條件、受影響版本和實際影響全部塞進去。
+
+而且不是每筆 Record 都一定會有 `title`。
+
+所以標題可以先看，但不能看完標題就宣布結案。這就像新聞只看標題一樣，很快，但翻車的速度通常也很快。
+
+### descriptions：終於開始講這個洞在幹嘛
+
+`descriptions` 是比較接近人類正常閱讀方式的漏洞描述。
+
+理想情況下，讀完描述後應該能回答幾個問題：
+
+- 哪個產品或元件出了問題？
+- 問題發生在哪裡？
+- 攻擊者需要具備什麼條件？
 - 成功利用後會造成什麼影響？
 
-例如，「某產品存在驗證不足」仍然太模糊；若能進一步說明未驗證的遠端攻擊者可透過特定介面修改設定，資訊才足以支援後續判斷。
+例如只寫：
 
-描述也不等於完整技術報告。PoC、修補 commit、繞過方式或操作細節，通常會放在 advisory 或其他 references 中。
+```text
+某產品存在驗證不足漏洞。
+```
 
-**affected：產品與版本範圍**
+看完還是會滿頭問號。
 
-`affected` 是實務上最需要仔細看的區塊之一。常見資料包括：
+誰可以利用？要不要登入？從遠端就能打嗎？成功後可以讀資料、改設定，還是直接接管系統？
 
-- `vendor`：供應商或維護組織。
-- `product`：受影響產品。
-- `versions`：版本與狀態，例如 `affected`、`unaffected` 或 `unknown`。
-- `platforms`：特定作業系統、硬體或執行平台。
-- `modules`、`programFiles`、`programRoutines`：更細的受影響元件。
-- `defaultStatus`：未逐一列出的版本預設狀態。
+如果能進一步寫成「未通過身分驗證的遠端攻擊者，可透過特定介面修改系統設定」，對後續判斷才比較有幫助。
 
-版本不一定只是一個固定字串，也可能是範圍：某版本起、某版本以前，或直到某個修補版本為止。閱讀時必須同時看邊界是否包含，以及 `lessThan`、`lessThanOrEqual` 等表示方式。
+不過，漏洞描述也不是完整的技術報告。PoC、修補 commit、繞過方式或更詳細的操作流程，通常還是得往 advisory 或其他 references 繼續找。
 
-最危險的讀法，是看到產品名稱相同就直接判定資產受影響。產品分支、平台、模組、設定與版本邊界都可能改變結論。
+### affected：跟我家的系統到底有沒有關係？
 
-**problemTypes：弱點分類**
+如果是站在防禦者或維運人員的角度，`affected` 很可能是整筆 Record 最值得先看的地方。
 
-`problemTypes` 常用來記錄 CWE，例如：
+因為大家最想知道的，通常不是這個洞聽起來有多可怕，而是：
+
+> 我們公司的版本到底有沒有中？
+
+常見欄位包括：
+
+- `vendor`：產品供應商或維護組織
+- `product`：受影響的產品
+- `versions`：各版本是否受影響
+- `platforms`：特定作業系統、硬體或執行平台
+- `modules`、`programFiles`、`programRoutines`：更細的受影響元件
+- `defaultStatus`：未逐一列出版本的預設狀態
+
+其中 `versions` 可能會看到：
+
+- `affected`
+- `unaffected`
+- `unknown`
+
+版本也不一定只寫成一個固定數字，有時會是一整段範圍，例如某個版本以上、某個版本以前，或直到某個修補版本為止。
+
+這時還要留意邊界有沒有包含在內，以及 `lessThan`、`lessThanOrEqual` 這類表示方式。
+
+一個很危險的讀法，是看到產品名稱相同，就立刻宣布全部中獎。
+
+實際上，產品分支、平台、模組、設定和版本邊界，都可能改變最後結論。名稱一樣不代表版本一樣，更不代表每一台機器都受影響。
+
+不然看到自家有 Apache，就把所有寫著 Apache 的 CVE 全部丟進緊急修補清單，維運人員大概會先想辦法修補提出清單的人。
+
+### problemTypes：這個洞是哪一種類型？
+
+`problemTypes` 常用來放 CWE，例如：
 
 ```text
 CWE-79: Improper Neutralization of Input During Web Page Generation
 ```
 
-它描述的是弱點類型或根因分類，不是另一個漏洞編號。CWE 可能由 CNA 提供，也可能在其他平台的 enrichment 中出現；有些 Record 則沒有足夠資訊選到精確 CWE。
+它是在描述弱點類型或問題根因，不是另一組漏洞編號。
 
-與其為了填欄位勉強選一個看似接近的分類，不如先確認真正的失效機制。第 8 至 10 天會再完整討論 CWE 與根因判斷。
+CVE ID 回答的是「哪一個漏洞」，CWE 則比較像是在回答「這是哪一類問題」。
 
-**metrics：嚴重程度資料**
+不過，不是每一筆 Record 都能立刻選到非常精確的 CWE。有時資訊還不夠完整，有時不同提供者也可能做出不同分類。
 
-`metrics` 可以承載 CVSS v3.1、CVSS v4.0 或其他評估資料，通常包含向量、分數與嚴重程度。
+與其為了把欄位填滿，硬挑一個看起來差不多的 CWE，不如先確認漏洞真正的失效機制。
 
-但要注意兩件事：
+CWE 和根因分類在第 8 到第 10 天還會再慢慢拆，今天先知道去哪裡找就好。
 
-1. CVE ID 本身不自帶固定分數。
-2. 不同資料提供者可能基於不同資訊與假設給出不同向量。
+### metrics：大家最愛先看的分數
 
-所以看到某網站的 CVSS 時，要一起確認版本、向量與評分來源。若 CNA container 沒有 metrics，也不代表這筆 CVE 無效。
+`metrics` 可以放 CVSS v3.1、CVSS v4.0 或其他評估資料，通常會包含向量、分數和嚴重程度。
 
-**references：可公開查證的資料**
+這大概是整筆 Record 裡最容易被第一眼看到的欄位。
 
-`references` 會列出與漏洞相關的公開網址，可能指向：
+畢竟 `9.8` 看起來就是比一整串版本範圍刺激很多。
 
-- Vendor security advisory
+但這裡要先記住兩件事：
+
+1. CVE ID 本身不會自動附贈一個固定分數。
+2. 不同資料提供者可能因為掌握的資訊或評估假設不同，算出不同的向量與分數。
+
+所以看到某個網站顯示 CVSS 9.8，除了被數字嚇到之外，還要一起看它使用哪個 CVSS 版本、向量怎麼寫，以及這個分數是誰提供的。
+
+如果 CNA container 沒有 `metrics`，也不代表這筆 CVE 是假的，更不代表它沒有風險。可能只是 CNA 沒有在這個 container 裡提供評分。
+
+分數很方便，但不能把大腦整個外包給分數。
+
+### references：覺得資料不夠，就從這裡繼續挖
+
+`references` 會列出與漏洞相關的公開網址，可能包含：
+
+- 廠商安全公告
 - 修補公告或 release notes
 - Git commit、issue 或 pull request
-- CERT/CC、協調單位或研究報告
-- 技術分析與利用說明
+- CERT/CC 或其他協調單位的公告
+- 研究報告、技術分析或利用說明
 
-有些 reference 還會帶 tags，例如 `vendor-advisory`、`patch` 或 `exploit`，幫助系統分類。不過 tag 只是提示，仍應打開原始頁面確認內容、版本與更新時間。
+有些 reference 還會帶著 `vendor-advisory`、`patch` 或 `exploit` 等 tag，幫助系統判斷這個連結大概是什麼類型。
 
-**還有 credits、timeline 與 supportingMedia**
+不過，tag 只是分類提示，不是品質保證。
 
-Record 還可能包含：
+真正要確認修補版本、發布時間或利用方式，還是得把原始頁面打開來看。只收藏連結但完全不點進去，就像買了參考書卻只欣賞封面，知識通常不會自己跑進腦袋。
 
-- `credits`：致謝發現者、通報者或協調者。
-- `timeline`：發現、通報、確認、公開等事件。
-- `supportingMedia`：補充文字或媒體資料。
-- `solutions`：修補或緩解方式。
-- `workarounds`：暫時性替代措施。
-- `configurations`：容易受影響的特定設定。
-- `exploits`：已知利用資訊。
+### 其他欄位：不是每一筆都會全員到齊
 
-這些欄位很有價值，但不是每筆 Record 都會出現。缺少某個可選欄位，不應直接解讀成「沒有修補」、「沒有被利用」或「沒有人獲得致謝」。它可能只是資料未由該來源提供。
+Record 裡還可能看到：
 
-## containers.adp：由其他角色補充 enrichment
+- `credits`：致謝發現者、通報者或協調者
+- `timeline`：發現、通報、確認與公開的時間線
+- `supportingMedia`：補充文字或媒體資料
+- `solutions`：修補或緩解方式
+- `workarounds`：暫時性的替代措施
+- `configurations`：容易受影響的特定設定
+- `exploits`：已知利用資訊
 
-ADP 是 Authorized Data Publisher。它可以在 CNA 已發布的核心資料之外，加入額外分析或標準化內容，同時保留來源邊界。
+這些欄位都很有價值，但不是每筆 Record 都會全部出現。
 
-這種設計很重要：如果 CNA 與後續分析者對評分或分類有不同判斷，資料不必互相覆蓋。讀者可以看到各自提供了什麼，再依用途決定採用方式。
+缺少 `workarounds`，不代表現實中一定沒有暫時緩解方式；沒有 `exploits`，也不能直接推論從來沒有人利用過。
 
-因此，一筆 Record 裡同時出現多組 metrics 或 problem type 並不一定是資料衝突，也可能是不同 provider 的評估。比較時應看 container 與 `providerMetadata`，不能只抓第一個分數。
+比較安全的理解是：
 
-## 最低要求與常見欄位，不是同一件事
+> 這個資料來源目前沒有在這個欄位提供相關資訊。
 
-依 CVE Program 公開流程，發布 Record 時需要提供 CVE ID、簡短描述、受影響產品與版本，以及相關公開 references。實際 JSON schema 為了支援多語言、版本範圍、評分與 enrichment，能承載的欄位遠比最低發布資料多。
+「資料裡沒寫」和「現實中不存在」，中間還隔著一段不小的距離。
 
-也就是說：
+## containers.adp：主菜上完後，其他人又端東西過來
 
-- CVSS 很常見，但不是判斷 CVE 是否存在的必要條件。
-- CWE 很有用，但不是每筆都能立即精確分類。
-- CPE 常在 NVD 使用，不應預設一定存在於 CNA container。
-- 沒有 PoC，不代表沒有漏洞。
-- 沒列 workaround，不代表一定沒有暫時措施，仍要查 vendor advisory。
+ADP 是 Authorized Data Publisher，也就是獲授權的資料發布者。
 
-把「沒有欄位」直接翻譯成「現實中不存在」，是讀漏洞資料時常見的推論錯誤。
+它可以在 CNA 已發布的主要內容之外，補上額外分析、標準化資料或其他參考資訊，同時保留各自的資料來源。
 
-## 真正查資料時，先看哪裡？
+其中，CVE Program 自己後來補上的 references，也可能放在採用 ADP 格式的 CVE Program Container 裡。其他 ADP 則可能補充 CVSS、CWE、CPE、KEV 或 SSVC 等資料。
 
-面對一筆陌生 CVE，通常先確認 ID、狀態與更新時間，再直接跳到 `affected` 看產品和版本。確定資產可能落在範圍內，才回頭細讀 description、CWE、CVSS 與 references。若有多個 container，還要看 provider，否則很容易把不同來源的評估混成同一份答案。
+這種設計的好處是，不同來源不必互相覆蓋。
 
-這個順序刻意把產品與版本放在分數前面。資產根本不在受影響範圍內，9.8 分也不是該資產的修補結論；反過來，Record 暫時沒有分數，也不是忽略它的理由。
+假設 CNA 算出一組 CVSS，另一個 ADP 根據自己掌握的資訊算出另一組，兩份評估可以同時保留。讀者可以知道誰提供了什麼，再依實際用途決定要採用哪一份。
 
-CVE JSON 的欄位很多，不需要一次背完。先記住 metadata、CNA 核心資料與可選的 ADP enrichment，已經足夠應付大多數閱讀情境。下一篇再把視野拉遠，看看同一組 CVE ID 為什麼會出現在一堆不同網站上。
+所以一筆 Record 裡同時出現兩組 CVSS，不一定是系統壞掉，也不一定是有人算錯。
 
-## 參考資料
+先看它們分別在哪個 container，再檢查 `providerMetadata`，通常就能知道這兩組資料是從哪裡來的。
 
-- CVE Program Process: https://www.cve.org/about/Process
-- CVE JSON 5 Schema: https://github.com/CVEProject/cve-schema
-- CVE List V5 Repository: https://github.com/CVEProject/cvelistV5
-- CVE Program Glossary: https://www.cve.org/ResourcesSupport/Glossary
+千萬不要直接抓第一個數字，然後開始跟別人爭「官方明明就是這一分」。
+
+## 常見不代表一定要有
+
+CVE JSON 能放的東西很多，但不代表每一筆 Record 都必須把所有欄位填滿。
+
+可以先記住：
+
+- CVSS 很常見，但不是每筆 Record 都一定由 CNA 提供。
+- CWE 很有用，但不一定能在第一時間精確分類。
+- CPE 常見於 NVD，不應預設一定會出現在 CNA container。
+- 沒看到 PoC，不代表漏洞不存在。
+- 沒列出 workaround，也不代表廠商公告裡一定沒有暫時措施。
+
+JSON schema 比較像是提供很多不同尺寸的收納格，讓資料有地方可以放。
+
+但有這個格子，不代表每一筆 CVE 都必須把它塞滿；格子是空的，也不代表世界上完全不存在那項資訊。
+
+只是這一包資料目前沒裝進來而已。
+
+## 真正查資料時，我會先看哪裡？
+
+如果今天拿到一筆陌生的 CVE，我通常會照這個順序看：
+
+1. 先看 `cveId`、`state` 和 `dateUpdated`，確認是哪一筆、是否有效，以及最近有沒有更新。
+2. 接著跳到 `affected`，確認產品和版本範圍。
+3. 如果自己的資產可能受影響，再細讀 `descriptions`。
+4. 接著看 CWE、CVSS 和 references。
+5. 如果有多個 container，再確認各自的 provider，避免把不同來源的評估混在一起。
+
+這個順序刻意把產品和版本放在分數前面。
+
+因為自家的資產如果根本不在受影響範圍內，就算 CVSS 是 9.8，也不能直接把它當成這台機器的修補結論。
+
+反過來說，一筆 Record 暫時沒有 CVSS，也不代表可以直接略過。
+
+先確認跟自己有沒有關係，再看它到底有多嚴重，通常比看到紅色高分就開始緊張實際得多。
+
+> 今天就到這裡了，先去買一點乾糧預防一下 XDD

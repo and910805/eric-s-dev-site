@@ -1,6 +1,7 @@
 # Day 3 - CNA、Root、MITRE 與 NVD：一筆 CVE 到底是誰在處理？
 
-> 系列：CVE 通報實務 30 天：從 CNA、CVSS 到 CWE/EPSS 的漏洞知識整理  
+> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀
+>
 > 本週主題：CVE 與 CNA 基礎
 
 ## 先離題一下：昨天的煙火

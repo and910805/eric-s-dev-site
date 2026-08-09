@@ -1,20 +1,69 @@
 # Day 2 - CVE 是什麼？CVE ID、CVE Record、CVE List 的差異
 
-> 系列：CVE 通報實務 30 天：從 CNA、CVSS 到 CWE/EPSS 的漏洞知識整理
->
+> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀  
 > 本週主題：CVE 與 CNA 基礎
 
-「可以幫忙查一下這個 CVE 嗎？」
+## 前言
 
-這句話通常不會有人聽不懂，但接著打開瀏覽器時，問題就來了：要確認的是編號、漏洞內容，還是公開狀態？三件事都能被簡稱成「查 CVE」，實際上查的是不同東西。
+> Day 2 開始前，還是先來一段跟 CVE 完全沒關係的喇賽。
 
-CVE Program 的術語表甚至直接把單獨使用的「CVE」標成 *Ambiguous*，也就是語意不夠明確。因為 CVE 可能指 CVE ID、CVE Record、CVE List，甚至是 CVE Program 本身。
+昨天 Day 1 寫完後，晚上跑去看《蜘蛛人》。買的電影套票有附爆米花和飲料，原本想說可以邊看邊吃，感覺非常舒服。
 
-這些名詞平常混著講不一定會出問題，但進入漏洞通報、資料交換或自動化處理後，差一個詞，指的可能就是不同層次的資料。
+我是在前面還在播預告片時才進場，走到位子上坐好，電影也剛好開始。接著吃了幾口爆米花，準備喝我的檸檬紅茶時，才發現一件很尷尬的事——我忘記拿吸管了。
 
-先暫時這樣記：ID 是門牌，Record 是門牌裡那份會更新的資料，List 則是收錄這些門牌與資料的總目錄。這個比喻不完全精確，但拿來分清楚三個層次很好用。
+偏偏影廳和櫃檯又在不同樓層。電影都開始了，實在不想為了一根吸管錯過劇情，所以那杯檸檬紅茶就這樣從頭到尾完整地放在旁邊，一口都沒喝……
 
-## 第一層：CVE ID 是識別碼
+![無奈表情](https://ithelp.ithome.com.tw/images/emoticon/emoticon02.gif)
+
+最後電影看完了、爆米花吃完了，檸檬紅茶則原封不動地跟著我一起離場。
+
+好啦，題外話先到這裡。
+
+## 回到正題：大家說的 CVE 是同一個東西嗎？
+
+昨天 Day 1 講了一大堆，其實重點只有一句：
+
+> 同一個漏洞，不管研究者、廠商或資安新聞怎麼稱呼，只要寫的是同一組 CVE ID，大家就知道在講同一件事。
+
+但到了 Day 2，麻煩又來了。
+
+因為大家平常講「CVE」時，可能是在講三個不同的東西。
+
+既然前面剛好聊到電影，我們就繼續拿電影票來比喻。
+
+假設我的電影票上有一組訂單編號：
+
+```text
+ABC-123456
+```
+
+這組編號可以讓櫃檯找到我的訂單，概念上就像 **CVE ID**。每一組 CVE ID 都是唯一的，用來指向特定的一筆漏洞紀錄。
+
+但編號是編號，資料是資料。光看 `ABC-123456`，你不會知道我看哪部電影、幾點開演、坐在哪裡，也不知道套餐裡有沒有那杯完全沒喝到的檸檬紅茶。
+
+把訂單打開後，裡面的電影名稱、場次、座位和套餐內容，就像 **CVE Record**。CVE ID 負責告訴大家「要找哪一筆」，CVE Record 才會告訴大家「這一筆裡面寫了什麼」。
+
+至於影城系統裡全部的訂單集合，就可以想成 **CVE List**。它不是某一張電影票，而是收錄所有紀錄的總目錄。
+
+先用三句話記起來：
+
+- **CVE ID**：要找哪一筆漏洞
+- **CVE Record**：這筆漏洞有哪些資料
+- **CVE List**：收錄所有 CVE Record 的官方目錄
+
+所以當有人說：
+
+> 可以幫忙查一下這個 CVE 嗎？
+
+最好再確認一下，他是想確認那組 CVE ID、查看 Record 裡的漏洞內容，還是到 CVE List 搜尋紀錄。
+
+平常聊天時全部簡稱 CVE 當然沒關係，反正大家大概聽得懂。但真的要寫通報、查資料或設計系統時，這三個東西就不能全部混在一起。
+
+CVE Program 自己也知道這件事，所以官方術語表直接把單獨使用的「CVE」標成 *Ambiguous*。講白一點就是：只說 CVE，實在有點模糊。
+
+接下來就把 ID、Record 和 List 分開來看。
+
+## 第一層：CVE ID 是唯一編號
 
 CVE ID 的格式看起來很簡單：
 
@@ -22,97 +71,135 @@ CVE ID 的格式看起來很簡單：
 CVE-YYYY-NNNN
 ```
 
-它由三個部分組成：固定的 `CVE` 前綴、年份，以及四位以上的序號。
+它由三個部分組成：
 
-![CVE ID 由固定前綴、年份與四位以上序號組成](/blog-assets/ithome-2026/day-02-id-anatomy.svg)
+- `CVE`：固定前綴，看到它就知道這是一組 CVE ID
+- `YYYY`：年份
+- `NNNN`：四位以上的序號
 
-例如：
+![CVE ID 由固定前綴、年份與四位以上序號組成](https://eric-s-dev-site.kuanlin.pro/blog-assets/ithome-2026/day-02-id-anatomy.svg)
+
+例如大家很熟悉的 Log4Shell：
 
 ```text
 CVE-2021-44228
 ```
 
-這裡有兩個很常見的誤解。
+看起來沒有很複雜，但裡面有兩個很容易搞錯的地方。
 
-第一，年份不一定是漏洞被發現的年份。依 CVE Program 的說明，年份代表 CVE ID 被保留的年份，或漏洞公開的年份。因此，不能只看 ID 中的年份就推斷漏洞何時被研究者發現、何時通報廠商，或何時完成修補。
+### 年份不一定是發現漏洞的年份
 
-第二，最後一段不是固定四位數。四位只是最低長度，序號可以有五位、六位或更多位，也沒有規定上限。若系統用只接受 `CVE-YYYY-NNNN` 的正規表示式驗證，日後很可能漏掉合法的 CVE ID。
+`2021` 不一定代表研究者在 2021 年發現漏洞。依 CVE Program 的說明，年份會依 CVE ID 被保留、Record 首次發布，或漏洞首次公開的時間來決定。
 
-比較實用的格式概念會是：
+所以只看這四個數字，沒辦法知道漏洞是哪一天被發現、哪一天通報廠商，也不知道廠商什麼時候完成修補。想還原完整時間線，還是得去看 Record、廠商公告或研究者公開資料。
 
-```regex
-^CVE-[0-9]{4}-[0-9]{4,}$
-```
+### 最後一段不一定只有四位數
 
-不過，格式正確只代表它「長得像」CVE ID，不代表這筆 ID 已公開、內容完整，甚至不代表它仍然有效。要知道這些狀態，就必須繼續看 CVE Record。
+很多人看到 `CVE-YYYY-NNNN`，會以為最後只能放四位數。
 
-## 第二層：CVE Record 是漏洞資料
+其實四位只是最低長度。序號可以有五位、六位，甚至更多位，而且官方沒有設定最大位數。
 
-CVE ID 只回答「是哪一個漏洞」，CVE Record 才開始回答「這個漏洞是什麼」。
+因此，如果系統只接受四位序號，以後遇到合法的五位或六位 CVE ID，就可能直接把人家擋在門外。
 
-依 CVE Program 的現行說明，CVE Record 是由 CNA 提供、與 CVE ID 關聯的描述性資料，並以人類和機器都可讀的格式提供。公開紀錄至少會包含：
+不過要注意，格式正確只代表它「長得像」CVE ID，不代表這組 ID 一定存在，也不代表漏洞資料已經公開。
+
+就像一串文字長得很像電影訂單編號，不代表櫃檯系統裡真的找得到這筆訂單。
+
+要確認內容和狀態，就要繼續看 CVE Record。
+
+## 第二層：CVE Record 才是完整資料
+
+CVE ID 只回答：
+
+> 我們現在講的是哪一個漏洞？
+
+CVE Record 才開始回答：
+
+> 這個漏洞到底是什麼？
+
+一筆公開的 CVE Record，至少會提供：
 
 - CVE ID
 - 簡短的漏洞描述
-- 受影響產品與版本
-- 相關公開參考資料
+- 受影響的產品與版本
+- 可以公開查證的參考資料
 
-實際的 CVE Record 還可能包含 CWE、CVSS、問題類型、credits、受影響版本的狀態，以及 CNA 或 ADP 提供的其他資料。
+除此之外，還可能看到 CWE、CVSS、致謝資訊、修補方式，以及 CNA 或 ADP 補充的其他資料。
 
-可以把兩者想成資料庫的主鍵與資料列：CVE ID 是用來定位的 key；CVE Record 則是掛在這個 key 底下、可被更新與擴充的內容。
+換回電影訂單的例子，CVE ID 就像唯一的訂單編號；CVE Record 則是打開訂單後看到的完整內容。訂單內容之後可能更新，例如更換座位或修改套餐，但原本用來識別這筆訂單的編號不需要跟著改。
 
-### CVE Record 不只有 Published
+CVE Record 也是一樣。描述、版本範圍或參考連結可能在公開後繼續修正，但大家仍然可以透過同一組 CVE ID 找到它。
 
-CVE Record 常見的三種狀態是：
+### 有編號，不代表資料已經公開
 
-| 狀態 | 代表意義 |
+CVE Record 會處於不同狀態：
+
+| 狀態 | 白話一點的意思 |
 | --- | --- |
-| `RESERVED` | CNA 已保留 CVE ID，用於協調與管理，但還沒有準備公開漏洞細節 |
-| `PUBLISHED` | 必要資料已填入，CVE Record 已公開到 CVE List |
-| `REJECTED` | 這個 CVE ID 與紀錄不應再使用 |
+| `RESERVED` | 編號先保留起來了，但漏洞資料還沒準備公開 |
+| `PUBLISHED` | 必要資料已經填好，Record 也正式公開了 |
+| `REJECTED` | 這組 ID 與紀錄已失效，不應再拿來指稱有效漏洞 |
 
-`RESERVED` 最容易造成誤解。看到一組 CVE ID，不代表一定能查到描述或受影響版本；它可能還在協調期間，公開頁面只顯示保留狀態。
+`RESERVED` 最容易讓人誤會。
 
-`REJECTED` 也不是把資料完全刪除。被拒絕的紀錄仍會留在 CVE List，目的是讓查詢者知道這個 ID 已失效，避免它被重新使用，或讓不同資料來源繼續把它當成有效漏洞。
+你可能已經在廠商公告、GitHub issue 或新聞裡看到一組 CVE ID，點進 CVE.org 卻只有 `RESERVED`，什麼產品、版本和描述都看不到。
 
-## 第三層：CVE List 是所有紀錄的目錄
+這不代表網站壞掉，也不代表有人忘記按儲存。通常只是這組 ID 已經先拿來做漏洞協調，但負責的 CNA 還沒準備好公開完整內容。
 
-CVE List 是所有 CVE Record 的集合。它不是單一漏洞，也不只是網頁上的搜尋結果，而是一份可供人員查詢、也可供系統下載與處理的公開目錄。
+`REJECTED` 也不是直接把資料刪掉。這筆紀錄仍會留在 CVE List，讓後來查詢的人知道：這組 ID 已經失效，不要再繼續使用，也不會把它重新發給另一個漏洞。
 
-![CVE ID、CVE Record 與 CVE List 的三層關係](/blog-assets/ithome-2026/day-02-three-layers.svg)
+## 第三層：CVE List 是官方總目錄
 
-CVE Program 在 GitHub 維護官方的 `cvelistV5` repository，提供 CVE JSON 5 格式的紀錄。對一般使用者來說，CVE 官網是搜尋與閱讀入口；對需要批次分析、資料同步或建立弱點平台的人來說，機器可讀的 CVE List 才是更重要的資料來源。
+如果 CVE ID 是訂單編號，CVE Record 是單筆訂單內容，那 CVE List 就是收錄全部訂單的總目錄。
 
-所以，「CVE List 有這個漏洞」比較精準的意思是：對應的 CVE Record 已存在於官方目錄中。至於內容是否已公開、是否被拒絕，仍要看該 Record 的狀態。
+當然，CVE List 收的不是電影票，而是由 CVE Program 識別或接收到的 CVE Record。
 
-## 把三個名詞放回同一個情境
+![CVE ID、CVE Record 與 CVE List 的三層關係](https://eric-s-dev-site.kuanlin.pro/blog-assets/ithome-2026/day-02-three-layers.svg)
 
-假設手上拿到 `CVE-2021-44228`。這串字是 **CVE ID**，作用是讓大家指向同一個漏洞；打開後看到的描述、產品、版本、references 與狀態，是 **CVE Record**；而能搜尋、下載並持續收錄其他 Record 的集合，就是 **CVE List**。
+一般使用者可以在 CVE 官網搜尋紀錄；如果要做大量分析、資料同步或建立弱點平台，也可以從官方的 `cvelistV5` repository 取得採用 CVE Record Format 5.x 的機器可讀資料。
 
-ID 本身不會隨描述更新而改號，Record 卻可能因版本範圍或 reference 修正而更新，List 也會持續新增與更新內容。這個區分對實務很有幫助。
+因此，在 CVE List 中找到一組 CVE ID，只能確定官方目錄裡有這筆紀錄。至於漏洞資料是否已經公開，或這組 ID 是否仍然有效，還要繼續看它是 `RESERVED`、`PUBLISHED` 還是 `REJECTED`。
 
-當有人說「已經有 CVE」時，可以再確認：只是 ID 已被保留，還是 Record 已經 Published？當掃描器顯示一個 CVE ID 時，也可以確認它引用的是哪一版資料，以及是否有同步後續更新。
+不能只看到搜尋結果出現，就直接腦補成「漏洞已確認、分數 9.8、修補也已經出了」。後面那些資訊都要另外確認。
 
-同樣地，不能因為找到 CVE ID，就直接假設 CVSS、CWE、修補版本或 PoC 一定存在。那些都是 Record 內容或外部資料來源提供的資訊，不是識別碼本身自帶的屬性。
+## 把三個名詞放回真實案例
 
-## 實際查詢時怎麼走
+假設今天拿到：
 
-拿到一組 ID 後，先確認它真的對應官方紀錄，再看 Record 是 Reserved、Published 還是 Rejected。若已公開，接著讀產品、版本、描述與 references；資料仍不足時，才往 vendor advisory、NVD、修補 commit 或其他情資來源延伸。
+```text
+CVE-2021-44228
+```
 
-這幾步不複雜，卻能避免一個很常見的跳躍：找到編號，就以為已經理解漏洞。
+這串唯一編號是 **CVE ID**。
 
-## 回到開頭那句「查一下 CVE」
+打開後看到的漏洞描述、受影響產品、版本、狀態與參考連結，是這個 ID 所對應的 **CVE Record**。
 
-如果對方要的是編號，就查 CVE ID；要理解內容，就讀 CVE Record；要做搜尋、同步或批次處理，談的則是 CVE List。
+而收錄這筆 Record，也持續收錄其他漏洞紀錄的官方目錄，就是 **CVE List**。
 
-平常口語上可以統稱 CVE，但在寫通報、設計 API、整理資料欄位或確認公開狀態時，最好把名詞說清楚。精準用詞不只是文字潔癖，它會直接影響後續的人如何理解與處理資料。
+所以有人說「這個漏洞已經有 CVE」時，還可以再多問一句：
 
-下一篇換個方向，不再拆資料，而是拆角色：CNA、Root、MITRE 與 NVD 到底各自在忙什麼。
+> 是只有 ID 已經保留，還是 Record 已經正式公開？
+
+這句話很重要。因為只有一組編號，不代表 CVSS、CWE、修補版本或 PoC 都已經準備好了。它們可能出現在 Record 裡，也可能要到廠商公告、NVD 或研究者文章繼續找。
+
+## 實際查詢時怎麼走？
+
+拿到一組 CVE ID 後，我會照這個順序看：
+
+1. 先到 CVE.org 確認這組 ID 是否存在。
+2. 看 Record 是 `RESERVED`、`PUBLISHED` 還是 `REJECTED`。
+3. 如果已公開，再看產品、版本與漏洞描述。
+4. 打開 references，找廠商公告和修補資訊。
+5. 資料仍然不夠，再往 NVD、修補 commit、PoC 或其他情資來源找。
+
+這幾步不複雜，但可以避免一個很常見的錯誤：看到 CVE 編號，就以為自己已經看完漏洞了。
+
+其實那可能只像拿到電影訂單編號，連電影幾點開演都還不知道。
 
 ## 參考資料
 
-- CVE Program Terminology: https://www.cve.org/Resources/Media/Archives/OldWebsite/about/terminology.html
+- CVE Program Glossary: https://www.cve.org/ResourcesSupport/Glossary
 - CVE Program Process: https://www.cve.org/about/Process
-- CVE Frequently Asked Questions: https://www.cve.org/Resources/Media/Archives/OldWebsite/about/faqs.html
+- CNA Operational Rules: https://www.cve.org/ResourcesSupport/AllResources/CNARules
 - CVE List V5: https://github.com/CVEProject/cvelistV5
 - CVE Record Format: https://github.com/CVEProject/cve-schema

@@ -1,12 +1,14 @@
 # Day 11 - CAPEC 是什麼？它和 CWE 有什麼不同
 
-> 系列：CVE 通報實務 30 天：從 CNA、CVSS 到 CWE/EPSS 的漏洞知識整理
+> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀
 >
 > 本週主題：弱點分類與攻擊模式
 
-CWE 在問「系統哪裡出了問題」，CAPEC 則把視角轉向攻擊者：「他通常怎麼利用這類問題？」
+前幾天都在看「系統到底哪裡寫壞了」，今天先換個位置，坐到攻擊者那一邊看看：碰到這類弱點時，他通常會怎麼下手？
 
-兩者會互相連結，但不是同一套編號換個名字。
+CWE 在問「系統哪裡出了問題」，CAPEC 則把視角轉向「攻擊者通常怎麼利用這類問題」。
+
+兩者確實會互相連結，但不是同一套編號換個名字而已。
 
 ## CAPEC 描述 Attack Pattern
 
@@ -41,7 +43,7 @@ CAPEC 與 MITRE ATT&CK 都描述 adversary behavior，但使用情境不同。CA
 
 ## CVE Record 一定要填 CAPEC 嗎
 
-不一定。CVE Record 的核心工作是識別與描述具體漏洞，CWE 常用來表示漏洞類型或原因；CAPEC 則適合在需要補充攻擊情境時使用。沒有 CAPEC，不代表 Record 不完整。
+不一定。CVE Record 的核心工作是識別與描述具體漏洞，CWE 常用來表示漏洞類型或原因；CAPEC 則適合在需要補充攻擊情境時使用。沒看到 CAPEC，不用急著覺得這筆 Record 少了什麼。
 
 也不要看到 CWE 就機械式挑第一個 related CAPEC。CWE 與 CAPEC 可能是多對多關係，具體漏洞是否真的符合某個攻擊模式，仍要看 prerequisites 與 execution flow。
 

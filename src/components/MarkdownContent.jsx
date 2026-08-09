@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import { createHeadingId } from '../lib/markdownHeadings.js'
 
 const allowedLinkProtocols = new Set(['http:', 'https:', 'mailto:', 'tel:'])
 const allowedImageProtocols = new Set(['http:', 'https:'])
@@ -19,12 +20,38 @@ function isSafeUrl(value, allowedProtocols) {
   }
 }
 
+function getTextContent(value) {
+  if (typeof value === 'string' || typeof value === 'number') return String(value)
+  if (Array.isArray(value)) return value.map(getTextContent).join('')
+  if (React.isValidElement(value)) return getTextContent(value.props.children)
+  return ''
+}
+
 export default function MarkdownContent({ children }) {
+  const headingCounts = new Map()
+
+  const heading = (Tag) => {
+    function MarkdownHeading({ children: headingChildren, ...props }) {
+      const text = getTextContent(headingChildren)
+
+      return (
+        <Tag {...props} id={createHeadingId(text, headingCounts)}>
+          {headingChildren}
+        </Tag>
+      )
+    }
+
+    return MarkdownHeading
+  }
+
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       skipHtml
       components={{
+        h1: heading('h1'),
+        h2: heading('h2'),
+        h3: heading('h3'),
         a: ({ node, href, children: linkChildren, ...props }) => {
           if (!isSafeUrl(href, allowedLinkProtocols)) {
             return <span className="text-zinc-300">{linkChildren}</span>

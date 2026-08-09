@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ChevronRight, ExternalLink, FileText, Folder, FolderOpen, Terminal } from 'lucide-react'
 import SectionContainer from '../components/SectionContainer.jsx'
@@ -115,8 +116,9 @@ function mergePostsWithApi(localPosts, apiPosts) {
 export default function Blog() {
   const [posts, setPosts] = useState(blogPosts)
   const [searchTerm, setSearchTerm] = useState('')
-  const [openCategories, setOpenCategories] = useState({})
-  const [openDirectories, setOpenDirectories] = useState({})
+  const [openCategories, setOpenCategories] = useState({ 'ithome-2026-ironman': true })
+  const [openDirectories, setOpenDirectories] = useState({ 'ithome-2026-ironman/day-01-10': true })
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     fetchBlogPosts()
@@ -161,6 +163,7 @@ export default function Blog() {
             <span className="mr-2 text-zinc-500">grep</span>
             <input
               type="search"
+              aria-label="搜尋文章"
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               className="w-[min(100%,28rem)] bg-transparent text-[#eaffec] outline-none placeholder:text-zinc-600"
@@ -194,7 +197,9 @@ export default function Blog() {
                     <button
                       type="button"
                       onClick={() => toggleCategory(category.slug)}
-                      className="group flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-100 transition hover:bg-[#4ade8008] hover:text-white"
+                      className="group flex min-h-11 w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-100 transition hover:bg-[#4ade8008] hover:text-white"
+                      aria-expanded={categoryOpen}
+                      aria-controls={`category-${category.slug}`}
                     >
                       <span className="w-5 text-zinc-500">{isLastCategory ? '└──' : '├──'}</span>
                       <ChevronRight
@@ -211,8 +216,17 @@ export default function Blog() {
                       </span>
                     </button>
 
-                    {categoryOpen && (
-                      <div className="ml-6 space-y-1 border-l border-[#4ade801f] pl-4">
+                    <AnimatePresence initial={false}>
+                      {categoryOpen && (
+                      <motion.div
+                        id={`category-${category.slug}`}
+                        initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0, y: -4 }}
+                        animate={reduceMotion ? { opacity: 1 } : { height: 'auto', opacity: 1, y: 0 }}
+                        exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0, y: -4 }}
+                        transition={{ duration: reduceMotion ? 0 : 0.22, ease: 'easeOut' }}
+                        className="ml-6 overflow-hidden border-l border-[#4ade801f] pl-4"
+                      >
+                        <div className="space-y-1">
                         {category.directories.map((directory, directoryIndex) => {
                           const directoryKey = `${category.slug}/${directory.name}`
                           const directoryOpen = normalizedSearch || Boolean(openDirectories[directoryKey])
@@ -223,7 +237,9 @@ export default function Blog() {
                               <button
                                 type="button"
                                 onClick={() => toggleDirectory(directoryKey)}
-                                className="group flex w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-200 transition hover:bg-[#67e8f90a] hover:text-white"
+                                className="group flex min-h-11 w-full items-center gap-2 rounded-lg px-2 py-2 text-left text-zinc-200 transition hover:bg-[#67e8f90a] hover:text-white"
+                                aria-expanded={directoryOpen}
+                                aria-controls={`directory-${category.slug}-${directory.name}`}
                               >
                                 <span className="w-5 text-zinc-600">{isLastDirectory ? '└──' : '├──'}</span>
                                 <ChevronRight
@@ -238,8 +254,17 @@ export default function Blog() {
                                 <span className="ml-auto text-[0.68rem] text-zinc-600">{directory.items.length} files</span>
                               </button>
 
-                              {directoryOpen && (
-                                <div className="ml-6 space-y-1 border-l border-[#67e8f91f] pl-4">
+                              <AnimatePresence initial={false}>
+                                {directoryOpen && (
+                                <motion.div
+                                  id={`directory-${category.slug}-${directory.name}`}
+                                  initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0, y: -4 }}
+                                  animate={reduceMotion ? { opacity: 1 } : { height: 'auto', opacity: 1, y: 0 }}
+                                  exit={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0, y: -4 }}
+                                  transition={{ duration: reduceMotion ? 0 : 0.2, ease: 'easeOut' }}
+                                  className="ml-6 overflow-hidden border-l border-[#67e8f91f] pl-4"
+                                >
+                                  <div className="space-y-1">
                                   {directory.items.map((post, postIndex) => {
                                     const isLastPost = postIndex === directory.items.length - 1
 
@@ -249,7 +274,7 @@ export default function Blog() {
                                         href={post.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#4ade8008] hover:text-white"
+                                        className="group flex min-h-11 items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#4ade8008] hover:text-white"
                                       >
                                         <span className="mt-0.5 w-5 text-zinc-700">{isLastPost ? '└──' : '├──'}</span>
                                         <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-[#7dd3fc]" />
@@ -264,7 +289,7 @@ export default function Blog() {
                                       <Link
                                         key={post.slug}
                                         to={`/blog/${post.slug}`}
-                                        className="group flex items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#4ade8008] hover:text-white"
+                                        className="group flex min-h-11 items-start gap-2 rounded-lg px-2 py-2 text-zinc-300 transition hover:bg-[#4ade8008] hover:text-white"
                                       >
                                         <span className="mt-0.5 w-5 text-zinc-700">{isLastPost ? '└──' : '├──'}</span>
                                         <FileText className="mt-0.5 h-4 w-4 shrink-0 text-[#4ade80]" />
@@ -277,13 +302,17 @@ export default function Blog() {
                                       </Link>
                                     )
                                   })}
-                                </div>
-                              )}
+                                  </div>
+                                </motion.div>
+                                )}
+                              </AnimatePresence>
                             </div>
                           )
                         })}
-                      </div>
-                    )}
+                        </div>
+                      </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 )
               })}

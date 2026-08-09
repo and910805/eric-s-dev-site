@@ -1,6 +1,6 @@
 # Day 10 - 不要只寫表面現象：CWE 與漏洞根因
 
-> 系列：CVE 通報實務 30 天：從 CNA、CVSS 到 CWE/EPSS 的漏洞知識整理
+> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀
 >
 > 本週主題：弱點分類與攻擊模式
 
@@ -8,11 +8,11 @@
 
 這句話很有價值，因為它說明了 impact；但拿來選 CWE，資訊仍然不夠。造成任意檔案讀取的原因可能是 Path Traversal、授權檢查缺失、符號連結處理錯誤，也可能是原本不該公開的 debug endpoint。
 
-結果相同，不代表根因相同。
+結果相同，不代表根因相同。就像看到地板都是濕的，不代表每次都是同一根水管破掉。
 
 ## Root Cause Mapping 在找什麼
 
-CWE 將 Root Cause Mapping 描述為辨識漏洞底層成因，並把 CVE Record、bug ticket 或漏洞報告與適當 CWE 關聯。目的不是替漏洞貼一個好看的標籤，而是找出哪一類設計或實作問題應該被改善。
+CWE 將 Root Cause Mapping 描述為辨識漏洞底層成因，並把 CVE Record、bug ticket 或漏洞報告與適當 CWE 關聯。說白一點，目的不是替漏洞貼一張看起來很專業的標籤，而是找出哪一類設計或實作問題真的需要改善。
 
 如果十筆漏洞都被標成「Information Disclosure」，只能知道資料外洩很多；如果能進一步看出其中六筆來自 missing authorization，開發流程才知道該把資源放在哪裡。
 
@@ -60,7 +60,7 @@ CWE 條目會標示 Vulnerability Mapping 使用建議：`ALLOWED`、`ALLOWED wi
 
 只有黑箱行為時，可以寫清楚「確認的 impact」與「推測的 root cause」。例如已確認未授權讀取，但無法判斷是 routing、ACL 還是 ownership check 出錯，就不要假裝掌握內部實作。
 
-好的分類不是最細，而是剛好落在證據能支持的位置。明天開始看 CAPEC，從「系統為什麼會弱」轉到「攻擊者通常怎麼利用這些弱點」。
+所以好的分類不一定是最細的那一條，而是剛好落在證據能支持的位置。明天開始看 CAPEC，把鏡頭從「系統為什麼會弱」轉到「攻擊者通常怎麼利用這些弱點」。
 
 ## 參考資料
 

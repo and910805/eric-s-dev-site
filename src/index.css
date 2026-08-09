@@ -23,6 +23,14 @@ html {
   html {
     scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -69,6 +77,11 @@ h4,
 a,
 button {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+button {
+  cursor: pointer;
 }
 
 .glass-card {
@@ -206,6 +219,18 @@ button {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #4ade80, #67e8f9 68%, #f4d58d);
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.45);
+}
+
 .terminal-button:hover {
   transform: translateY(-1px);
 }
@@ -233,7 +258,7 @@ button {
 
 .blog-hero {
   position: relative;
-  min-height: 26rem;
+  min-height: 23rem;
   overflow: hidden;
   background:
     radial-gradient(circle at top left, rgba(244, 213, 141, 0.18), transparent 28%),
@@ -258,11 +283,13 @@ button {
 }
 
 .blog-hero__content {
-  position: absolute;
-  inset: auto 0 0;
+  position: relative;
   z-index: 1;
   display: flex;
+  min-height: inherit;
+  box-sizing: border-box;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 1.25rem;
   padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
 }
@@ -323,6 +350,7 @@ button {
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3 {
+  scroll-margin-top: 7.5rem;
   color: #ffffff;
   font-weight: 700;
   line-height: 1.25;
@@ -454,13 +482,117 @@ button {
   padding: 1rem 1.25rem 1rem 2.4rem;
 }
 
+.article-toc {
+  color: #d7e6dd;
+}
+
+.article-toc--mobile {
+  border-radius: 0.9rem;
+  border: 1px solid rgba(74, 222, 128, 0.16);
+  background: rgba(0, 0, 0, 0.22);
+  padding: 0.15rem 0.75rem 0.75rem;
+}
+
+.article-toc--mobile summary {
+  display: flex;
+  min-height: 2.75rem;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: 'IBM Plex Mono', 'Noto Sans TC', monospace;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.article-toc--mobile summary::-webkit-details-marker {
+  display: none;
+}
+
+.article-toc__chevron {
+  transition: transform 0.2s ease;
+}
+
+.article-toc--mobile[open] .article-toc__chevron {
+  transform: rotate(180deg);
+}
+
+.article-toc__list {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.article-toc__subitem {
+  padding-left: 0.85rem;
+}
+
+.article-toc__link {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #9db3a8;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.article-toc__link:hover,
+.article-toc__link.is-active {
+  background: rgba(74, 222, 128, 0.07);
+  color: #eaffec;
+}
+
+.article-toc__marker {
+  width: 0.38rem;
+  height: 0.38rem;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid rgba(103, 232, 249, 0.5);
+  background: transparent;
+}
+
+.article-toc__link.is-active .article-toc__marker {
+  border-color: #4ade80;
+  background: #4ade80;
+  box-shadow: 0 0 9px rgba(74, 222, 128, 0.55);
+}
+
+.home-bento-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(103, 232, 249, 0.06), transparent 35%),
+    linear-gradient(180deg, rgba(9, 17, 24, 0.94), rgba(4, 10, 16, 0.96));
+  padding: clamp(1.25rem, 1rem + 0.8vw, 1.8rem);
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.32);
+}
+
+@media (hover: none) {
+  .terminal-button:active,
+  .article-toc__link:active,
+  .terminal-tree button:active,
+  .terminal-tree a:active {
+    transform: scale(0.985);
+    background-color: rgba(74, 222, 128, 0.1);
+  }
+}
+
 @media (max-width: 768px) {
   .glass-card {
     border-radius: 1rem;
   }
 
   .blog-hero {
-    min-height: 30rem;
+    min-height: 26rem;
   }
 
   .blog-hero__content {
@@ -485,5 +617,11 @@ button {
 
   .markdown-body--feature p {
     font-size: 1rem;
+  }
+
+  .markdown-body table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }

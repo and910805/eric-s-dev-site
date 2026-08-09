@@ -1,10 +1,12 @@
 # Day 9 - 常見 CWE 怎麼分？從 XSS、SQL Injection、Path Traversal 到 RCE
 
-> 系列：CVE 通報實務 30 天：從 CNA、CVSS 到 CWE/EPSS 的漏洞知識整理
+> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀
 >
 > 本週主題：弱點分類與攻擊模式
 
-漏洞名稱常把不同層次的概念混在一起。XSS、SQL Injection 與 Path Traversal 比較像失效方式；RCE 則描述攻擊成功後的結果。把四個詞並排，剛好可以看出選 CWE 時最常見的陷阱。
+看到 XSS、SQL Injection、Path Traversal、RCE 這幾個詞，很多人會直覺覺得它們都是「漏洞類型」。這樣講平常溝通沒什麼問題，但真的要選 CWE 時，麻煩就來了。
+
+XSS、SQL Injection 與 Path Traversal 比較像失效方式；RCE 則描述攻擊成功後的結果。把四個詞擺在一起，剛好可以看出選 CWE 時最常踩到的坑。
 
 ## XSS：不要只看到 `<script>`
 
@@ -52,7 +54,7 @@ RCE 是 Remote Code Execution，描述遠端攻擊者最後能執行程式碼。
 
 輸入進到 HTML renderer，可能往 CWE-79 查；進到 SQL parser，可能是 CWE-89；進到檔案系統 path resolver，可能是 CWE-22 或 CWE-73；進到 shell，則可能是 CWE-78。
 
-分類不是關鍵字配對。明天會繼續往根因走：為什麼只寫「任意檔案讀取」或「RCE」仍然可能停在表面現象。
+所以分類不是看到關鍵字就連連看。明天會繼續往根因走：為什麼只寫「任意檔案讀取」或「RCE」，仍然可能只停在表面現象。
 
 ## 參考資料
 

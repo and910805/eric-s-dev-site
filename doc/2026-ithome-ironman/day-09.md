@@ -4,9 +4,23 @@
 >
 > 本週主題：弱點分類與攻擊模式
 
-看到 XSS、SQL Injection、Path Traversal、RCE 這幾個詞，很多人會直覺覺得它們都是「漏洞類型」。這樣講平常溝通沒什麼問題，但真的要選 CWE 時，麻煩就來了。
+## 前言
 
-XSS、SQL Injection 與 Path Traversal 比較像失效方式；RCE 則描述攻擊成功後的結果。把四個詞擺在一起，剛好可以看出選 CWE 時最常踩到的坑。
+真的有不少廠商第一次碰到漏洞通報時，會問一些讓人不知道該先從哪裡解釋的問題。
+
+「我們都已經修好了，可以把 CVE 撤銷嗎？」
+
+「這會影響商譽，我是要找通報者，還是找 CNA 賠我？」
+
+先別急著找人賠錢啦。CVE 不是處罰單，也不是產品的負評留言。漏洞修好之後，CVE 反而更有用途，因為使用者需要知道哪些版本受影響、哪個版本已修補，以及自己到底要不要更新。
+
+修補完成，也不代表這個漏洞就沒有發生過。一般來說，CVE 會因為確認並不存在漏洞、重複指派、使用錯誤的 ID，或多筆紀錄需要合併等原因被標記為 `REJECTED`；「廠商已經修好」或「看起來會影響商譽」，本身並不是撤掉一筆有效 CVE 的理由。
+
+至於通報者在協調修補後公開研究成果，本來就是漏洞揭露流程的一部分。很多通報者甚至會等廠商完成修補、公告新版後才公開，目的不是讓廠商難看，而是讓正在使用舊版本的人知道：這個問題真的存在，該更新了。
+
+不過公告寫「有一個漏洞」還不夠。使用者會想知道它到底是 XSS、SQL Injection、Path Traversal，還是最後可以造成 RCE。這幾個詞平常都會被叫做「漏洞類型」，但真的要對應 CWE 時，麻煩就來了。
+
+XSS、SQL Injection 與 Path Traversal 比較像問題怎麼發生；RCE 則比較像攻擊成功後造成的結果。把四個詞擺在一起，剛好可以看出選 CWE 時最常踩到的坑。
 
 ## XSS：不要只看到 `<script>`
 
@@ -63,3 +77,4 @@ RCE 是 Remote Code Execution，描述遠端攻擊者最後能執行程式碼。
 - CWE-22: https://cwe.mitre.org/data/definitions/22.html
 - CWE-78: https://cwe.mitre.org/data/definitions/78.html
 - CWE Root Cause Mapping: https://cwe.mitre.org/documents/cwe_usage/guidance.html
+- CVE CNA Operational Rules: https://www.cve.org/ResourcesSupport/AllResources/CNARules

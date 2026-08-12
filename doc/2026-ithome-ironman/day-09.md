@@ -22,9 +22,9 @@
 
 XSS、SQL Injection 與 Path Traversal 比較像問題怎麼發生；RCE 則比較像攻擊成功後造成的結果。把四個詞擺在一起，剛好可以看出選 CWE 時最常踩到的坑。
 
-## XSS：不要只看到 `<script>`
+## XSS：不要只盯著 script 標籤
 
-XSS 常對應 `CWE-79: Improper Neutralization of Input During Web Page Generation`。重點不是 payload 裡有沒有 `<script>`，而是外部可控資料進入網頁輸出時，沒有依所在 context 做正確處理，最後能在其他使用者的瀏覽器中執行非預期內容。
+XSS 常對應 `CWE-79: Improper Neutralization of Input During Web Page Generation`。重點不是測試內容裡有沒有 script 標籤，而是外部可控資料進入網頁輸出時，沒有依所在 context 做正確處理，最後能在其他使用者的瀏覽器中執行非預期內容。
 
 同一段輸入放在 HTML body、attribute、JavaScript 字串或 URL，所需的處理方式都不同。因此「系統有做 HTML escape」不一定能回答所有 XSS 問題，還要看資料最後落在哪個 context。
 
@@ -34,9 +34,7 @@ XSS 常對應 `CWE-79: Improper Neutralization of Input During Web Page Generati
 
 SQL Injection 最常對應 `CWE-89`。它不是單純「輸入含有單引號」，而是外部輸入被拼進 SQL 指令，使攻擊者能改變原本的查詢語意。
 
-```javascript
-const sql = "SELECT * FROM users WHERE name = '" + name + "'"
-```
+例如，程式直接把使用者提供的名稱接到查詢字串後面，而不是把它當成獨立參數，輸入內容就可能從原本的「資料」變成查詢結構的一部分。
 
 修補方向通常是參數化查詢，讓資料維持資料，不被解讀成 SQL 結構。只做黑名單、刪除單引號或替換關鍵字，往往會漏掉不同編碼、資料庫語法與其他注入位置。
 

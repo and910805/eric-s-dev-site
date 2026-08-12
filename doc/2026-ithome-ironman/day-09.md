@@ -60,6 +60,17 @@ RCE 是 Remote Code Execution，描述遠端攻擊者最後能執行程式碼。
 
 所以「這是一個 RCE，CWE 就選 RCE」通常不夠精確。應往前問：攻擊者的資料經過哪條路徑，最後為什麼被當成指令、程式碼或物件執行？
 
+## 當然還可以分得更細
+
+前面提到 Path Traversal 常對應 `CWE-22`，但這其實還能再往下分。`CWE-22` 比較像上層的通稱，底下還有兩個更具體的項目：
+
+- `CWE-23: Relative Path Traversal`：攻擊者利用相對路徑離開原本允許的目錄，常見線索就是 `../` 這類往上一層走的表示方式。
+- `CWE-36: Absolute Path Traversal`：程式接受了攻擊者提供的完整路徑，導致檔案操作直接指向原本限制範圍以外的位置。
+
+簡單講，一個是「從目前的位置一路走出去」，另一個是「直接指定要去哪裡」。兩者最後都可能讀取或修改不該碰到的檔案，但資料走法不太一樣。
+
+所以報告如果已經清楚證明使用相對路徑繞出目錄，可以選 `CWE-23`；如果問題是可直接指定完整路徑，則可以選 `CWE-36`。但手上的資料如果只能確認有 Path Traversal，還分不出是哪一種，留在 `CWE-22` 反而比較誠實。CWE 不是選得越細越厲害，而是要細到證據撐得住的位置。
+
 ## 用一條資料流來判斷
 
 遇到名稱不確定時，可以追四個位置：input 從哪裡進來、途中經過哪些轉換、在哪個安全檢查失敗、最後進入哪個敏感 sink。
@@ -73,6 +84,8 @@ RCE 是 Remote Code Execution，描述遠端攻擊者最後能執行程式碼。
 - CWE-79: https://cwe.mitre.org/data/definitions/79.html
 - CWE-89: https://cwe.mitre.org/data/definitions/89.html
 - CWE-22: https://cwe.mitre.org/data/definitions/22.html
+- CWE-23: https://cwe.mitre.org/data/definitions/23.html
+- CWE-36: https://cwe.mitre.org/data/definitions/36.html
 - CWE-78: https://cwe.mitre.org/data/definitions/78.html
 - CWE Root Cause Mapping: https://cwe.mitre.org/documents/cwe_usage/guidance.html
 - CVE CNA Operational Rules: https://www.cve.org/ResourcesSupport/AllResources/CNARules

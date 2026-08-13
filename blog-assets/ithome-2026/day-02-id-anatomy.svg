@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">CVE ID 格式拆解</title>
+  <desc id="desc">CVE ID 由 CVE 前綴、四位年份及四位以上序號組成。</desc>
+  <rect width="1200" height="520" rx="16" fill="#0b1118"/>
+  <g font-family="Inter, 'Noto Sans TC', sans-serif" letter-spacing="0">
+    <text x="60" y="66" fill="#eef3f7" font-size="28" font-weight="700">CVE ID 的三個部分</text>
+    <text x="60" y="100" fill="#8996a3" font-size="17">格式正確不等於紀錄已公開，仍需查詢 Record 狀態</text>
+
+    <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="72" font-weight="700">
+      <rect x="80" y="160" width="260" height="130" rx="8" fill="#161636" stroke="#ff940e" stroke-width="2"/>
+      <text x="210" y="247" fill="#ff940e" text-anchor="middle">CVE</text>
+      <text x="376" y="247" fill="#66717d">-</text>
+      <rect x="420" y="160" width="280" height="130" rx="8" fill="#141d27" stroke="#5ea8d6" stroke-width="2"/>
+      <text x="560" y="247" fill="#b8dcf3" text-anchor="middle">YYYY</text>
+      <text x="736" y="247" fill="#66717d">-</text>
+      <rect x="780" y="160" width="340" height="130" rx="8" fill="#141d27" stroke="#79c8a1" stroke-width="2"/>
+      <text x="950" y="247" fill="#b8efd3" text-anchor="middle">NNNN...</text>
+    </g>
+
+    <g font-size="19" text-anchor="middle">
+      <path d="M210 290V340" stroke="#ff940e" stroke-width="2"/>
+      <text x="210" y="375" fill="#f3f6f8" font-weight="700">固定前綴</text>
+      <text x="210" y="407" fill="#8996a3">Common Vulnerabilities</text>
+      <text x="210" y="433" fill="#8996a3">and Exposures</text>
+
+      <path d="M560 290V340" stroke="#5ea8d6" stroke-width="2"/>
+      <text x="560" y="375" fill="#f3f6f8" font-weight="700">四位年份</text>
+      <text x="560" y="407" fill="#8996a3">保留或公開的年份</text>
+      <text x="560" y="433" fill="#8996a3">不是發現日期</text>
+
+      <path d="M950 290V340" stroke="#79c8a1" stroke-width="2"/>
+      <text x="950" y="375" fill="#f3f6f8" font-weight="700">序號</text>
+      <text x="950" y="407" fill="#8996a3">至少四位數</text>
+      <text x="950" y="433" fill="#8996a3">沒有固定上限</text>
+    </g>
+    <text x="60" y="486" fill="#56626e" font-size="15">資料依據：CVE Program Process</text>
+  </g>
+</svg>

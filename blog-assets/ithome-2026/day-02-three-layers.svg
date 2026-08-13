@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">CVE ID、CVE Record 與 CVE List 的關係</title>
+  <desc id="desc">CVE ID 識別單一漏洞，CVE Record 承載該漏洞資料，CVE List 收錄所有紀錄。</desc>
+  <rect width="1200" height="675" rx="16" fill="#0b1118"/>
+  <g font-family="Inter, 'Noto Sans TC', sans-serif" letter-spacing="0">
+    <text x="60" y="70" fill="#eef3f7" font-size="30" font-weight="700">CVE 的三個資料層次</text>
+    <text x="60" y="105" fill="#8996a3" font-size="18">從一組識別碼，到一筆漏洞資料，再到完整公開目錄</text>
+
+    <rect x="60" y="160" width="300" height="370" rx="8" fill="#161636" stroke="#ff940e" stroke-width="3"/>
+    <text x="210" y="215" fill="#ff940e" font-size="25" font-weight="800" text-anchor="middle">CVE ID</text>
+    <rect x="103" y="260" width="214" height="74" rx="6" fill="#232348"/>
+    <text x="210" y="307" fill="#ffffff" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="22" text-anchor="middle">CVE-2026-NNNN</text>
+    <text x="210" y="385" fill="#d8dde4" font-size="20" text-anchor="middle">唯一識別漏洞</text>
+    <text x="210" y="422" fill="#8f99a5" font-size="17" text-anchor="middle">回答：是哪一個？</text>
+    <text x="210" y="492" fill="#ffb565" font-size="15" text-anchor="middle">Identifier</text>
+
+    <path d="M360 345H442" stroke="#687480" stroke-width="3"/>
+    <path d="M430 334L446 345L430 356" fill="none" stroke="#687480" stroke-width="3"/>
+
+    <rect x="450" y="160" width="300" height="370" rx="8" fill="#121c26" stroke="#5ea8d6" stroke-width="3"/>
+    <text x="600" y="215" fill="#8ec9ee" font-size="25" font-weight="800" text-anchor="middle">CVE Record</text>
+    <g fill="#263848">
+      <rect x="500" y="260" width="200" height="18" rx="3"/>
+      <rect x="500" y="296" width="158" height="12" rx="3"/>
+      <rect x="500" y="324" width="180" height="12" rx="3"/>
+      <rect x="500" y="352" width="130" height="12" rx="3"/>
+    </g>
+    <text x="600" y="410" fill="#d8dde4" font-size="20" text-anchor="middle">承載漏洞資料</text>
+    <text x="600" y="447" fill="#8f99a5" font-size="17" text-anchor="middle">回答：目前知道什麼？</text>
+    <text x="600" y="492" fill="#8ec9ee" font-size="15" text-anchor="middle">Descriptive data</text>
+
+    <path d="M750 345H832" stroke="#687480" stroke-width="3"/>
+    <path d="M820 334L836 345L820 356" fill="none" stroke="#687480" stroke-width="3"/>
+
+    <rect x="840" y="160" width="300" height="370" rx="8" fill="#12221e" stroke="#79c8a1" stroke-width="3"/>
+    <text x="990" y="215" fill="#9de0bf" font-size="25" font-weight="800" text-anchor="middle">CVE List</text>
+    <g fill="none" stroke="#467960" stroke-width="2">
+      <rect x="910" y="250" width="160" height="44" rx="4"/>
+      <rect x="910" y="310" width="160" height="44" rx="4"/>
+      <rect x="910" y="370" width="160" height="44" rx="4"/>
+    </g>
+    <g fill="#9de0bf"><circle cx="934" cy="272" r="5"/><circle cx="934" cy="332" r="5"/><circle cx="934" cy="392" r="5"/></g>
+    <text x="990" y="454" fill="#d8dde4" font-size="20" text-anchor="middle">收錄所有紀錄</text>
+    <text x="990" y="491" fill="#8f99a5" font-size="17" text-anchor="middle">回答：目錄中有哪些？</text>
+
+    <rect x="60" y="570" width="1080" height="52" rx="6" fill="#111922"/>
+    <text x="600" y="603" fill="#aab4bd" font-size="18" text-anchor="middle">ID 本身不包含完整風險資訊；Record 內容與狀態才是判讀重點</text>
+    <text x="60" y="650" fill="#56626e" font-size="15">資料依據：CVE Program Terminology 與 Process</text>
+  </g>
+</svg>

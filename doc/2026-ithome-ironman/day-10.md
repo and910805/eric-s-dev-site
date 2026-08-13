@@ -4,63 +4,80 @@
 >
 > 本週主題：弱點分類與攻擊模式
 
+## 前言
+
+唉，團隊賽又失敗了，看來還是得繼續個人單飛。
+
+朋友還以為我今天已經發文，跑來問我文章在哪。只能說，不是我不想發，是隊伍先把我送回單人模式了 XDD
+
+好啦，傷心歸傷心，鐵人賽還是得繼續。上一篇聊到 CWE 可以分得多細，今天就接著談一個更容易選錯的地方：**看到漏洞造成的結果，不代表已經找到它的根因。**
+
 「攻擊者可以讀取任意檔案。」
 
-這句話很有價值，因為它說明了 impact；但拿來選 CWE，資訊仍然不夠。造成任意檔案讀取的原因可能是 Path Traversal、授權檢查缺失、符號連結處理錯誤，也可能是原本不該公開的 debug endpoint。
+這句話很有價值，因為它已經說明漏洞造成的影響。但如果要拿來選 CWE，資訊還是不夠。任意檔案讀取可能來自 Path Traversal、授權檢查缺失、符號連結處理錯誤，也可能是原本不該公開的 debug endpoint 被放了出來。
 
-結果相同，不代表根因相同。就像看到地板都是濕的，不代表每次都是同一根水管破掉。
+結果相同，不代表根因相同。就像看到地板都是濕的，也不能每次都直接判定是同一根水管破掉。
 
-## Root Cause Mapping 在找什麼
+## Root Cause Mapping 到底在找什麼？
 
-CWE 將 Root Cause Mapping 描述為辨識漏洞底層成因，並把 CVE Record、bug ticket 或漏洞報告與適當 CWE 關聯。說白一點，目的不是替漏洞貼一張看起來很專業的標籤，而是找出哪一類設計或實作問題真的需要改善。
+CWE 所說的 Root Cause Mapping，就是試著找出漏洞底層真正出了什麼問題，再把 CVE Record、bug ticket 或漏洞報告對應到適合的 CWE。
 
-如果十筆漏洞都被標成「Information Disclosure」，只能知道資料外洩很多；如果能進一步看出其中六筆來自 missing authorization，開發流程才知道該把資源放在哪裡。
+說白一點，它不是替漏洞貼一張看起來很專業的標籤，而是要回答：「到底是哪一類設計或實作問題需要被修掉？」
 
-## 從 symptom 往前追
+假設十筆漏洞全部都只標成 Information Disclosure，我們只能知道最近資料外洩很多；但如果繼續往下看，發現其中六筆都來自 missing authorization，開發團隊才知道問題可能集中在授權設計，而不是每一筆都各自救火。
 
-可以把分析拆成三層：
+## 從結果一路往前追
 
-```text
-結果：讀到其他使用者的檔案
-失效點：取檔前沒有驗證 resource ownership
-根因：Authorization Missing / Incorrect Authorization
-```
+分析時，可以把資訊拆成三層：
 
-另一個案例也可能有相同結果：
+- **結果**：讀到其他使用者的檔案。
+- **失效點**：取檔前沒有檢查這份資源是不是屬於目前使用者。
+- **根因**：Missing Authorization 或 Incorrect Authorization。
 
-```text
-結果：讀到系統任意檔案
-失效點：外部輸入可用 ../ 跳出允許目錄
-根因：Path Traversal
-```
+另一個案例雖然也是讀到不該看的檔案，過程可能完全不同：
 
-兩者都可以被描述成 arbitrary file read，修補位置卻完全不同。一個要補授權決策，一個要處理路徑解析與目錄限制。
+- **結果**：讀到系統中的任意檔案。
+- **失效點**：外部輸入可以讓路徑離開原本允許的目錄。
+- **根因**：Path Traversal。
 
-## 修補內容常比 payload 更接近根因
+兩個案例最後都能被描述成 arbitrary file read，修補位置卻完全不同。一個要補授權判斷，另一個要處理路徑解析與目錄限制。只看最後結果，很容易把兩種問題選成同一個 CWE。
 
-PoC 告訴我們怎麼觸發問題，patch 則常透露真正少了哪個控制。
+## 修補內容常比測試字串更接近根因
 
-如果修補加入 prepared statement，可能支持 SQL Injection；若只是把錯誤訊息隱藏起來，則未必修掉注入。若 patch 加上 ownership check，比起看到 URL 裡有一個可改的 ID，更能支持 authorization 類 CWE。
+PoC 告訴我們怎麼觸發問題，patch 則常常透露原本少了哪一道控制。
 
-當然，patch 也可能同時做重構或防禦加固，不能看到新增一個 validation 就直接決定根因。仍要把變更和可利用路徑對起來。
+如果修補改成參數化查詢，通常更能支持 SQL Injection 的判斷；如果只是把錯誤訊息藏起來，可能只是看不到錯誤，注入問題本身還在。若 patch 補上 ownership check，也比「網址裡有一個可以修改的 ID」更能支持 authorization 類 CWE。
 
-## 別選到不能拿來 mapping 的 CWE
+不過也不能看到 patch 新增 validation，就立刻把根因定案。一次修補可能同時包含重構、防禦加固和真正的漏洞修正，還是要把變更和可利用路徑對起來看。
 
-CWE 條目會標示 Vulnerability Mapping 使用建議：`ALLOWED`、`ALLOWED with careful review`、`DISCOURAGED` 或 `PROHIBITED`。有些條目太抽象、是 Category，或不適合直接對應具體漏洞。
+## 別選到不適合拿來 mapping 的 CWE
 
-例如很寬的輸入驗證分類看起來什麼都能套，但可能遮住更具體的 injection、path traversal 或數值處理錯誤。官方建議能準確選 Base 或 Variant 時，就不要只停在過度抽象的 Class；若證據真的不足，選可允許 mapping 的較高層級，反而比猜一個錯誤細項可靠。
+CWE 條目會標示 Vulnerability Mapping 的使用建議，目前可看到四種：
+
+- `ALLOWED`
+- `ALLOWED（with careful review of mapping notes）`
+- `DISCOURAGED`
+- `PROHIBITED`
+
+有些條目太抽象，有些只是 Category，並不適合直接對應一個具體漏洞。這也是為什麼不能只看名稱很像，就把 CWE 編號填上去。
+
+例如很寬的輸入驗證分類看起來什麼都能套，但可能會蓋掉更明確的 Injection、Path Traversal 或數值處理錯誤。官方建議是：能準確選到 Base 或 Variant 時，就不要只停在過度抽象的 Class；若證據真的不足，選一個允許 mapping、但較高層的 CWE，也比硬猜一個錯誤細項可靠。
 
 ## 一條 weakness chain 可能不只一個節點
 
-有些漏洞不是單一錯誤。外部輸入缺少驗證，進入不安全反序列化，最後載入攻擊者控制的 class，可能形成一條 weakness chain。
+有些漏洞真的不是一個錯誤造成的。外部輸入缺少驗證，接著進入不安全的反序列化流程，最後又載入攻擊者可控的 class，就可能形成一條 weakness chain。
 
-這時可以記錄多個相關 CWE，但要分清楚哪個是 primary root cause、哪個是後續 consequence。把每個看得到的現象全部塞進去，並不會自動變得更精確。
+這時可以記錄多個相關 CWE，但要分清楚哪一個比較接近 primary root cause，哪些是後續才出現的 weakness 或 consequence。把每個看得到的現象全部塞進去，不會自動變得比較精確，只會讓讀者更難看出問題從哪裡開始。
 
-## 不知道時，保留不確定性
+## 不知道時，就老實保留不確定性
 
-只有黑箱行為時，可以寫清楚「確認的 impact」與「推測的 root cause」。例如已確認未授權讀取，但無法判斷是 routing、ACL 還是 ownership check 出錯，就不要假裝掌握內部實作。
+只有黑箱測試結果時，可以把「已確認的 impact」和「推測的 root cause」分開寫。
 
-所以好的分類不一定是最細的那一條，而是剛好落在證據能支持的位置。明天開始看 CAPEC，把鏡頭從「系統為什麼會弱」轉到「攻擊者通常怎麼利用這些弱點」。
+例如，已經確認使用者可以讀取別人的檔案，但看不到程式碼，也無法判斷究竟是 routing、ACL，還是 ownership check 出錯，就不要假裝自己已經掌握內部實作。這時先記錄確定的行為，再選擇證據能支持的 CWE 層級即可。
+
+所以好的分類，不一定是挑到最細的那一條，而是剛好落在證據撐得住的位置。上一篇講的是 CWE 可以分得多細；這一篇要記住的則是：**分得細之前，先確定自己真的知道問題出在哪裡。**
+
+下一篇開始看 CAPEC，把鏡頭從「系統為什麼會弱」，轉到「攻擊者通常怎麼利用這些弱點」。
 
 ## 參考資料
 

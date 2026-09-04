@@ -432,6 +432,24 @@
     "coverImage": null
   },
   {
+    "slug": "zeabur-postgresql-blog-foundation",
+    "title": "Zeabur PostgreSQL Blog Foundation",
+    "date": "2026-04-10",
+    "category": "Database Lab",
+    "categorySlug": "database-lab",
+    "excerpt": "把部落格內容獨立成一個資料庫 schema，讓文章、分類、標籤、留言與發佈狀態可以和作品集靜態資料分開管理。",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80"
+  },
+  {
+    "slug": "security-writing-index",
+    "title": "Security Writing Index",
+    "date": "2026-04-08",
+    "category": "Security Notes",
+    "categorySlug": "security-notes",
+    "excerpt": "把資安筆記整理成可搜尋、可分類、可延伸的內容索引，降低日後重複整理成本。",
+    "coverImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80"
+  },
+  {
     "slug": "weekly-vulnerability-radar-2026-week-14",
     "title": "本週漏洞雷達 #14：Chrome、Edge 也可能受影響，但 Dawn 漏洞需要攻擊鏈",
     "date": "2026-04-05",
@@ -439,6 +457,15 @@
     "categorySlug": "weekly-vulnerability-radar",
     "excerpt": "這週的 KEV 又多了幾筆。先別急著把所有 CVE 貼進工單，否則維運看到那一長串編號，大概只會先把視窗關掉。",
     "coverImage": null
+  },
+  {
+    "slug": "portfolio-content-architecture",
+    "title": "Portfolio Content Architecture",
+    "date": "2026-04-01",
+    "category": "Build Log",
+    "categorySlug": "build-log",
+    "excerpt": "記錄作品集從靜態資料走向可維護內容系統的規劃方式。",
+    "coverImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80"
   },
   {
     "slug": "weekly-vulnerability-radar-2026-week-13",

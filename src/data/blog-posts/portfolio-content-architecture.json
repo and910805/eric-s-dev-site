@@ -1,0 +1,10 @@
+{
+  "slug": "portfolio-content-architecture",
+  "title": "Portfolio Content Architecture",
+  "date": "2026-04-01",
+  "category": "Build Log",
+  "categorySlug": "build-log",
+  "excerpt": "記錄作品集從靜態資料走向可維護內容系統的規劃方式。",
+  "coverImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=80",
+  "contentMarkdown": "## 內容邊界\n\n首頁維持資安履歷定位，專案與證照維持原本展示用途，部落格則獨立承接長文。\n\n資料來源拆開之後，未來可以逐步把 `blogPosts` 換成 API response，而不用重寫整個 UI。\n\n## 下一步\n\n- 建立後端 API\n- 將 Markdown 寫入 PostgreSQL\n- 將留言送進 `blog.comments`\n- 文章改由本地檔案或資料庫維護，不開放線上寫文章後台"
+}

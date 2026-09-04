@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { ChevronRight, ExternalLink, FileText, Folder, FolderOpen, Terminal } from 'lucide-react'
 import SectionContainer from '../components/SectionContainer.jsx'
 import { articles } from '../data/articles.js'
-import { blogCategories, blogPosts } from '../data/blog.js'
-import { fetchBlogPosts } from '../lib/blogApi.js'
+import blogIndex from '../data/blog-index.json'
+import { blogCategories } from '../data/blog-categories.js'
 
 const hiddenCategorySlugs = new Set(['database-lab', 'security-notes', 'build-log'])
 
@@ -103,30 +103,13 @@ function filterTree(tree, query) {
     .filter(Boolean)
 }
 
-function mergePostsWithApi(localPosts, apiPosts) {
-  const postsBySlug = new Map(localPosts.map((post) => [post.slug, post]))
-
-  for (const post of apiPosts) {
-    postsBySlug.set(post.slug, post)
-  }
-
-  return Array.from(postsBySlug.values())
-}
-
 export default function Blog() {
-  const [posts, setPosts] = useState(blogPosts)
+  // 文章清單改成編進 bundle 的靜態資料，同步可用 —— 不再需要先給 fallback 再等 API 回來
+  const posts = blogIndex
   const [searchTerm, setSearchTerm] = useState('')
   const [openCategories, setOpenCategories] = useState({ 'ithome-2026-ironman': true })
   const [openDirectories, setOpenDirectories] = useState({ 'ithome-2026-ironman/day-01-10': true })
   const reduceMotion = useReducedMotion()
-
-  useEffect(() => {
-    fetchBlogPosts()
-      .then((apiPosts) => {
-        if (apiPosts.length) setPosts(mergePostsWithApi(blogPosts, apiPosts))
-      })
-      .catch(() => {})
-  }, [])
 
   const tree = useMemo(() => buildTree(posts), [posts])
   const normalizedSearch = searchTerm.trim().toLowerCase()

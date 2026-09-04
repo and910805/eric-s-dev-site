@@ -1,0 +1,10 @@
+{
+  "slug": "security-writing-index",
+  "title": "Security Writing Index",
+  "date": "2026-04-08",
+  "category": "Security Notes",
+  "categorySlug": "security-notes",
+  "excerpt": "把資安筆記整理成可搜尋、可分類、可延伸的內容索引，降低日後重複整理成本。",
+  "coverImage": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
+  "contentMarkdown": "## 索引策略\n\n以主題分類文章，例如證照心得、CTF 解題、工具使用、弱點管理與自動化流程。\n\n每篇文章保留摘要、標籤與發佈狀態，方便後續做列表、搜尋與精選文章區塊。\n\n## 建議分類\n\n- 證照心得\n- CTF 筆記\n- 弱點管理\n- 工具使用\n- 自動化流程"
+}

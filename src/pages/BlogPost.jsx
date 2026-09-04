@@ -3,7 +3,6 @@ import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowLeft, CalendarDays, Check, ChevronDown, Clock3, Copy, FolderOpen, List, TerminalSquare } from 'lucide-react'
 import MarkdownContent from '../components/MarkdownContent.jsx'
-import { blogPosts } from '../data/blog.js'
 import { fetchBlogPost } from '../lib/blogApi.js'
 import { extractMarkdownHeadings, stripLeadingMarkdownTitle } from '../lib/markdownHeadings.js'
 
@@ -67,8 +66,7 @@ function TableOfContents({ headings, activeHeading, collapsible = false }) {
 
 export default function BlogPost() {
   const { slug } = useParams()
-  const fallbackPost = blogPosts.find((item) => item.slug === slug)
-  const [post, setPost] = useState(() => fallbackPost ?? null)
+  const [post, setPost] = useState(null)
   const [notFound, setNotFound] = useState(false)
   const [copyStatus, setCopyStatus] = useState('idle')
   const [activeHeading, setActiveHeading] = useState('')
@@ -85,13 +83,12 @@ export default function BlogPost() {
 
   useEffect(() => {
     setNotFound(false)
-    setPost(fallbackPost ?? null)
+    setPost(null)
+    // 全文是每篇一個 chunk 動態載入，所以仍然是非同步；找不到就是真的沒有這篇
     fetchBlogPost(slug)
       .then(setPost)
-      .catch(() => {
-        if (!fallbackPost) setNotFound(true)
-      })
-  }, [fallbackPost, slug])
+      .catch(() => setNotFound(true))
+  }, [slug])
 
   useEffect(() => {
     setCopyStatus('idle')

@@ -1,0 +1,10 @@
+{
+  "slug": "zeabur-postgresql-blog-foundation",
+  "title": "Zeabur PostgreSQL Blog Foundation",
+  "date": "2026-04-10",
+  "category": "Database Lab",
+  "categorySlug": "database-lab",
+  "excerpt": "把部落格內容獨立成一個資料庫 schema，讓文章、分類、標籤、留言與發佈狀態可以和作品集靜態資料分開管理。",
+  "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
+  "contentMarkdown": "## 目標\n\n這個分頁用來承接長文、學習筆記、證照心得與資料庫紀錄，不再混在原本的文章連結清單裡。\n\n內容結構參考傳統部落格文章頁：\n\n- 文章標題與發佈日期\n- 分類、閱讀時間與摘要\n- Markdown 主文\n- 近期文章與分類側邊欄\n- 文章底部留言區\n\n## 資料切分方式\n\n前端先用獨立的 `blogPosts` data module 呈現，後續要接 API 時可以直接對應 PostgreSQL 的 `blog` schema。\n\n資料庫端建議使用獨立 schema，表格包含：\n\n| table | purpose |\n| --- | --- |\n| `blog.categories` | 文章分類 |\n| `blog.posts` | Markdown 文章本文 |\n| `blog.tags` | 標籤 |\n| `blog.post_tags` | 文章與標籤關聯 |\n| `blog.comments` | 留言 |\n\n## 後台寫作流程\n\n後台文章內容使用 Markdown 儲存在 `content_markdown` 欄位。前端文章頁只負責渲染 Markdown，不直接連 PostgreSQL。\n\n```markdown\n## 範例標題\n\n- 支援清單\n- 支援表格\n- 支援程式碼區塊\n```\n\n## 安全注意\n\nPostgreSQL 密碼不應該放進 React 前端或 Git repository，部署時只放在 Zeabur 的環境變數。\n\n如果資料庫連線資訊曾經貼到對話或文件，正式上線前建議旋轉密碼，並確認應用程式只使用最小權限帳號。"
+}

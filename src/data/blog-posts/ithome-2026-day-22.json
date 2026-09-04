@@ -1,0 +1,10 @@
+{
+  "slug": "ithome-2026-day-22",
+  "title": "Day 22 - EPSS 是什麼？它預測的是未來 30 天",
+  "date": "2026-07-28",
+  "category": "2026 iThome 鐵人賽",
+  "categorySlug": "ithome-2026-ironman",
+  "excerpt": "EPSS 每日估計 CVE 在未來 30 天觀察到野外利用的機率。理解 score、percentile 與模型限制，避免把預測當成風險答案。",
+  "coverImage": null,
+  "contentMarkdown": "# Day 22 - EPSS 是什麼？它預測的是未來 30 天\r\n\r\n> 系列：一個漏洞的公開旅程：從 CVE 編號到風險判讀\n>\r\n> 本週主題：EPSS、風險排序與 CNA 實務\r\n\r\n假設面前有兩個 CVSS 都是 9.8 的漏洞，但今晚的人力只夠先修一個。兩邊分數打成平手，再比較一次嚴重度也不會突然跑出答案。這時真正想問的是：「哪一個比較可能很快遭到利用？」\n\r\nEPSS 就是拿來補這塊資訊的，但先說在前面：它會提供線索，不會替你按下最終決定鍵。\n\r\n## 一個每天更新的機率估計\r\n\r\nExploit Prediction Scoring System 由 FIRST 維護。它利用公開可取得的漏洞與威脅資訊，估計某一個已發布 CVE 在未來 30 天內，出現野外利用活動的機率。\r\n\r\nEPSS score 介於 0 到 1，也可以看成 0% 到 100%。例如 0.20 表示模型估計未來 30 天觀察到利用的機率為 20%，不是「漏洞有 20% 嚴重」，也不是「20% 的系統已遭入侵」。\r\n\r\n分數每日更新。PoC、攻擊工具、社群關注與其他訊號改變後，同一 CVE 的 EPSS 可能跟著升降，因此引用時最好保留查詢日期。\r\n\r\n## Percentile 是相對位置\r\n\r\nEPSS 資料還提供 percentile。它回答這個分數在所有已評估 CVE 中排在哪個相對位置。\r\n\r\nscore 是模型的絕對機率估計，percentile 是相對排名。某筆 CVE 的機率看起來不高，仍可能位於很高 percentile，因為大多數漏洞被觀察利用的機率本來就低。兩個值不能互相替代。\r\n\r\n## EPSS 不知道你的環境\r\n\r\n模型不知道公司是否真的使用該產品、不知道服務是否對外，也不知道受影響資產承載的是公開測試資料還是核心交易。\r\n\r\n它同樣不衡量利用成功後的衝擊。EPSS 高、技術影響低，和 EPSS 低、可能造成重大安全事故，是兩種不同決策情境。\r\n\r\n因此 EPSS 是 prioritization input，不是完整風險分數。資產存在性、可達性、補償控制、業務影響與威脅情報仍要一起看。\r\n\r\n## 為什麼不能拿 EPSS 當預言\r\n\r\n機率不是承諾。高分漏洞可能在你的環境從未遭利用，低分漏洞也可能成為針對性攻擊入口。模型根據可觀察資料建立，而觀測本身必然有限，新的漏洞與小眾產品也可能缺乏足夠訊號。\r\n\r\n比較健康的用法是縮小待處理清單。例如先從確實存在於環境的 CVE 中，找出 EPSS 較高者進一步檢查，而不是訂一條「低於 0.1 一律不修」的永久規則。\r\n\r\n## 查詢時至少記三件事\r\n\r\n記下 CVE ID、score 與查詢日期；需要比較整體相對位置時，再記 percentile。若將 EPSS 匯入內部系統，應按日更新，而不是在漏洞建立當天抓一次後永久保存。\r\n\r\n明天會把 CVSS 與 EPSS 放在同一張決策圖裡看：一個談技術嚴重度，一個談近期利用機率。兩個放在一起很有用，但誰都不能單獨冒充完整風險。\n\r\n## 參考資料\r\n\r\n- EPSS 官方網站: https://www.first.org/epss/\r\n- EPSS Model: https://www.first.org/epss/model\r\n- EPSS FAQ: https://www.first.org/epss/faq\r\n- EPSS API: https://www.first.org/epss/api\r\n"
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "ithome-2025-day-29",
+  "title": "Day 29 - 轉職資安人必備技能",
+  "date": "2025-09-14",
+  "category": "2025 iThome 鐵人賽",
+  "categorySlug": "ithome-2025-ironman",
+  "excerpt": "「如果想轉職資安，要從哪裡開始？」 說真的，資安的範圍大到你會覺得無從下手。一堆名詞：Nmap、SIEM、EDR、SOC、APT…到底要先學哪一個？ 其實最簡單...",
+  "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80",
+  "contentMarkdown": "**「如果想轉職資安，要從哪裡開始？」**\r\n\r\n說真的，資安的範圍大到你會覺得無從下手。 一堆名詞：Nmap、SIEM、EDR、SOC、APT… 到底要先學哪一個？\r\n\r\n其實最簡單的方法就是 —— **去看求職網站上的職缺**。 因為 JD（Job Description）才是最誠實的需求。\r\n\r\n---\r\n\r\n## 從職缺看真實技能需求\r\n\r\n> 大部分資安工程師會寫這幾個\r\n\r\n- **弱點掃描 / 漏洞管理**：會操作 Nessus、OpenVAS 或類似工具\r\n- **事件偵測與回應**：有用過 SIEM、EDR，能看 log、追異常\r\n- **網路與系統基礎**：熟悉 TCP/IP、DNS，能處理 Windows/Linux 基本設定\r\n- **程式與自動化**：至少懂一門語言（Python、Go），或能寫 Script 來省時\r\n- **雲端安全**：AWS / Azure / GCP 基本防護經驗（有的職缺會寫「佳」）\r\n- **證照**：CEH、Security+、CISSP、ISO 27001 常被列為加分項\r\n- **軟實力**：細心、邏輯思考、耐心、溝通協調、英文讀寫能力\r\n\r\n你可以看到，不會有人要求「一定要會全部」，但 **基礎 IT + 一兩項專長** 幾乎是標配。\r\n\r\n---\r\n\r\n## 技術面的基礎\r\n\r\n資安不是憑空長出來的，它是 **IT 的延伸**。 所以轉職資安，第一步還是要打好 IT 基礎：\r\n\r\n- **網路**：TCP/IP、DNS、Routing、防火牆\r\n  → 可以把 CCNA 當成入門證照\r\n- **系統**：Windows / Linux 基本操作\r\n- **程式**：能看懂程式碼、會寫 Script（Python/Shell）做自動化\r\n\r\n如果你走比較硬派技術，可以挑戰 CTF 六大領域：\r\n\r\n1. Web\r\n2. Crypto\r\n3. Pwn\r\n4. Reverse\r\n5. Forensics\r\n6. Misc\r\n\r\n幾乎涵蓋大學資工的必修課，對轉職的人來說，是很完整的技能地圖。\r\n\r\n---\r\n\r\n## 技術 + 管理的切入點\r\n\r\n不是每個人都要當「滲透高手」。 另一條路是走「技術 + 管理」：\r\n\r\n- 學 ISO 27001 的概念，理解資安制度\r\n- 了解風險管理、法規（GDPR、PCI DSS、個資法）\r\n- 能把技術轉成管理聽得懂的語言（報告、簡報）\r\n\r\n> 很多公司缺的就是「會講人話的資安人」。\r\n\r\n---\r\n\r\n## 證照的現實\r\n\r\n證照的確是好敲門磚，但要注意成本。\r\n\r\n> 因為真的很貴啊..\r\n\r\n- **IT 基礎**：CCNA、Linux Essentials\r\n- **資安入門**：Security+、CEH\r\n- **進階管理**：ISO 27001 LA / LI、CISSP\r\n\r\n> 先挑 **CP 值高、能快速讓你跨進門檻的**。 證照不是保證工作，但會讓 HR 至少願意多看你一眼。\r\n\r\n---\r\n\r\n原文連結：https://ithelp.ithome.com.tw/articles/10379737"
+}

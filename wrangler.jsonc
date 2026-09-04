@@ -1,0 +1,23 @@
+{
+  "name": "eric-s-dev-site",
+  "compatibility_date": "2026-09-03",
+
+  // 純靜態網站。原本的 Express + PostgreSQL 後端已在 2026-09 靜態化移除，
+  // 文章資料編進前端 bundle，沒有 Worker 程式碼，所以不設 main。
+  "assets": {
+    "directory": "./dist",
+    // 這個站用 react-router 有真正的多路由（/blog/:slug、/cv、/projects…），
+    // 直接開深層網址或重新整理時要回 index.html 交給前端路由，
+    // 所以是 single-page-application，不是 404-page。
+    "not_found_handling": "single-page-application"
+  },
+
+  // 部署前自己跑建置產生 dist/，後台的「Build command」留空也能部署。
+  "build": {
+    "command": "npm run build"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowLeft, CalendarDays, Check, ChevronDown, Clock3, Copy, FolderOpen, List, TerminalSquare } from 'lucide-react'
-import BlogComments from '../components/BlogComments.jsx'
 import MarkdownContent from '../components/MarkdownContent.jsx'
 import { blogPosts } from '../data/blog.js'
 import { fetchBlogPost } from '../lib/blogApi.js'
@@ -243,7 +242,6 @@ export default function BlogPost() {
         </aside>
       </div>
 
-      <BlogComments postSlug={post.slug} />
     </section>
   )
 }

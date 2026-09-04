@@ -7,3 +7,7 @@ vite.err.log
 vite.*.log
 vite.*.err.log
 server.*.log
+
+# 本機工作檔，不屬於網站
+outputs/
+.claude/
